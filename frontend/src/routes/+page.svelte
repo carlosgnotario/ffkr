@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { Screensaver } from '../routes/screensaver/scripts.js'
 
 	onMount(() => {
-		console.log("homepage");
-		console.log(Screensaver);
+		// Force screensaver to show immediately on homepage
+		// Wait a bit for the screensaver to be fully initialized
+		setTimeout(() => {
+			if (typeof window !== 'undefined' && window.screensaverInstance) {
+				window.screensaverInstance.setHomepageTimer();
+			}
+		}, 100)
 	})
 
 </script>

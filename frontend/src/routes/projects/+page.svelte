@@ -9,6 +9,11 @@
   let selectedStatus = 'all'
 
   onMount(async () => {
+    // Reset screensaver timer for non-homepage pages
+    if (typeof window !== 'undefined' && window.screensaverInstance) {
+      window.screensaverInstance.resetTimer();
+    }
+    
     try {
       const response = await fetch('/api/projects')
       if (!response.ok) {

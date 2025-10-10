@@ -7,6 +7,11 @@
 	let studioSwiper: any = null;
 
 	onMount(async () => {
+		// Reset screensaver timer for non-homepage pages
+		if (typeof window !== 'undefined' && window.screensaverInstance) {
+			window.screensaverInstance.resetTimer();
+		}
+		
 		const data = await loadStudioData()
 		categories = data.categories		
 		await tick()

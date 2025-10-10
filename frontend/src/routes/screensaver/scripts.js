@@ -16,6 +16,7 @@ export class Screensaver {
         this.projects = await fetch('/api/projects').then(r => r.json())
         this.siteSettings = await fetch('/api/site-settings').then(r => r.json())
         console.log("appended screensaver");
+        this.sliderTimer = 1000;
         
         
         this.elements()
@@ -53,15 +54,33 @@ export class Screensaver {
             ease: "expo.out",
             onComplete: () => {
                 this.element.style.display = 'none'
-                // check if homepage, if so, add 1000 to timer, otherwise set to 0
-                if (window.location.pathname === '/') {                    
-                    this.timer = 0;
-                } else {
-                    this.timer = 1000;
-                }
                 this.active = false;
+                // Don't reset timer here - let it be handled by the new page
             }
         })
+    }
+
+    resetTimerForCurrentPage() {
+        // Check if we're on homepage, if so set timer to 0 for immediate show
+        if (window.location.pathname === '/') {
+            this.timer = 0;
+            console.log("Homepage detected - timer set to 0");
+        } else {
+            this.timer = 1000;
+            console.log("Other page detected - timer set to 1000");
+        }
+    }
+
+    // Public method to force homepage behavior
+    setHomepageTimer() {
+        this.timer = 0;
+        console.log("Timer manually set to 0 for homepage");
+    }
+
+    // Public method to reset timer for non-homepage pages
+    resetTimer() {
+        this.timer = 1000;
+        console.log("Timer reset to 1000 for non-homepage page");
     }
 
     createSlide() {
@@ -170,8 +189,8 @@ export class Screensaver {
     }
 
     elements() {
-        this.timer = 0;
         this.sliderTimer = 1000;
+        this.timer = 1000; // Default timer for all pages
         this.textMessage = this.element.querySelector('.screensaver-text')
         this.menu = this.element.querySelector('.screensaver-menu')
     }
