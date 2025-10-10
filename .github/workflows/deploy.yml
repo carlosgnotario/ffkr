@@ -37,6 +37,8 @@ jobs:
         run: |
           cd frontend
           npm run build
+        env:
+          SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
