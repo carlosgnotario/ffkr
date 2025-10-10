@@ -5,9 +5,8 @@
 	let logoUrl = ''
 
 	onMount(async () => {
-		// Use text fallback since CORS blocks direct Sanity API calls
-		// The logo will fall back to "FFKR" text as defined in the template
-		logoUrl = ''
+		// Use the actual logo from Sanity studio
+		logoUrl = 'https://cdn.sanity.io/images/80je9ukv/production/a951976d003854fa494abca54cfc312c44f4f6d8-506x50.svg?w=2000&fit=max&auto=format'
 	})
 </script>
 
