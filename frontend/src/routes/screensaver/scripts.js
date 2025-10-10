@@ -13,61 +13,88 @@ export class Screensaver {
 	}
     
     async init() {
-        // Use fallback data since CORS blocks direct Sanity API calls
-        this.projects = [
-            {
-                name: "Carbon Neutral Campus",
-                location: "University District",
-                category: { title: "Educational" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" } } }]
-            },
-            {
-                name: "Smart Business District",
-                location: "Downtown",
-                category: { title: "Commercial" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" } } }]
-            },
-            {
-                name: "Sustainable Housing Complex",
-                location: "Residential Area",
-                category: { title: "Residential" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" } } }]
-            },
-            {
-                name: "Modern Office Complex",
-                location: "Business District",
-                category: { title: "Commercial" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop" } } }]
-            },
-            {
-                name: "Green Technology Center",
-                location: "Innovation Hub",
-                category: { title: "Technology" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&h=600&fit=crop" } } }]
-            }
-        ]
+        // Use CORS proxy to fetch from Sanity API
+        const corsProxy = 'https://api.allorigins.win/raw?url='
+        const sanityBaseUrl = 'https://80je9ukv.api.sanity.io/v2024-01-15/data/query/production'
         
-        this.siteSettings = {
-            navigation: [
-                {
-                    title: "Projects",
-                    url: "/studio",
-                    image: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" } }
-                },
-                {
-                    title: "History", 
-                    url: "/history",
-                    image: { asset: { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" } }
-                },
-                {
-                    title: "Culture",
-                    url: "/culture", 
-                    image: { asset: { url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" } }
+        // Fetch projects
+        const projectsQuery = `*[_type == "project"] | order(name asc) {
+            _id,
+            name,
+            description,
+            location,
+            status,
+            completionDate,
+            "slug": slug.current,
+            services,
+            category->{
+                _id,
+                title,
+                "slug": slug.current
+            },
+            team[]->{
+                _id,
+                name,
+                role,
+                photo {
+                    asset->{
+                        _id,
+                        url
+                    }
                 }
-            ]
-        }
+            },
+            photoGallery[] {
+                image {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            }
+        }`
         
-        console.log("appended screensaver");
+        // Fetch site settings
+        const siteSettingsQuery = `*[_type == "siteSettings"][0] {
+            _id,
+            logo {
+                asset->{
+                    _id,
+                    url
+                }
+            },
+            navigation[] {
+                title,
+                url,
+                description,
+                image {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            }
+        }`
+        
+        try {
+            const [projectsResponse, siteSettingsResponse] = await Promise.all([
+                fetch(`${corsProxy}${encodeURIComponent(`${sanityBaseUrl}?query=${encodeURIComponent(projectsQuery)}`)}`),
+                fetch(`${corsProxy}${encodeURIComponent(`${sanityBaseUrl}?query=${encodeURIComponent(siteSettingsQuery)}`)}`)
+            ])
+            
+            const [projectsData, siteSettingsData] = await Promise.all([
+                projectsResponse.json(),
+                siteSettingsResponse.json()
+            ])
+            
+            this.projects = projectsData.result || []
+            this.siteSettings = siteSettingsData.result || {}
+            console.log("appended screensaver");
+        } catch (error) {
+            console.error('Error fetching data:', error)
+            // Fallback to empty arrays if API fails
+            this.projects = []
+            this.siteSettings = {}
+        }
         
         
         this.elements()
