@@ -1,0 +1,111 @@
+{
+  "description": "A comprehensive urban planning project focused on revitalizing the downtown core with sustainable design principles and community engagement.",
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-80a5e16c25097793c15b9474a007559138fd5bbf-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/80a5e16c25097793c15b9474a007559138fd5bbf-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/1dbd0e0680a2cdce39c80f7c87e2b25288b64fc0-800x600.jpg",
+          "_id": "image-1dbd0e0680a2cdce39c80f7c87e2b25288b64fc0-800x600-jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-5079c5158d3a74e07215a463e0c0e63b0097a41c-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5079c5158d3a74e07215a463e0c0e63b0097a41c-800x600.jpg"
+        }
+      }
+    }
+  ],
+  "_id": "hd5Qs6cLRW6hFZrgwF9kU1",
+  "category": {
+    "_id": "pTWiiMyc1zJOfVMw5IsWzM",
+    "title": "Urban Planning",
+    "slug": "urban-planning"
+  },
+  "location": "Downtown District, Metro City",
+  "slug": "downtown-urban-renewal",
+  "services": [
+    "Feasibility Studies",
+    "Structural Engineering Coordination",
+    "Building Information Modeling",
+    "Project Management",
+    "Code Compliance Review"
+  ],
+  "name": "Downtown Urban Renewal",
+  "team": [
+    {
+      "role": "Interior Design Specialist",
+      "description": "Emily creates innovative interior spaces that blend functionality with aesthetic appeal, specializing in healthcare and hospitality design.",
+      "credentials": [
+        "NCIDQ Certified",
+        "IIDA Member",
+        "EDAC Certified"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAW6d",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-3b85606c306cd029f8d2cca827edeea347e24134-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3b85606c306cd029f8d2cca827edeea347e24134-400x400.jpg"
+        }
+      },
+      "_id": "oK8li7jSKxzxwrBhCmxO08",
+      "name": "Emily Watson"
+    },
+    {
+      "_id": "hd5Qs6cLRW6hFZrgwTVwT5",
+      "name": "Robert Taylor",
+      "role": "Technology Integration Specialist",
+      "description": "Robert leads the integration of smart building technologies and digital design tools, enhancing project efficiency and building performance.",
+      "credentials": [
+        "BIM Specialist",
+        "Smart Building Certified",
+        "Digital Design"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-461f9741922bcb307cf14847ab04b91bea90b4c2-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/461f9741922bcb307cf14847ab04b91bea90b4c2-400x400.jpg"
+        }
+      }
+    },
+    {
+      "_id": "hd5Qs6cLRW6hFZrgwTVuK1",
+      "name": "Maria Garcia",
+      "role": "Landscape Architect",
+      "description": "Maria designs sustainable outdoor spaces that integrate with architectural projects, focusing on native plant systems and water conservation.",
+      "credentials": [
+        "ASLA Member",
+        "LEED AP",
+        "Sustainable Design"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-aa00b0391b0d6bd7f6a8d52bd0a3e970454bdbba-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/aa00b0391b0d6bd7f6a8d52bd0a3e970454bdbba-400x400.jpg"
+        }
+      }
+    }
+  ],
+  "status": "in-progress"
+}

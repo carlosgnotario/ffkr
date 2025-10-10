@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "wc93Pvmj7qzmyHtTVDXaCS",
+    "title": "Commercial Design",
+    "slug": "commercial-design"
+  },
+  {
+    "slug": "residential-architecture",
+    "_id": "pTWiiMyc1zJOfVMw5IsWYD",
+    "title": "Residential Architecture"
+  },
+  {
+    "title": "Sustainable Design",
+    "slug": "sustainable-design",
+    "_id": "drafts.wc93Pvmj7qzmyHtTVDXZGg"
+  },
+  {
+    "title": "Sustainable Design",
+    "slug": "sustainable-design",
+    "_id": "wc93Pvmj7qzmyHtTVDXZGg"
+  },
+  {
+    "title": "Urban Planning",
+    "slug": "urban-planning",
+    "_id": "pTWiiMyc1zJOfVMw5IsWzM"
+  }
+]

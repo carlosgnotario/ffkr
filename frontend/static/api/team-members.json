@@ -1,0 +1,211 @@
+[
+  {
+    "_id": "u2M3CJw4MOJAMKoEZdAXKK",
+    "name": "David Kim",
+    "role": "Urban Planner",
+    "description": "Urban planner focused on creating sustainable and livable communities through innovative planning strategies and community engagement.",
+    "credentials": [
+      "AICP Certified",
+      "Urban Planning Master",
+      "Community Development Specialist"
+    ],
+    "location": {
+      "_type": "reference",
+      "_ref": "pTWiiMyc1zJOfVMw5IsVy1"
+    },
+    "photo": {
+      "asset": {
+        "_id": "image-5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400-jpg",
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400.jpg"
+      }
+    }
+  },
+  {
+    "_id": "pTWiiMyc1zJOfVMw5IsXre",
+    "name": "Emily Johnson",
+    "role": "Project Manager",
+    "description": "Experienced project manager with expertise in coordinating large-scale architectural projects and ensuring timely delivery of innovative designs.",
+    "credentials": [
+      "PMP Certified",
+      "Project Management Professional"
+    ],
+    "location": {
+      "_type": "reference",
+      "_ref": "u2M3CJw4MOJAMKoEZdAW6d"
+    },
+    "photo": {
+      "asset": {
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/5d8d2defb8bdb67246e2505fe040e4a589a7bcfd-400x400.jpg",
+        "_id": "image-5d8d2defb8bdb67246e2505fe040e4a589a7bcfd-400x400-jpg"
+      }
+    }
+  },
+  {
+    "_id": "oK8li7jSKxzxwrBhCmxO08",
+    "name": "Emily Watson",
+    "role": "Interior Design Specialist",
+    "description": "Emily creates innovative interior spaces that blend functionality with aesthetic appeal, specializing in healthcare and hospitality design.",
+    "credentials": [
+      "NCIDQ Certified",
+      "IIDA Member",
+      "EDAC Certified"
+    ],
+    "location": {
+      "_ref": "u2M3CJw4MOJAMKoEZdAW6d",
+      "_type": "reference"
+    },
+    "photo": {
+      "asset": {
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/3b85606c306cd029f8d2cca827edeea347e24134-400x400.jpg",
+        "_id": "image-3b85606c306cd029f8d2cca827edeea347e24134-400x400-jpg"
+      }
+    }
+  },
+  {
+    "location": {
+      "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+      "_type": "reference"
+    },
+    "photo": {
+      "asset": {
+        "_id": "image-33f1931cde1427ff194ad3f5dc684b5ea1d0c1fe-400x400-jpg",
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/33f1931cde1427ff194ad3f5dc684b5ea1d0c1fe-400x400.jpg"
+      }
+    },
+    "_id": "oK8li7jSKxzxwrBhCmxP8a",
+    "name": "James Wilson",
+    "role": "Structural Engineer",
+    "description": "James provides structural engineering expertise for complex architectural projects, specializing in seismic design and sustainable construction methods.",
+    "credentials": [
+      "PE Licensed",
+      "SE Certified",
+      "ASCE Member"
+    ]
+  },
+  {
+    "credentials": [
+      "PMP Certified",
+      "AIA Associate",
+      "Construction Management"
+    ],
+    "location": {
+      "_type": "reference",
+      "_ref": "pTWiiMyc1zJOfVMw5IsVy1"
+    },
+    "photo": {
+      "asset": {
+        "_id": "image-3daa54b2291ded021efc1f7c5c13b3a69418829e-400x400-jpg",
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/3daa54b2291ded021efc1f7c5c13b3a69418829e-400x400.jpg"
+      }
+    },
+    "_id": "oK8li7jSKxzxwrBhCmxOhU",
+    "name": "Lisa Thompson",
+    "role": "Project Manager",
+    "description": "Lisa oversees complex architectural projects from conception to completion, ensuring timely delivery and quality standards across all project phases."
+  },
+  {
+    "location": {
+      "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+      "_type": "reference"
+    },
+    "photo": {
+      "asset": {
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400.jpg",
+        "_id": "image-b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400-jpg"
+      }
+    },
+    "_id": "wc93Pvmj7qzmyHtTVDXac8",
+    "name": "Marcus Rodriguez",
+    "role": "Senior Architect",
+    "description": "Senior architect specializing in commercial and cultural projects. Marcus brings a unique perspective to urban design, with expertise in adaptive reuse and community-centered architecture.",
+    "credentials": [
+      "AIA Member",
+      "Registered Architect",
+      "Urban Design Certificate"
+    ]
+  },
+  {
+    "name": "Maria Garcia",
+    "role": "Landscape Architect",
+    "description": "Maria designs sustainable outdoor spaces that integrate with architectural projects, focusing on native plant systems and water conservation.",
+    "credentials": [
+      "ASLA Member",
+      "LEED AP",
+      "Sustainable Design"
+    ],
+    "location": {
+      "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+      "_type": "reference"
+    },
+    "photo": {
+      "asset": {
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/aa00b0391b0d6bd7f6a8d52bd0a3e970454bdbba-400x400.jpg",
+        "_id": "image-aa00b0391b0d6bd7f6a8d52bd0a3e970454bdbba-400x400-jpg"
+      }
+    },
+    "_id": "hd5Qs6cLRW6hFZrgwTVuK1"
+  },
+  {
+    "role": "Technology Integration Specialist",
+    "description": "Robert leads the integration of smart building technologies and digital design tools, enhancing project efficiency and building performance.",
+    "credentials": [
+      "BIM Specialist",
+      "Smart Building Certified",
+      "Digital Design"
+    ],
+    "location": {
+      "_type": "reference",
+      "_ref": "u2M3CJw4MOJAMKoEZdAV8s"
+    },
+    "photo": {
+      "asset": {
+        "_id": "image-461f9741922bcb307cf14847ab04b91bea90b4c2-400x400-jpg",
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/461f9741922bcb307cf14847ab04b91bea90b4c2-400x400.jpg"
+      }
+    },
+    "_id": "hd5Qs6cLRW6hFZrgwTVwT5",
+    "name": "Robert Taylor"
+  },
+  {
+    "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture.",
+    "credentials": [
+      "LEED AP",
+      "AIA Member",
+      "Registered Architect"
+    ],
+    "location": {
+      "_type": "reference",
+      "_ref": "u2M3CJw4MOJAMKoEZdAV8s"
+    },
+    "photo": {
+      "asset": {
+        "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+      }
+    },
+    "_id": "drafts.pTWiiMyc1zJOfVMw5IsX8P",
+    "name": "Sarah Chen",
+    "role": "Principal Architect"
+  },
+  {
+    "photo": {
+      "asset": {
+        "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+        "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+      }
+    },
+    "_id": "pTWiiMyc1zJOfVMw5IsX8P",
+    "name": "Sarah Chen",
+    "role": "Principal Architect",
+    "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture.",
+    "credentials": [
+      "LEED AP",
+      "AIA Member",
+      "Registered Architect"
+    ],
+    "location": {
+      "_type": "reference",
+      "_ref": "u2M3CJw4MOJAMKoEZdAV8s"
+    }
+  }
+]

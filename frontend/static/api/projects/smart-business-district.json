@@ -1,0 +1,75 @@
+{
+  "category": {
+    "_id": "wc93Pvmj7qzmyHtTVDXaCS",
+    "title": "Commercial Design",
+    "slug": "commercial-design"
+  },
+  "_id": "S9hWxunWkDj5sGO7rCdCRI",
+  "slug": "smart-business-district",
+  "name": "Smart Business District",
+  "status": "planning",
+  "team": [
+    {
+      "name": "David Kim",
+      "role": "Urban Planner",
+      "description": "Urban planner focused on creating sustainable and livable communities through innovative planning strategies and community engagement.",
+      "credentials": [
+        "AICP Certified",
+        "Urban Planning Master",
+        "Community Development Specialist"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "pTWiiMyc1zJOfVMw5IsVy1"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400.jpg"
+        }
+      },
+      "_id": "u2M3CJw4MOJAMKoEZdAXKK"
+    }
+  ],
+  "location": "Tech Business District, Metro City",
+  "description": "Technology-integrated commercial area with smart lighting, waste management systems, and digital infrastructure.",
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-c77feb375043709bfe6c22c5eb2282c2003c5c62-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/c77feb375043709bfe6c22c5eb2282c2003c5c62-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/b5d3a11e65e57895c5e44792b623091d8c36ae13-800x600.jpg",
+          "_id": "image-b5d3a11e65e57895c5e44792b623091d8c36ae13-800x600-jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-df8572ab2e312d8e3b571ab36dcfd006e2282552-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/df8572ab2e312d8e3b571ab36dcfd006e2282552-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3a446c0fd5b7fa77e03eb9bfe02ec0ec10d78afa-800x600.jpg",
+          "_id": "image-3a446c0fd5b7fa77e03eb9bfe02ec0ec10d78afa-800x600-jpg"
+        }
+      }
+    }
+  ],
+  "services": [
+    "Master Planning",
+    "Accessibility Compliance",
+    "LEED Certification"
+  ]
+}

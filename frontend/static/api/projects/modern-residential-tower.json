@@ -1,0 +1,90 @@
+{
+  "category": {
+    "slug": "residential-architecture",
+    "_id": "pTWiiMyc1zJOfVMw5IsWYD",
+    "title": "Residential Architecture"
+  },
+  "_id": "oK8li7jSKxzxwrBhCiXLyS",
+  "name": "Modern Residential Tower",
+  "services": [
+    "Master Planning",
+    "Project Management",
+    "Community Engagement",
+    "LEED Certification",
+    "Construction Administration"
+  ],
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-59d6e9b092e875c21d8663694fdc4dfbc8a65a1e-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/59d6e9b092e875c21d8663694fdc4dfbc8a65a1e-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-ace06aa0e28ed65c99d60d4ba9d11c6725b33c96-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/ace06aa0e28ed65c99d60d4ba9d11c6725b33c96-800x600.jpg"
+        }
+      }
+    }
+  ],
+  "location": "Downtown Heights, Metro City",
+  "slug": "modern-residential-tower",
+  "team": [
+    {
+      "credentials": [
+        "AIA Member",
+        "Registered Architect",
+        "Urban Design Certificate"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400.jpg"
+        }
+      },
+      "_id": "wc93Pvmj7qzmyHtTVDXac8",
+      "name": "Marcus Rodriguez",
+      "role": "Senior Architect",
+      "description": "Senior architect specializing in commercial and cultural projects. Marcus brings a unique perspective to urban design, with expertise in adaptive reuse and community-centered architecture."
+    },
+    {
+      "credentials": [
+        "LEED AP",
+        "AIA Member",
+        "Registered Architect"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+        }
+      },
+      "_id": "drafts.pTWiiMyc1zJOfVMw5IsX8P",
+      "name": "Sarah Chen",
+      "role": "Principal Architect",
+      "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture."
+    }
+  ],
+  "description": "High-rise residential building with contemporary design, energy-efficient systems, and panoramic city views.",
+  "status": "in-progress"
+}

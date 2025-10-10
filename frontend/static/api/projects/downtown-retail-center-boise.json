@@ -1,0 +1,72 @@
+{
+  "category": {
+    "_id": "wc93Pvmj7qzmyHtTVDXaCS",
+    "title": "Commercial Design",
+    "slug": "commercial-design"
+  },
+  "selectSimilarProjectsManually": false,
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-ec4fa64b542420d1be8ca7a5fe7996d986a5748c-1170x780-heif",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/ec4fa64b542420d1be8ca7a5fe7996d986a5748c-1170x780.heif"
+        }
+      }
+    }
+  ],
+  "description": "A vibrant retail center that seamlessly integrates shopping, dining, and entertainment while maintaining the historic character of downtown Boise.",
+  "slug": "downtown-retail-center-boise",
+  "team": [
+    {
+      "_id": "wc93Pvmj7qzmyHtTVDXac8",
+      "name": "Marcus Rodriguez",
+      "role": "Senior Architect",
+      "description": "Senior architect specializing in commercial and cultural projects. Marcus brings a unique perspective to urban design, with expertise in adaptive reuse and community-centered architecture.",
+      "credentials": [
+        "AIA Member",
+        "Registered Architect",
+        "Urban Design Certificate"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400.jpg"
+        }
+      }
+    },
+    {
+      "description": "Urban planner focused on creating sustainable and livable communities through innovative planning strategies and community engagement.",
+      "credentials": [
+        "AICP Certified",
+        "Urban Planning Master",
+        "Community Development Specialist"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "pTWiiMyc1zJOfVMw5IsVy1"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400.jpg"
+        }
+      },
+      "_id": "u2M3CJw4MOJAMKoEZdAXKK",
+      "name": "David Kim",
+      "role": "Urban Planner"
+    }
+  ],
+  "status": "planning",
+  "services": [
+    "MEP Coordination",
+    "Building Analysis"
+  ],
+  "_id": "wc93Pvmj7qzmyHtTVDXbrA",
+  "name": "Downtown Retail Center",
+  "location": "Boise"
+}

@@ -1,0 +1,118 @@
+{
+  "status": "planning",
+  "category": {
+    "title": "Residential Architecture",
+    "slug": "residential-architecture",
+    "_id": "pTWiiMyc1zJOfVMw5IsWYD"
+  },
+  "_id": "oK8li7jSKxzxwrBhCiXJK4",
+  "description": "Affordable housing development featuring sustainable materials, energy-efficient systems, and community spaces for residents.",
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-266de0d9fcef5ac492776c56b5a7d95bb15c44d3-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/266de0d9fcef5ac492776c56b5a7d95bb15c44d3-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-3a446c0fd5b7fa77e03eb9bfe02ec0ec10d78afa-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3a446c0fd5b7fa77e03eb9bfe02ec0ec10d78afa-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-b5d3a11e65e57895c5e44792b623091d8c36ae13-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/b5d3a11e65e57895c5e44792b623091d8c36ae13-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-df8572ab2e312d8e3b571ab36dcfd006e2282552-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/df8572ab2e312d8e3b571ab36dcfd006e2282552-800x600.jpg"
+        }
+      }
+    }
+  ],
+  "slug": "sustainable-housing-complex",
+  "name": "Sustainable Housing Complex",
+  "location": "Residential District, Metro City",
+  "services": [
+    "Full Architectural Services",
+    "Accessibility Compliance",
+    "Building Analysis",
+    "Cost Estimation"
+  ],
+  "team": [
+    {
+      "_id": "oK8li7jSKxzxwrBhCmxOhU",
+      "name": "Lisa Thompson",
+      "role": "Project Manager",
+      "description": "Lisa oversees complex architectural projects from conception to completion, ensuring timely delivery and quality standards across all project phases.",
+      "credentials": [
+        "PMP Certified",
+        "AIA Associate",
+        "Construction Management"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsVy1",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3daa54b2291ded021efc1f7c5c13b3a69418829e-400x400.jpg",
+          "_id": "image-3daa54b2291ded021efc1f7c5c13b3a69418829e-400x400-jpg"
+        }
+      }
+    },
+    {
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/aa00b0391b0d6bd7f6a8d52bd0a3e970454bdbba-400x400.jpg",
+          "_id": "image-aa00b0391b0d6bd7f6a8d52bd0a3e970454bdbba-400x400-jpg"
+        }
+      },
+      "_id": "hd5Qs6cLRW6hFZrgwTVuK1",
+      "name": "Maria Garcia",
+      "role": "Landscape Architect",
+      "description": "Maria designs sustainable outdoor spaces that integrate with architectural projects, focusing on native plant systems and water conservation.",
+      "credentials": [
+        "ASLA Member",
+        "LEED AP",
+        "Sustainable Design"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      }
+    },
+    {
+      "_id": "oK8li7jSKxzxwrBhCmxO08",
+      "name": "Emily Watson",
+      "role": "Interior Design Specialist",
+      "description": "Emily creates innovative interior spaces that blend functionality with aesthetic appeal, specializing in healthcare and hospitality design.",
+      "credentials": [
+        "NCIDQ Certified",
+        "IIDA Member",
+        "EDAC Certified"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "u2M3CJw4MOJAMKoEZdAW6d"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-3b85606c306cd029f8d2cca827edeea347e24134-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3b85606c306cd029f8d2cca827edeea347e24134-400x400.jpg"
+        }
+      }
+    }
+  ]
+}

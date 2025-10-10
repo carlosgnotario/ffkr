@@ -1,0 +1,76 @@
+{
+  "name": "Sustainable Office Complex - Salt Lake City",
+  "description": "A cutting-edge sustainable office complex featuring LEED Platinum certification, solar panels, and innovative water conservation systems. This project represents the future of environmentally conscious commercial design.",
+  "status": "completed",
+  "category": {
+    "slug": "sustainable-design",
+    "_id": "wc93Pvmj7qzmyHtTVDXZGg",
+    "title": "Sustainable Design"
+  },
+  "_id": "wc93Pvmj7qzmyHtTVDXbUh",
+  "slug": "sustainable-office-complex-salt-lake-city",
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-c31c29e4f7a5bfd4296d5bf1cd9a92351d1728d7-687x1031-heif",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/c31c29e4f7a5bfd4296d5bf1cd9a92351d1728d7-687x1031.heif"
+        }
+      }
+    }
+  ],
+  "completionDate": "2023-08-15",
+  "selectSimilarProjectsManually": false,
+  "team": [
+    {
+      "_id": "pTWiiMyc1zJOfVMw5IsX8P",
+      "name": "Sarah Chen",
+      "role": "Principal Architect",
+      "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture.",
+      "credentials": [
+        "LEED AP",
+        "AIA Member",
+        "Registered Architect"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+        }
+      }
+    },
+    {
+      "description": "Senior architect specializing in commercial and cultural projects. Marcus brings a unique perspective to urban design, with expertise in adaptive reuse and community-centered architecture.",
+      "credentials": [
+        "AIA Member",
+        "Registered Architect",
+        "Urban Design Certificate"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/b8163ec66b3b705997fbe8ad37e9fb97190c9dcb-400x400.jpg"
+        }
+      },
+      "_id": "wc93Pvmj7qzmyHtTVDXac8",
+      "name": "Marcus Rodriguez",
+      "role": "Senior Architect"
+    }
+  ],
+  "location": "123 Main Street, Salt Lake City, UT",
+  "services": [
+    "Historic Preservation",
+    "3D Visualization",
+    "LEED Certification",
+    "Sustainability Consulting",
+    "Site Planning"
+  ]
+}

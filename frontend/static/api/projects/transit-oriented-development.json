@@ -1,0 +1,66 @@
+{
+  "slug": "transit-oriented-development",
+  "team": [
+    {
+      "role": "Urban Planner",
+      "description": "Urban planner focused on creating sustainable and livable communities through innovative planning strategies and community engagement.",
+      "credentials": [
+        "AICP Certified",
+        "Urban Planning Master",
+        "Community Development Specialist"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsVy1",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400.jpg",
+          "_id": "image-5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400-jpg"
+        }
+      },
+      "_id": "u2M3CJw4MOJAMKoEZdAXKK",
+      "name": "David Kim"
+    }
+  ],
+  "location": "Transit Hub, Metro City",
+  "name": "Transit-Oriented Development",
+  "status": "planning",
+  "_id": "S9hWxunWkDj5sGO7rCdBFk",
+  "services": [
+    "Master Planning",
+    "Landscape Architecture"
+  ],
+  "category": {
+    "_id": "pTWiiMyc1zJOfVMw5IsWzM",
+    "title": "Urban Planning",
+    "slug": "urban-planning"
+  },
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-80a5e16c25097793c15b9474a007559138fd5bbf-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/80a5e16c25097793c15b9474a007559138fd5bbf-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-1dbd0e0680a2cdce39c80f7c87e2b25288b64fc0-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/1dbd0e0680a2cdce39c80f7c87e2b25288b64fc0-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5079c5158d3a74e07215a463e0c0e63b0097a41c-800x600.jpg",
+          "_id": "image-5079c5158d3a74e07215a463e0c0e63b0097a41c-800x600-jpg"
+        }
+      }
+    }
+  ],
+  "description": "Mixed-use development centered around public transportation hubs, promoting walkability and reducing car dependency."
+}

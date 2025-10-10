@@ -1,0 +1,74 @@
+{
+  "slug": "urban-green-corridor",
+  "category": {
+    "_id": "pTWiiMyc1zJOfVMw5IsWzM",
+    "title": "Urban Planning",
+    "slug": "urban-planning"
+  },
+  "description": "Linear park system connecting neighborhoods with bike paths, walking trails, and native plant landscaping.",
+  "status": "in-progress",
+  "name": "Urban Green Corridor",
+  "_id": "oK8li7jSKxzxwrBhCiXKro",
+  "team": [
+    {
+      "_id": "hd5Qs6cLRW6hFZrgwTVwT5",
+      "name": "Robert Taylor",
+      "role": "Technology Integration Specialist",
+      "description": "Robert leads the integration of smart building technologies and digital design tools, enhancing project efficiency and building performance.",
+      "credentials": [
+        "BIM Specialist",
+        "Smart Building Certified",
+        "Digital Design"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-461f9741922bcb307cf14847ab04b91bea90b4c2-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/461f9741922bcb307cf14847ab04b91bea90b4c2-400x400.jpg"
+        }
+      }
+    }
+  ],
+  "services": [
+    "Feasibility Studies",
+    "MEP Coordination"
+  ],
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/b5d3a11e65e57895c5e44792b623091d8c36ae13-800x600.jpg",
+          "_id": "image-b5d3a11e65e57895c5e44792b623091d8c36ae13-800x600-jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-df8572ab2e312d8e3b571ab36dcfd006e2282552-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/df8572ab2e312d8e3b571ab36dcfd006e2282552-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-3a446c0fd5b7fa77e03eb9bfe02ec0ec10d78afa-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3a446c0fd5b7fa77e03eb9bfe02ec0ec10d78afa-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-266de0d9fcef5ac492776c56b5a7d95bb15c44d3-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/266de0d9fcef5ac492776c56b5a7d95bb15c44d3-800x600.jpg"
+        }
+      }
+    }
+  ],
+  "location": "Metro City Corridor"
+}

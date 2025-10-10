@@ -1,0 +1,76 @@
+{
+  "name": "Net-Zero Energy Homes",
+  "location": "Green Suburb, Metro City",
+  "description": "Residential development featuring homes that produce as much energy as they consume through solar panels and energy-efficient design.",
+  "status": "completed",
+  "services": [
+    "Community Engagement",
+    "Interior Design",
+    "Full Architectural Services"
+  ],
+  "_id": "oK8li7jSKxzxwrBhCiXKq0",
+  "category": {
+    "_id": "pTWiiMyc1zJOfVMw5IsWYD",
+    "title": "Residential Architecture",
+    "slug": "residential-architecture"
+  },
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/59d6e9b092e875c21d8663694fdc4dfbc8a65a1e-800x600.jpg",
+          "_id": "image-59d6e9b092e875c21d8663694fdc4dfbc8a65a1e-800x600-jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/ace06aa0e28ed65c99d60d4ba9d11c6725b33c96-800x600.jpg",
+          "_id": "image-ace06aa0e28ed65c99d60d4ba9d11c6725b33c96-800x600-jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/c77feb375043709bfe6c22c5eb2282c2003c5c62-800x600.jpg",
+          "_id": "image-c77feb375043709bfe6c22c5eb2282c2003c5c62-800x600-jpg"
+        }
+      }
+    }
+  ],
+  "slug": "net-zero-energy-homes",
+  "team": [
+    {
+      "credentials": [
+        "NCIDQ Certified",
+        "IIDA Member",
+        "EDAC Certified"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAW6d",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-3b85606c306cd029f8d2cca827edeea347e24134-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3b85606c306cd029f8d2cca827edeea347e24134-400x400.jpg"
+        }
+      },
+      "_id": "oK8li7jSKxzxwrBhCmxO08",
+      "name": "Emily Watson",
+      "role": "Interior Design Specialist",
+      "description": "Emily creates innovative interior spaces that blend functionality with aesthetic appeal, specializing in healthcare and hospitality design."
+    }
+  ],
+  "completionDate": "2025-10-07"
+}

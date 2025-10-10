@@ -1,0 +1,117 @@
+{
+  "services": [
+    "Design Development",
+    "Energy Modeling",
+    "Code Compliance Review"
+  ],
+  "name": "Green Office Tower",
+  "_id": "oK8li7jSKxzxwrBhCiXJLs",
+  "location": "Business District, Metro City",
+  "category": {
+    "title": "Commercial Design",
+    "slug": "commercial-design",
+    "_id": "wc93Pvmj7qzmyHtTVDXaCS"
+  },
+  "team": [
+    {
+      "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture.",
+      "credentials": [
+        "LEED AP",
+        "AIA Member",
+        "Registered Architect"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+        }
+      },
+      "_id": "drafts.pTWiiMyc1zJOfVMw5IsX8P",
+      "name": "Sarah Chen",
+      "role": "Principal Architect"
+    },
+    {
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/33f1931cde1427ff194ad3f5dc684b5ea1d0c1fe-400x400.jpg",
+          "_id": "image-33f1931cde1427ff194ad3f5dc684b5ea1d0c1fe-400x400-jpg"
+        }
+      },
+      "_id": "oK8li7jSKxzxwrBhCmxP8a",
+      "name": "James Wilson",
+      "role": "Structural Engineer",
+      "description": "James provides structural engineering expertise for complex architectural projects, specializing in seismic design and sustainable construction methods.",
+      "credentials": [
+        "PE Licensed",
+        "SE Certified",
+        "ASCE Member"
+      ]
+    },
+    {
+      "name": "Lisa Thompson",
+      "role": "Project Manager",
+      "description": "Lisa oversees complex architectural projects from conception to completion, ensuring timely delivery and quality standards across all project phases.",
+      "credentials": [
+        "PMP Certified",
+        "AIA Associate",
+        "Construction Management"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsVy1",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/3daa54b2291ded021efc1f7c5c13b3a69418829e-400x400.jpg",
+          "_id": "image-3daa54b2291ded021efc1f7c5c13b3a69418829e-400x400-jpg"
+        }
+      },
+      "_id": "oK8li7jSKxzxwrBhCmxOhU"
+    }
+  ],
+  "description": "LEED-certified commercial building with integrated green technologies, rooftop gardens, and sustainable energy systems.",
+  "status": "in-progress",
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-59d6e9b092e875c21d8663694fdc4dfbc8a65a1e-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/59d6e9b092e875c21d8663694fdc4dfbc8a65a1e-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-ace06aa0e28ed65c99d60d4ba9d11c6725b33c96-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/ace06aa0e28ed65c99d60d4ba9d11c6725b33c96-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-c77feb375043709bfe6c22c5eb2282c2003c5c62-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/c77feb375043709bfe6c22c5eb2282c2003c5c62-800x600.jpg"
+        }
+      }
+    }
+  ],
+  "slug": "green-office-tower"
+}

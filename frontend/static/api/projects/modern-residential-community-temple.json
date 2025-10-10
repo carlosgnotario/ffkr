@@ -1,0 +1,75 @@
+{
+  "status": "in-progress",
+  "services": [
+    "Historic Preservation",
+    "Code Compliance Review",
+    "MEP Coordination",
+    "Building Analysis",
+    "Interior Design"
+  ],
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-fdd1979f61f6d09b38d95e5e798a51cef7665a62-1974x2960-heif",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/fdd1979f61f6d09b38d95e5e798a51cef7665a62-1974x2960.heif"
+        }
+      }
+    }
+  ],
+  "slug": "modern-residential-community-temple",
+  "selectSimilarProjectsManually": false,
+  "_id": "pTWiiMyc1zJOfVMw5IsYIn",
+  "completionDate": "2024-06-30",
+  "name": "Modern Residential Community - Temple",
+  "team": [
+    {
+      "credentials": [
+        "LEED AP",
+        "AIA Member",
+        "Registered Architect"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+        }
+      },
+      "_id": "pTWiiMyc1zJOfVMw5IsX8P",
+      "name": "Sarah Chen",
+      "role": "Principal Architect",
+      "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture."
+    },
+    {
+      "credentials": [
+        "PMP Certified",
+        "Project Management Professional"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAW6d",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-5d8d2defb8bdb67246e2505fe040e4a589a7bcfd-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5d8d2defb8bdb67246e2505fe040e4a589a7bcfd-400x400.jpg"
+        }
+      },
+      "_id": "pTWiiMyc1zJOfVMw5IsXre",
+      "name": "Emily Johnson",
+      "role": "Project Manager",
+      "description": "Experienced project manager with expertise in coordinating large-scale architectural projects and ensuring timely delivery of innovative designs."
+    }
+  ],
+  "category": {
+    "_id": "pTWiiMyc1zJOfVMw5IsWYD",
+    "title": "Residential Architecture",
+    "slug": "residential-architecture"
+  },
+  "description": "A contemporary residential community featuring smart home technology, energy-efficient design, and community-focused amenities. This development sets new standards for sustainable living.",
+  "location": "456 Oak Avenue, Temple, AZ"
+}

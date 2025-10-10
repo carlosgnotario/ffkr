@@ -1,0 +1,44 @@
+{
+  "logo": {
+    "asset": {
+      "url": "https://cdn.sanity.io/images/80je9ukv/production/a951976d003854fa494abca54cfc312c44f4f6d8-506x50.svg",
+      "_id": "image-a951976d003854fa494abca54cfc312c44f4f6d8-506x50-svg"
+    }
+  },
+  "navigation": [
+    {
+      "description": "Explore our portfolio of architectural projects",
+      "image": {
+        "asset": {
+          "_id": "image-04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/04222dcd14b82687ed98eb5625237c9b99dabc4d-800x600.jpg"
+        }
+      },
+      "title": "Projects",
+      "url": "/studio"
+    },
+    {
+      "image": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/4b9ca5d6a4e6c5fab9bb742b5646c6c10c36133d-800x600.jpg",
+          "_id": "image-4b9ca5d6a4e6c5fab9bb742b5646c6c10c36133d-800x600-jpg"
+        }
+      },
+      "title": "History",
+      "url": "/history",
+      "description": "Learn about our company history and journey"
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-0f4f9dd29914c6862880f140ea2ae7dcd5db04f5-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/0f4f9dd29914c6862880f140ea2ae7dcd5db04f5-800x600.jpg"
+        }
+      },
+      "title": "Culture",
+      "url": "/culture",
+      "description": "Discover our company culture and values"
+    }
+  ],
+  "_id": "siteSettings"
+}

@@ -1,0 +1,109 @@
+{
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-80a5e16c25097793c15b9474a007559138fd5bbf-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/80a5e16c25097793c15b9474a007559138fd5bbf-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-1dbd0e0680a2cdce39c80f7c87e2b25288b64fc0-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/1dbd0e0680a2cdce39c80f7c87e2b25288b64fc0-800x600.jpg"
+        }
+      }
+    },
+    {
+      "image": {
+        "asset": {
+          "_id": "image-5079c5158d3a74e07215a463e0c0e63b0097a41c-800x600-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5079c5158d3a74e07215a463e0c0e63b0097a41c-800x600.jpg"
+        }
+      }
+    }
+  ],
+  "location": "Waterfront District, Metro City",
+  "services": [
+    "Landscape Architecture",
+    "Urban Design",
+    "Structural Engineering Coordination",
+    "Full Architectural Services"
+  ],
+  "category": {
+    "title": "Urban Planning",
+    "slug": "urban-planning",
+    "_id": "pTWiiMyc1zJOfVMw5IsWzM"
+  },
+  "_id": "S9hWxunWkDj5sGO7rCd4ZY",
+  "name": "Waterfront Development",
+  "status": "planning",
+  "description": "Mixed-use waterfront development featuring residential, commercial, and recreational spaces with sustainable design and flood resilience.",
+  "team": [
+    {
+      "name": "Emily Johnson",
+      "role": "Project Manager",
+      "description": "Experienced project manager with expertise in coordinating large-scale architectural projects and ensuring timely delivery of innovative designs.",
+      "credentials": [
+        "PMP Certified",
+        "Project Management Professional"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "u2M3CJw4MOJAMKoEZdAW6d"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5d8d2defb8bdb67246e2505fe040e4a589a7bcfd-400x400.jpg",
+          "_id": "image-5d8d2defb8bdb67246e2505fe040e4a589a7bcfd-400x400-jpg"
+        }
+      },
+      "_id": "pTWiiMyc1zJOfVMw5IsXre"
+    },
+    {
+      "_id": "drafts.pTWiiMyc1zJOfVMw5IsX8P",
+      "name": "Sarah Chen",
+      "role": "Principal Architect",
+      "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture.",
+      "credentials": [
+        "LEED AP",
+        "AIA Member",
+        "Registered Architect"
+      ],
+      "location": {
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg"
+        }
+      }
+    },
+    {
+      "name": "James Wilson",
+      "role": "Structural Engineer",
+      "description": "James provides structural engineering expertise for complex architectural projects, specializing in seismic design and sustainable construction methods.",
+      "credentials": [
+        "PE Licensed",
+        "SE Certified",
+        "ASCE Member"
+      ],
+      "location": {
+        "_ref": "pTWiiMyc1zJOfVMw5IsWA5",
+        "_type": "reference"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/33f1931cde1427ff194ad3f5dc684b5ea1d0c1fe-400x400.jpg",
+          "_id": "image-33f1931cde1427ff194ad3f5dc684b5ea1d0c1fe-400x400-jpg"
+        }
+      },
+      "_id": "oK8li7jSKxzxwrBhCmxP8a"
+    }
+  ],
+  "slug": "waterfront-development"
+}

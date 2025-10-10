@@ -27,28 +27,11 @@ export class Screensaver {
     setup() {
         this.element.style.display = 'none'
     }
-    
-    setTimer(value) {
-        this.timer = value
-    }
 
     show() {
         this.sliderTimer = 1000;
-        
-        // Ensure elements are available
-        if (!this.menu) {
-            this.menu = this.element.querySelector('.screensaver-menu')
-        }
-        if (!this.textMessage) {
-            this.textMessage = this.element.querySelector('.screensaver-text')
-        }
-        
-        if (this.menu) {
-            this.menu.style.width = '0'
-        }
-        if (this.textMessage) {
-            this.textMessage.style.clipPath = 'inset(0 0 0 0)'
-        }
+        this.menu.style.width = '0'
+        this.textMessage.style.clipPath = 'inset(0 0 0 0)'
         
         gsap.set(this.element, {
             display: 'grid',
@@ -70,19 +53,18 @@ export class Screensaver {
             ease: "expo.out",
             onComplete: () => {
                 this.element.style.display = 'none'
-                this.timer = 1000;
+                // check if homepage, if so, add 1000 to timer, otherwise set to 0
+                if (window.location.pathname === '/') {                    
+                    this.timer = 0;
+                } else {
+                    this.timer = 1000;
+                }
                 this.active = false;
             }
         })
     }
 
     createSlide() {
-        // Check if projects are loaded
-        if (!this.projects || this.projects.length === 0) {
-            console.warn('No projects available for screensaver')
-            return
-        }
-        
         if (this.currentSlide) {
             this.currentIndex = (this.currentIndex + 1) % this.projects.length
             this.previousSlide = this.currentSlide
@@ -171,39 +153,24 @@ export class Screensaver {
             }
             
             console.log("show menu");
-            
-            // Ensure elements are available
-            if (!this.menu) {
-                this.menu = this.element.querySelector('.screensaver-menu')
-            }
-            if (!this.textMessage) {
-                this.textMessage = this.element.querySelector('.screensaver-text')
-            }
-            
-            if (this.menu) {
-                gsap.to(this.menu, {
-                    width: "28.125rem"
-                })
-            }
-            if (this.textMessage) {
-                gsap.to(this.textMessage, {
-                    clipPath: "inset(0 50% 0 50%)",
-                    duration: 2,
-                })
-            }
+            gsap.to(this.menu, {
+                width: "28.125rem"
+            })
+            gsap.to(this.textMessage, {
+                clipPath: "inset(0 50% 0 50%)",
+                duration: 2,
+            })
         })
 
-        if (this.menu) {
-            this.menu.querySelectorAll('a').forEach(a => {
-                a.addEventListener('click', () => {
-                    this.hide()
-                })
+        this.menu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                this.hide()
             })
-        }
+        })
     }
 
     elements() {
-        this.timer = 1000;
+        this.timer = 0;
         this.sliderTimer = 1000;
         this.textMessage = this.element.querySelector('.screensaver-text')
         this.menu = this.element.querySelector('.screensaver-menu')

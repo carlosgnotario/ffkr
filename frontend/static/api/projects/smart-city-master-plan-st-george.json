@@ -1,0 +1,76 @@
+{
+  "location": "St. George, UT",
+  "completionDate": "2024-12-31",
+  "category": {
+    "_id": "pTWiiMyc1zJOfVMw5IsWzM",
+    "title": "Urban Planning",
+    "slug": "urban-planning"
+  },
+  "slug": "smart-city-master-plan-st-george",
+  "services": [
+    "3D Visualization",
+    "Landscape Architecture",
+    "Permit Processing",
+    "LEED Certification",
+    "Energy Modeling"
+  ],
+  "selectSimilarProjectsManually": false,
+  "photoGallery": [
+    {
+      "image": {
+        "asset": {
+          "_id": "image-0b16a2360455809663e63628586c4f032b763458-1169x780-jpg",
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/0b16a2360455809663e63628586c4f032b763458-1169x780.jpg"
+        }
+      }
+    }
+  ],
+  "_id": "pTWiiMyc1zJOfVMw5IsYgv",
+  "team": [
+    {
+      "credentials": [
+        "AICP Certified",
+        "Urban Planning Master",
+        "Community Development Specialist"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "pTWiiMyc1zJOfVMw5IsVy1"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400.jpg",
+          "_id": "image-5239c4cfe9bd9d7437929bee066b14c42d51059c-400x400-jpg"
+        }
+      },
+      "_id": "u2M3CJw4MOJAMKoEZdAXKK",
+      "name": "David Kim",
+      "role": "Urban Planner",
+      "description": "Urban planner focused on creating sustainable and livable communities through innovative planning strategies and community engagement."
+    },
+    {
+      "_id": "pTWiiMyc1zJOfVMw5IsX8P",
+      "name": "Sarah Chen",
+      "role": "Principal Architect",
+      "description": "Principal architect with 15 years of experience in sustainable design and urban planning. Sarah leads our environmental design initiatives and has been recognized internationally for her innovative approaches to green architecture.",
+      "credentials": [
+        "LEED AP",
+        "AIA Member",
+        "Registered Architect"
+      ],
+      "location": {
+        "_type": "reference",
+        "_ref": "u2M3CJw4MOJAMKoEZdAV8s"
+      },
+      "photo": {
+        "asset": {
+          "url": "https://cdn.sanity.io/images/80je9ukv/production/d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400.jpg",
+          "_id": "image-d6d3056810167a063783bee7a606a6c5dde1f5fa-400x400-jpg"
+        }
+      }
+    }
+  ],
+  "name": "Smart City Master Plan - St. George",
+  "description": "A comprehensive master plan for St. George that incorporates smart city technology, sustainable transportation, and community-centered design principles.",
+  "status": "in-progress"
+}
