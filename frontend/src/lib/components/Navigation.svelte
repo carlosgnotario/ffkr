@@ -6,8 +6,19 @@
 
 	onMount(async () => {
 		try {
-			const response = await fetch('/api/site-settings')
-			siteSettings = await response.json()
+			// Fetch directly from Sanity CDN
+			const query = `*[_type == "siteSettings"][0] {
+				logo {
+					asset->{
+						_id,
+						url
+					}
+				}
+			}`
+			
+			const response = await fetch(`https://80je9ukv.api.sanity.io/v2024-01-15/data/query/production?query=${encodeURIComponent(query)}`)
+			const data = await response.json()
+			siteSettings = data.result || {}
 			
 			if (siteSettings?.logo?.asset?.url) {
 				logoUrl = siteSettings.logo.asset.url

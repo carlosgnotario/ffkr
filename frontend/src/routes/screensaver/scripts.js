@@ -13,9 +13,91 @@ export class Screensaver {
 	}
     
     async init() {
-        this.projects = await fetch('/api/projects').then(r => r.json())
-        this.siteSettings = await fetch('/api/site-settings').then(r => r.json())
-        console.log("appended screensaver");
+        // Fetch directly from Sanity CDN since GitHub Pages is static
+        const sanityClient = {
+            projectId: '80je9ukv',
+            dataset: 'production',
+            useCdn: true,
+            apiVersion: '2024-01-15'
+        }
+        
+        // Fetch projects
+        const projectsQuery = `*[_type == "project"] | order(name asc) {
+            _id,
+            name,
+            description,
+            location,
+            status,
+            completionDate,
+            "slug": slug.current,
+            services,
+            category->{
+                _id,
+                title,
+                "slug": slug.current
+            },
+            team[]->{
+                _id,
+                name,
+                role,
+                photo {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            },
+            photoGallery[] {
+                image {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            }
+        }`
+        
+        // Fetch site settings
+        const siteSettingsQuery = `*[_type == "siteSettings"][0] {
+            _id,
+            logo {
+                asset->{
+                    _id,
+                    url
+                }
+            },
+            navigation[] {
+                title,
+                url,
+                description,
+                image {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            }
+        }`
+        
+        try {
+            const [projectsResponse, siteSettingsResponse] = await Promise.all([
+                fetch(`https://${sanityClient.projectId}.api.sanity.io/v${sanityClient.apiVersion}/data/query/${sanityClient.dataset}?query=${encodeURIComponent(projectsQuery)}`),
+                fetch(`https://${sanityClient.projectId}.api.sanity.io/v${sanityClient.apiVersion}/data/query/${sanityClient.dataset}?query=${encodeURIComponent(siteSettingsQuery)}`)
+            ])
+            
+            const [projectsData, siteSettingsData] = await Promise.all([
+                projectsResponse.json(),
+                siteSettingsResponse.json()
+            ])
+            
+            this.projects = projectsData.result || []
+            this.siteSettings = siteSettingsData.result || {}
+            console.log("appended screensaver");
+        } catch (error) {
+            console.error('Error fetching data:', error)
+            this.projects = []
+            this.siteSettings = {}
+        }
         
         
         this.elements()
