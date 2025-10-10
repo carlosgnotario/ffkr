@@ -5,27 +5,8 @@
 	let logoUrl = ''
 
 	onMount(async () => {
-		try {
-			// Fetch directly from Sanity CDN
-			const query = `*[_type == "siteSettings"][0] {
-				logo {
-					asset->{
-						_id,
-						url
-					}
-				}
-			}`
-			
-			const response = await fetch(`https://80je9ukv.api.sanity.io/v2024-01-15/data/query/production?query=${encodeURIComponent(query)}`)
-			const data = await response.json()
-			siteSettings = data.result || {}
-			
-			if (siteSettings?.logo?.asset?.url) {
-				logoUrl = siteSettings.logo.asset.url
-			}
-		} catch (error) {
-			console.error('Error fetching site settings:', error)
-		}
+		// Use fallback logo since CORS blocks direct Sanity API calls
+		logoUrl = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&h=60&fit=crop'
 	})
 </script>
 
