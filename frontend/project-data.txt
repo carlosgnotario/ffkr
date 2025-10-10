@@ -1,0 +1,64 @@
+PROJECT DATA FOR MANUAL CREATION
+=====================================
+
+Copy and paste this data into your Sanity Studio to create projects manually.
+
+PROJECT 1:
+----------
+Project Name: Downtown Urban Renewal
+Description: A comprehensive urban planning project focused on revitalizing the downtown core with sustainable design principles and community engagement.
+Location: Downtown District, Metro City
+Status: in-progress
+Category: Urban Planning
+Slug: downtown-urban-renewal
+
+PROJECT 2:
+----------
+Project Name: Green Infrastructure Network
+Description: Development of an integrated green infrastructure system connecting parks, bike lanes, and sustainable transportation options across the city.
+Location: Metro City, Regional Area
+Status: planning
+Category: Environmental Design
+Slug: green-infrastructure-network
+
+PROJECT 3:
+----------
+Project Name: Historic District Preservation
+Description: Comprehensive preservation and adaptive reuse plan for the historic downtown district, maintaining architectural heritage while enabling modern functionality.
+Location: Historic Downtown, Metro City
+Status: completed
+Category: Heritage Conservation
+Slug: historic-district-preservation
+
+PROJECT 4:
+----------
+Project Name: Smart City Technology Hub
+Description: Implementation of smart city technologies including IoT sensors, data analytics, and citizen engagement platforms to improve urban services.
+Location: Tech District, Metro City
+Status: in-progress
+Category: Smart Cities
+Slug: smart-city-technology-hub
+
+PROJECT 5:
+----------
+Project Name: Waterfront Development
+Description: Mixed-use waterfront development featuring residential, commercial, and recreational spaces with sustainable design and flood resilience.
+Location: Waterfront District, Metro City
+Status: planning
+Category: Urban Planning
+Slug: waterfront-development
+
+INSTRUCTIONS:
+=============
+1. Go to https://ffkr.sanity.studio/
+2. Click "Create" → "Project"
+3. Copy and paste the data above for each project
+4. Select the appropriate category from the dropdown
+5. Click "Publish"
+6. Repeat for all 5 projects
+
+STATUS OPTIONS:
+- planning
+- in-progress
+- completed
+- on-hold

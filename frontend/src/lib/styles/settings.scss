@@ -1,0 +1,48 @@
+// Color variables
+$red: #EE3D42;
+$dark-gray: #5A5B5D;
+$mid-gray: #A2A2A2;
+$gray: #E3E4E5;
+$black: #000000;
+$white: #FFFFFF;
+
+// Import Roboto from Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// Font family tofino
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/tofino-pro-personal-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@function ptr($px-value) {
+  @return #{$px-value / 32}rem;
+}
+
+// Alternative function with a more explicit base
+@function ptr-alt($px-value, $base-px: 32) {
+  @return #{$px-value / $base-px}rem;
+}
+
+// Mixin for easy usage
+@mixin ptr($property, $px-value) {
+  #{$property}: ptr($px-value);
+}
+
+@mixin decor-font($font-size: ptr(30)) {
+  font-family: 'Tofino', sans-serif;
+  font-size: $font-size;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 440;
+}
+
+@mixin decor-medal() {
+  background-image: url('data:image/svg+xml,<svg width="142" height="147" viewBox="0 0 142 147" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M71.0003 97.75C58.4025 97.75 46.3207 92.7456 37.4128 83.8376C28.5048 74.9296 23.5003 62.8478 23.5003 50.25C23.5003 37.6522 28.5048 25.5704 37.4128 16.6624C46.3207 7.75445 58.4025 2.75 71.0003 2.75C83.5981 2.75 95.6799 7.75445 104.588 16.6624C113.496 25.5704 118.5 37.6522 118.5 50.25C118.5 62.8478 113.496 74.9296 104.588 83.8376C95.6799 92.7456 83.5981 97.75 71.0003 97.75ZM71.0003 97.75L97.917 144.379L110.568 118.785L139.052 120.621L112.135 74M29.8522 74L2.93555 120.629L31.4197 118.785L44.0705 144.371L70.9872 97.75" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

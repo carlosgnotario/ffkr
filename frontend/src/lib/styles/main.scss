@@ -1,0 +1,63 @@
+// Main SCSS file - minimal imports
+@use 'settings.scss';
+@use 'global.scss';
+@use 'pages/culture.scss';
+@use 'pages/studio.scss';
+@use 'settings.scss' as *;
+
+body {
+    display: grid;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.4;
+    color: #333;
+    background: #fff;
+    overflow: hidden;
+}
+
+a {
+    color: $white;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+h1, h2, h3 {
+	margin-top: 0;
+}
+
+h2 {
+	font-family: "Tofino", sans-serif;
+	font-size: ptr(72);
+	letter-spacing: -1px;
+	font-weight: 430;
+	line-height: 1.2;
+}
+
+img {
+    -webkit-user-drag: none;
+}
+
+nav {
+    grid-area: 1 / 1;
+    position: fixed;
+    place-self: start;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 10000;
+    padding: ptr(100) ptr(100) ptr(50);
+    
+    &:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        // background-color: $red;
+    }
+    
+    a {
+        width: ptr(500);
+    }
+}

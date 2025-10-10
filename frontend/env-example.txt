@@ -1,0 +1,3 @@
+# Sanity Token for Content Creation
+# Get this from: https://www.sanity.io/manage/personal/project/80je9ukv/api/tokens
+SANITY_TOKEN=sk7z4GB9rAwfz66WyixsK8ikDMc9XDoFgmtA8EII6TzYCPBrAaI1PUuwqWGQwhn8mfj4GTMLXy73dsGWhh5akb2NsSq8lQwbvILoRYdE8jNBHiSMH2h13MxlOq4dZE6bfB1sM6V5gRVoVbBMq3TIt5VZQC5R1znNSxzafE87EOKBr5uzu1Sx

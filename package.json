@@ -1,0 +1,25 @@
+{
+  "name": "sanity-svelte-project",
+  "version": "1.0.0",
+  "description": "Sanity CMS with SvelteKit frontend",
+  "scripts": {
+    "start": "concurrently \"npm run studio\" \"npm run frontend\"",
+    "studio": "cd studio && npm run dev",
+    "frontend": "cd frontend && npm run dev -- --open",
+    "build": "npm run build:studio && npm run build:frontend",
+    "build:studio": "cd studio && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd studio && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "sanity",
+    "svelte",
+    "cms",
+    "headless"
+  ],
+  "author": "",
+  "license": "MIT"
+}
