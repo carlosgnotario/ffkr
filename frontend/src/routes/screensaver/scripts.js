@@ -113,8 +113,21 @@ export class Screensaver {
 
     show() {
         this.sliderTimer = 1000;
-        this.menu.style.width = '0'
-        this.textMessage.style.clipPath = 'inset(0 0 0 0)'
+        
+        // Ensure elements are available
+        if (!this.menu) {
+            this.menu = this.element.querySelector('.screensaver-menu')
+        }
+        if (!this.textMessage) {
+            this.textMessage = this.element.querySelector('.screensaver-text')
+        }
+        
+        if (this.menu) {
+            this.menu.style.width = '0'
+        }
+        if (this.textMessage) {
+            this.textMessage.style.clipPath = 'inset(0 0 0 0)'
+        }
         
         gsap.set(this.element, {
             display: 'grid',
@@ -231,20 +244,35 @@ export class Screensaver {
             }
             
             console.log("show menu");
-            gsap.to(this.menu, {
-                width: "28.125rem"
-            })
-            gsap.to(this.textMessage, {
-                clipPath: "inset(0 50% 0 50%)",
-                duration: 2,
-            })
+            
+            // Ensure elements are available
+            if (!this.menu) {
+                this.menu = this.element.querySelector('.screensaver-menu')
+            }
+            if (!this.textMessage) {
+                this.textMessage = this.element.querySelector('.screensaver-text')
+            }
+            
+            if (this.menu) {
+                gsap.to(this.menu, {
+                    width: "28.125rem"
+                })
+            }
+            if (this.textMessage) {
+                gsap.to(this.textMessage, {
+                    clipPath: "inset(0 50% 0 50%)",
+                    duration: 2,
+                })
+            }
         })
 
-        this.menu.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => {
-                this.hide()
+        if (this.menu) {
+            this.menu.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    this.hide()
+                })
             })
-        })
+        }
     }
 
     elements() {
