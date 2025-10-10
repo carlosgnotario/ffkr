@@ -91,9 +91,28 @@ export class Screensaver {
             console.log("appended screensaver");
         } catch (error) {
             console.error('Error fetching data:', error)
-            // Fallback to empty arrays if API fails
-            this.projects = []
-            this.siteSettings = {}
+            // Fallback to basic data if API fails
+            this.projects = [
+                {
+                    name: "Carbon Neutral Campus",
+                    location: "University District",
+                    category: { title: "Educational" },
+                    photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" } } }]
+                },
+                {
+                    name: "Smart Business District", 
+                    location: "Downtown",
+                    category: { title: "Commercial" },
+                    photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" } } }]
+                }
+            ]
+            this.siteSettings = {
+                navigation: [
+                    { title: "Projects", url: "/studio" },
+                    { title: "History", url: "/history" },
+                    { title: "Culture", url: "/culture" }
+                ]
+            }
         }
         
         
@@ -156,6 +175,12 @@ export class Screensaver {
     }
 
     createSlide() {
+        // Check if projects are loaded
+        if (!this.projects || this.projects.length === 0) {
+            console.warn('No projects available for screensaver')
+            return
+        }
+        
         if (this.currentSlide) {
             this.currentIndex = (this.currentIndex + 1) % this.projects.length
             this.previousSlide = this.currentSlide
