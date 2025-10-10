@@ -3,10 +3,11 @@
 
 	onMount(() => {
 		// Force screensaver to show immediately on homepage
-		// Wait a bit for the screensaver to be fully initialized
+		// Wait a bit for the screensaver to be initialized by the layout
 		setTimeout(() => {
 			if (typeof window !== 'undefined' && window.screensaverInstance) {
-				window.screensaverInstance.setHomepageTimer();
+				console.log("set to 0");
+				window.screensaverInstance.timer = 0
 			}
 		}, 100)
 	})

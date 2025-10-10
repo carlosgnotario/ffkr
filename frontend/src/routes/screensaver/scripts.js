@@ -13,15 +13,81 @@ export class Screensaver {
 	}
     
     async init() {
-        // Fetch from static JSON files for GitHub Pages compatibility
+        // Direct Sanity API calls with CORS enabled
+        const corsProxy = 'https://api.allorigins.win/raw?url='
+        const sanityBaseUrl = 'https://80je9ukv.api.sanity.io/v2024-01-15/data/query/production'
+        
+        // Fetch projects
+        const projectsQuery = `*[_type == "project"] | order(name asc) {
+            _id,
+            name,
+            description,
+            location,
+            status,
+            completionDate,
+            "slug": slug.current,
+            services,
+            category->{
+                _id,
+                title,
+                "slug": slug.current
+            },
+            team[]->{
+                _id,
+                name,
+                role,
+                photo {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            },
+            photoGallery[] {
+                image {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            }
+        }`
+        
+        // Fetch site settings
+        const siteSettingsQuery = `*[_type == "siteSettings"][0] {
+            _id,
+            logo {
+                asset->{
+                    _id,
+                    url
+                }
+            },
+            navigation[] {
+                title,
+                url,
+                description,
+                image {
+                    asset->{
+                        _id,
+                        url
+                    }
+                }
+            }
+        }`
+        
         try {
             const [projectsResponse, siteSettingsResponse] = await Promise.all([
-                fetch('/api/projects.json'),
-                fetch('/api/site-settings.json')
+                fetch(`${corsProxy}${encodeURIComponent(`${sanityBaseUrl}?query=${encodeURIComponent(projectsQuery)}`)}`),
+                fetch(`${corsProxy}${encodeURIComponent(`${sanityBaseUrl}?query=${encodeURIComponent(siteSettingsQuery)}`)}`)
             ])
             
-            this.projects = await projectsResponse.json()
-            this.siteSettings = await siteSettingsResponse.json()
+            const [projectsData, siteSettingsData] = await Promise.all([
+                projectsResponse.json(),
+                siteSettingsResponse.json()
+            ])
+            
+            this.projects = projectsData.result || []
+            this.siteSettings = siteSettingsData.result || {}
         } catch (error) {
             console.error('Error fetching data:', error)
             // Fallback data
@@ -67,33 +133,15 @@ export class Screensaver {
             ease: "expo.out",
             onComplete: () => {
                 this.element.style.display = 'none'
+                // check if homepage, if so, add 1000 to timer, otherwise set to 0
+                if (window.location.pathname === '/') {                    
+                    this.timer = 0;
+                } else {
+                    this.timer = 1000;
+                }
                 this.active = false;
-                // Don't reset timer here - let it be handled by the new page
             }
         })
-    }
-
-    resetTimerForCurrentPage() {
-        // Check if we're on homepage, if so set timer to 0 for immediate show
-        if (window.location.pathname === '/') {
-            this.timer = 0;
-            console.log("Homepage detected - timer set to 0");
-        } else {
-            this.timer = 1000;
-            console.log("Other page detected - timer set to 1000");
-        }
-    }
-
-    // Public method to force homepage behavior
-    setHomepageTimer() {
-        this.timer = 0;
-        console.log("Timer manually set to 0 for homepage");
-    }
-
-    // Public method to reset timer for non-homepage pages
-    resetTimer() {
-        this.timer = 1000;
-        console.log("Timer reset to 1000 for non-homepage page");
     }
 
     createSlide() {
@@ -203,7 +251,7 @@ export class Screensaver {
 
     elements() {
         this.sliderTimer = 1000;
-        this.timer = 1000; // Default timer for all pages
+        this.timer = 1000;
         this.textMessage = this.element.querySelector('.screensaver-text')
         this.menu = this.element.querySelector('.screensaver-menu')
     }

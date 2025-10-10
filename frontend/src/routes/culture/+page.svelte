@@ -13,11 +13,6 @@
 	let featuredPosts: any[] = []
 
 	onMount(async () => {
-		// Reset screensaver timer for non-homepage pages
-		if (typeof window !== 'undefined' && window.screensaverInstance) {
-			window.screensaverInstance.resetTimer();
-		}
-		
 		const data = await loadCultureData()
 		teamMembers = data.teamMembers
 		siteSettings = data.siteSettings		
