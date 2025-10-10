@@ -5,8 +5,9 @@
 	let logoUrl = ''
 
 	onMount(async () => {
-		// Use fallback logo since CORS blocks direct Sanity API calls
-		logoUrl = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&h=60&fit=crop'
+		// Use text fallback since CORS blocks direct Sanity API calls
+		// The logo will fall back to "FFKR" text as defined in the template
+		logoUrl = ''
 	})
 </script>
 
