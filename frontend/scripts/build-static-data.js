@@ -122,8 +122,10 @@ async function buildStaticData() {
       }`)
     ])
 
-    // Create static directory
+    // Create static directory in public folder for GitHub Pages
     const staticDir = path.join(process.cwd(), 'static', 'api')
+    const publicDir = path.join(process.cwd(), 'static', 'api')
+    
     if (!fs.existsSync(staticDir)) {
       fs.mkdirSync(staticDir, { recursive: true })
     }

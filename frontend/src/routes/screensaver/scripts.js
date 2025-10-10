@@ -13,8 +13,21 @@ export class Screensaver {
 	}
     
     async init() {
-        this.projects = await fetch('/api/projects').then(r => r.json())
-        this.siteSettings = await fetch('/api/site-settings').then(r => r.json())
+        // Fetch from static JSON files for GitHub Pages compatibility
+        try {
+            const [projectsResponse, siteSettingsResponse] = await Promise.all([
+                fetch('/api/projects.json'),
+                fetch('/api/site-settings.json')
+            ])
+            
+            this.projects = await projectsResponse.json()
+            this.siteSettings = await siteSettingsResponse.json()
+        } catch (error) {
+            console.error('Error fetching data:', error)
+            // Fallback data
+            this.projects = []
+            this.siteSettings = { navigation: [] }
+        }
         console.log("appended screensaver");
         this.sliderTimer = 1000;
         
