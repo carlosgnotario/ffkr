@@ -25,13 +25,25 @@ export class Screensaver {
                 name: "Smart Business District",
                 location: "Downtown",
                 category: { title: "Commercial" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" } } }]
+                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" } } }]
             },
             {
                 name: "Sustainable Housing Complex",
                 location: "Residential Area",
                 category: { title: "Residential" },
-                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop" } } }]
+                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop" } } }]
+            },
+            {
+                name: "Modern Office Complex",
+                location: "Business District",
+                category: { title: "Commercial" },
+                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop" } } }]
+            },
+            {
+                name: "Green Technology Center",
+                location: "Innovation Hub",
+                category: { title: "Technology" },
+                photoGallery: [{ image: { asset: { url: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&h=600&fit=crop" } } }]
             }
         ]
         
