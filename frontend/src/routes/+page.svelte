@@ -2,14 +2,30 @@
 	import { onMount } from 'svelte'
 
 	onMount(() => {
+		console.log("homepage mounted");
+		
 		// Force screensaver to show immediately on homepage
-		// Wait a bit for the screensaver to be initialized by the layout
-		setTimeout(() => {
+		const activateScreensaver = () => {
 			if (typeof window !== 'undefined' && window.screensaverInstance) {
-				console.log("set to 0");
+				console.log("Activating screensaver on homepage");
 				window.screensaverInstance.timer = 0
+				return true
 			}
-		}, 100)
+			return false
+		}
+		
+		// Try immediately first (screensaver should be mounted before this now)
+		if (!activateScreensaver()) {
+			// Fallback: poll for up to 500ms if not ready
+			let attempts = 0
+			const maxAttempts = 10
+			const pollInterval = setInterval(() => {
+				attempts++
+				if (activateScreensaver() || attempts >= maxAttempts) {
+					clearInterval(pollInterval)
+				}
+			}, 50)
+		}
 	})
 
 </script>

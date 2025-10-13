@@ -21,7 +21,7 @@
 </svelte:head>
 
 <Navigation />
+<Screensaver />
 <main>
 	{@render children?.()}
 </main>
-<Screensaver />
