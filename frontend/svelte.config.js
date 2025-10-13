@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -9,15 +9,16 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html',
-			precompress: false,
-			strict: true
-		}),
-		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/ffkr' : '',
-		}
+			// Vercel adapter options
+			runtime: 'nodejs20.x',
+			regions: ['iad1'], // Change to your preferred region
+			split: false
+		})
+		// Remove base path for Vercel deployment
+		// If you need a base path, uncomment and modify:
+		// paths: {
+		// 	base: process.env.BASE_PATH || '',
+		// }
 	}
 };
 

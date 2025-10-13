@@ -47,6 +47,7 @@ nav {
     display: flex;
     flex-direction: column;
     z-index: 10000;
+    pointer-events: none;
     padding: ptr(100) ptr(100) ptr(50);
     
     &:after {
@@ -59,5 +60,6 @@ nav {
     
     a {
         width: ptr(500);
+        pointer-events: all;
     }
 }
