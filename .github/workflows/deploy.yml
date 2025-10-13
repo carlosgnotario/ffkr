@@ -1,9 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (DISABLED - Using Vercel)
 
+# Disabled in favor of Vercel deployment
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
+  # push:
+  #   branches: [ main ]
 
 permissions:
   contents: read
