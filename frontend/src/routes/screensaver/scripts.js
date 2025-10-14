@@ -8,7 +8,8 @@ export class Screensaver {
         this.active = false
         this.idleScreen = false
         this.currentIndex = 0
-        this.timer = 6000;
+        this.timerDuration = 6000000;
+        this.timer = this.timerDuration;
         
         this.setup()
         this.init()
@@ -30,6 +31,7 @@ export class Screensaver {
     }
 
     show() {
+        this.logo.classList.add('invert')
         if (this.currentSlide) {
             console.log(this.currentSlide);
             this.currentSlide.remove()
@@ -57,7 +59,7 @@ export class Screensaver {
             duration: 2,
             ease: "expo.out",
             onComplete: () => {
-                this.timer = 6000;
+                this.timer = this.timerDuration;
                 this.active = false;
                 this.idleScreen = false;
             }
@@ -134,12 +136,12 @@ export class Screensaver {
     bind() {
         document.addEventListener('mousedown', () => {
             if (this.active) return;
-            this.timer = 6000
+            this.timer = this.timerDuration
         })
 
         this.element.addEventListener('click', (e) => {
             if (!this.active || this.idleScreen) return;
-            
+            this.logo.classList.remove('invert')
             // Don't show menu if clicking on project links - let them navigate
             if (e.target.closest('.screensaver-project-info')) {
                 return;
@@ -162,6 +164,7 @@ export class Screensaver {
     }
 
     elements() {
+        this.logo = document.querySelector('nav a')
         this.sliderTimer = 1000;
         this.textMessage = this.element.querySelector('.screensaver-text')
         this.menu = this.element.querySelector('.screensaver-menu')

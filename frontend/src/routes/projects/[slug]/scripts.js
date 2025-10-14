@@ -13,6 +13,7 @@ export class projectSlider {
     }
 
     define() {
+        this.logo = document.querySelector("nav a")
         this.slides = this.element.querySelectorAll(".project-slider-image")
         this.parent = this.element.parentElement;
         this.info = this.parent.querySelector(".project-info")
@@ -75,6 +76,7 @@ export class projectSlider {
 
     update() {
         let easedPos = 0;
+        this.logo.classList.add('invert')
         this.ticker = (time) => {
             const currentPos = this.pos.x.stored + (this.pos.x.new - this.pos.x.old) + this.variationX
             easedPos += (currentPos - easedPos) * 0.05;

@@ -34,6 +34,7 @@
 				<div class="wrap">
 					<h2>{category.title}</h2>
 					<!-- Projects Section -->
+					<div class="studio-category-projects-wrap">
 					<div class="studio-category-projects">
 						{#each category.projects || [] as project}
 						{@const featuredImage = project.photoGallery.find(img => img.isFeatured) || project.photoGallery[0]}
@@ -45,6 +46,7 @@
 						{:else}
 							<p class="no-projects">No projects in this category yet.</p>
 						{/each}
+					</div>
 					</div>
 					{#if category.stats && category.stats.length > 0}
 					<div class="studio-category-stats">

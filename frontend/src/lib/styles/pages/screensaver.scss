@@ -27,9 +27,14 @@
             width: ptr(700);
             flex-grow: 1;
             display: grid;
+            align-items: center;
+            justify-items: center;
+            grid-template-rows: minmax(0, 1fr);
+            overflow: hidden;
 
             > * {
                 grid-area: 1 / 1;
+
             }
             
             .menu-text {
