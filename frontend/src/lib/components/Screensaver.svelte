@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
+	import { page } from '$app/stores'
 	import { Screensaver } from '../../routes/screensaver/scripts.js'
 	import '$lib/styles/pages/screensaver.scss'
 
@@ -10,14 +11,11 @@
 		// Only run in browser
 		if (typeof window !== 'undefined') {
 			screensaverInstance = new Screensaver(screensaver)
+			if ($page.url.pathname === '/') {
+				screensaverInstance.timer = 0
+			}
 			// Expose instance globally for homepage access
 			window.screensaverInstance = screensaverInstance
-		}
-	})
-
-	onDestroy(() => {
-		if (screensaverInstance) {
-			screensaverInstance.destroy()
 		}
 	})
 </script>

@@ -6,7 +6,9 @@ export class Screensaver {
         gsap.registerPlugin(SplitText) 
         this.element = element
         this.active = false
+        this.idleScreen = false
         this.currentIndex = 0
+        this.timer = 6000;
         
         this.setup()
         this.init()
@@ -15,9 +17,7 @@ export class Screensaver {
     async init() {
         this.projects = await fetch('/api/projects').then(r => r.json())
         this.siteSettings = await fetch('/api/site-settings').then(r => r.json())
-        console.log("appended screensaver");
         this.sliderTimer = 1000;
-        
         
         this.elements()
         this.bind()
@@ -30,16 +30,20 @@ export class Screensaver {
     }
 
     show() {
+        if (this.currentSlide) {
+            console.log(this.currentSlide);
+            this.currentSlide.remove()
+        }
         this.sliderTimer = 1000;
         this.menu.style.width = '0'
         this.textMessage.style.clipPath = 'inset(0 0 0 0)'
         
         gsap.set(this.element, {
             display: 'grid',
-            opacity: 0
+            autoAlpha: 0
         })
         gsap.to(this.element, {
-            opacity: 1,
+            autoAlpha: 1,
             duration: 2,
             ease: "expo.out"
         })
@@ -49,18 +53,13 @@ export class Screensaver {
 
     hide() {
         gsap.to(this.element, {
-            opacity: 0,
+            autoAlpha: 0,
             duration: 2,
             ease: "expo.out",
             onComplete: () => {
-                this.element.style.display = 'none'
-                // check if homepage, if so, add 1000 to timer, otherwise set to 0
-                if (window.location.pathname === '/') {                    
-                    this.timer = 0;
-                } else {
-                    this.timer = 1000;
-                }
+                this.timer = 6000;
                 this.active = false;
+                this.idleScreen = false;
             }
         })
     }
@@ -93,7 +92,7 @@ export class Screensaver {
         const split = SplitText.create(heading, { type: "words, chars", charsClass: "char" });
 
         gsap.from(this.currentSlide, {
-            opacity: 0,
+            autoAlpha: 0,
             duration: 2,
             ease: "power2.out",
             onComplete: () => {
@@ -104,7 +103,7 @@ export class Screensaver {
         })
 
         gsap.from(split.chars, {
-            opacity: 0,
+            autoAlpha: 0,
             y: 20,
             rotateY: 50,
             stagger: {
@@ -124,15 +123,8 @@ export class Screensaver {
             duration: 2,
             ease: "expo.out"
         })
-        
-        if (this.previousSlide) {
-            this.previousSlide.querySelector('.screensaver-project-info').removeEventListener('click', () => {
-                this.hide()
-            })
-        }
 
         info?.addEventListener('click', (e) => {
-            // Hide screensaver first, then let navigation happen
             this.hide()
         })
 
@@ -142,18 +134,16 @@ export class Screensaver {
     bind() {
         document.addEventListener('mousedown', () => {
             if (this.active) return;
-            this.timer = 1000
+            this.timer = 6000
         })
 
         this.element.addEventListener('click', (e) => {
-            if (!this.active) return;
+            if (!this.active || this.idleScreen) return;
             
             // Don't show menu if clicking on project links - let them navigate
             if (e.target.closest('.screensaver-project-info')) {
                 return;
-            }
-            
-            console.log("show menu");
+            }            
             gsap.to(this.menu, {
                 width: "28.125rem"
             })
@@ -161,6 +151,7 @@ export class Screensaver {
                 clipPath: "inset(0 50% 0 50%)",
                 duration: 2,
             })
+            this.idleScreen = true
         })
 
         this.menu.querySelectorAll('a').forEach(a => {
@@ -172,7 +163,6 @@ export class Screensaver {
 
     elements() {
         this.sliderTimer = 1000;
-        this.timer = 1000;
         this.textMessage = this.element.querySelector('.screensaver-text')
         this.menu = this.element.querySelector('.screensaver-menu')
     }
@@ -180,7 +170,6 @@ export class Screensaver {
     update() {
         this.ticker = (time) => {
             if (this.timer <= 0 && !this.active) {
-                console.log("show once");
                 this.show();
                 this.active = true
                 
@@ -218,10 +207,5 @@ export class Screensaver {
                 }
             }
         })
-    }
-
-    destroy() {
-        document.removeEventListener('mousedown', this.mouseHandler)
-        gsap.ticker.remove(this.ticker)
     }
 }

@@ -4,10 +4,11 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 	import Screensaver from '$lib/components/Screensaver.svelte';
 	import { onMount } from 'svelte'
+	import { fade } from 'svelte/transition';
+	import { page } from '$app/stores';
 	import { loader } from '../js/app.js';
 
 	onMount(() => {
-		console.log("layout mounted");
 		loader();
 	})
 
@@ -21,7 +22,11 @@
 </svelte:head>
 
 <Navigation />
-<Screensaver />
 <main>
-	{@render children?.()}
+	{#key $page.url.pathname}
+		<div in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>
+			{@render children?.()}
+		</div>
+	{/key}
 </main>
+<Screensaver />

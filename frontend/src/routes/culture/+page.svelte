@@ -4,7 +4,7 @@
 	import { loadCultureData, cultureGrid, cultureToggler } from './scripts.js'
 
 	let teamMembers: any[] = []
-	let siteSettings: any[] = []
+	let siteSettings: any = null
 	let cities: any[] = []
 	let teamGrid: any = null;
 	let grid: any = null;
@@ -19,15 +19,20 @@
 		cities = data.cities
 		featuredPosts = data.newsPosts
 		await tick()
-		grid = new cultureGrid(teamGrid, teamMembers, siteSettings)
-		toggler = new cultureToggler(togglerElement)
+		if (teamGrid) {
+			grid = new cultureGrid(teamGrid, teamMembers, siteSettings)
+		}
+		if (togglerElement) {
+			toggler = new cultureToggler(togglerElement)
+		}
 	})
 
 	onDestroy(() => {
-		console.log('the component is being destroyed');
 		if (grid) {
-			// clear console log
 			grid.destroy();
+		}
+		if (toggler) {
+			toggler.destroy();
 		}
 	});
 

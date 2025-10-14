@@ -6,10 +6,20 @@
 
 	onMount(async () => {
 		try {
-			// Use server-side API route
-			const response = await fetch('/api/site-settings')
+			// Use CORS proxy to fetch from Sanity API
+			const corsProxy = 'https://api.allorigins.win/raw?url='
+			const query = `*[_type == "siteSettings"][0] {
+				logo {
+					asset->{
+						_id,
+						url
+					}
+				}
+			}`
+			
+			const response = await fetch(`${corsProxy}${encodeURIComponent(`https://80je9ukv.api.sanity.io/v2024-01-15/data/query/production?query=${encodeURIComponent(query)}`)}`)
 			const data = await response.json()
-			siteSettings = data || {}
+			siteSettings = data.result || {}
 			
 			if (siteSettings?.logo?.asset?.url) {
 				logoUrl = siteSettings.logo.asset.url

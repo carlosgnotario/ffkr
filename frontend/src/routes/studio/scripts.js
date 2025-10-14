@@ -38,7 +38,11 @@ export class studioGrid {
 		this.resize()
 		this.bind()
 		this.update()
-		this.animate();
+		if (document.fonts && document.fonts.ready) {
+			document.fonts.ready.then(() => {
+				this.animate();
+			})
+		}
 		this.destroy = this.destroy.bind(this)
 		gsap.registerPlugin(SplitText);
 	}
@@ -68,7 +72,6 @@ export class studioGrid {
 	}
 	
 	animate() {
-		
 		this.slides.forEach((slide, index) => {
 			const heading = slide.querySelector("h2")
 			const statItems = slide.querySelectorAll(".studio-category-stats-item")
@@ -78,7 +81,7 @@ export class studioGrid {
 			const split = SplitText.create(heading, { type: "words, chars", charsClass: "char" })
 
 			gsap.from(split.chars, {
-				opacity: 0,
+				autoAlpha: 0,
 				y: 20,
 				rotateY: 50,
 				stagger: {
@@ -89,20 +92,20 @@ export class studioGrid {
 			})			
 
 			gsap.from(slideItems, {
-				opacity: 0,
+				autoAlpha: 0,
 				y: 200,
 				delay: (i, el, arr) => 1 + Math.pow(Math.min(i, arr.length - i), 1.8) * 0.1
 			})
 
 			gsap.from(statItems, {
-				opacity: 0,
+				autoAlpha: 0,
 				y: 100,
 				delay: 1,
 				ease: "expo.out",
 				stagger: 0.3
 			})
-			gsap.from(achievementsItems, {
-				opacity: 0,
+			achievementsItems.length && gsap.from(achievementsItems, {
+				autoAlpha: 0,
 				y: 100,
 				delay: 1,
 				ease: "expo.out",
@@ -110,7 +113,7 @@ export class studioGrid {
 			})
 
 			gsap.from(avatarItems, {
-				opacity: 0,
+				autoAlpha: 0,
 				top: 200,
 				position: "relative",
 				ease: "expo.out",
@@ -123,7 +126,7 @@ export class studioGrid {
 		})
 
 		gsap.from(this.element, {
-			opacity: 0,
+			autoAlpha: 0,
 			y: 100,
 			delay: 1
 		})
@@ -148,8 +151,6 @@ export class studioGrid {
 		}
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
-			console.log("dragging");
-			
 			this.pos.x.new = e.clientX;
 		}
 		this.mouseUpEvent = (e) => {
@@ -225,7 +226,6 @@ class projectsSlider {
 		this.element = element
 		this.index = index
 		this.isActive = false
-		console.log("just how many");
 		
 		this.define()
 		this.sizing()		
@@ -401,13 +401,12 @@ class teamMembersCarousel {
 						x: member.getBoundingClientRect().left - this.memberCardWrap.getBoundingClientRect().left + this.slideW / 2
 					})
 					gsap.from(this.memberCardWrap.querySelector(".team-member"), {
-						opacity: 0,
+						autoAlpha: 0,
 						y: 100,
 						ease: "elastic.out(1, 0.8)"
 					})
 
 					this.cardOpen = index;
-					console.log("clicked");
 					
 				}
 			})
@@ -439,10 +438,6 @@ class teamMembersCarousel {
 
 			
 			this.members.forEach((member, index) => {
-				if (index === 0) {
-					// console.log(member.left, this.position);
-					
-				}
 				if (member.left + this.slideW + this.position + member.loop * this.loopW < 0) {
 					member.loop += 1
 				}

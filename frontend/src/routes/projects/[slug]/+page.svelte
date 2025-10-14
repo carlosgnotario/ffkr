@@ -12,8 +12,6 @@
 		const slug = $page.params.slug
 		const response = await fetch(`/api/projects/${slug}`)
 		project = await response.json()
-		console.log('Project data:', project)
-		console.log('Similar projects:', project.similarProjects)
 		await tick()
 		
 		// Clean up existing slider before creating new one
@@ -26,8 +24,6 @@
 	onMount(loadProject)
 
 	onDestroy(() => {
-		console.log("destroy pls");
-		
 		if (slider) {
 			slider.destroy()
 		}
@@ -76,7 +72,9 @@
 				<h3>Key Team Members</h3>
 				{#each project.team as member}
 					<div class="project-info-team-member">
-						<img src={member.photo.asset.url} alt={member.name} />
+						{#if member.photo}
+							<img src={member.photo.asset.url} alt={member.name} />
+						{/if}
 						<div class="project-info-team-member-floater">
 							<div class="project-info-team-member-floater-wrap">
 								<div class="project-info-team-member-floater-image">

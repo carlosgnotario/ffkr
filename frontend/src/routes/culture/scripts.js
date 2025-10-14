@@ -43,11 +43,13 @@ export class cultureGrid {
 		this.animate()
 		this.destroy = this.destroy.bind(this)
 		this.resize = this.resize.bind(this)
-		this.manipulate()
+		this.bind()
 		this.update()
 	}
 	
 	elements() {
+		if (!this.element) return;
+		
 		this.gridItems = []
 		this.teamCards = Array.from(this.element.querySelectorAll(".team-member"))
 		this.modal = this.element.closest(".culture").querySelector(".team-member-modal")
@@ -63,6 +65,9 @@ export class cultureGrid {
 	}
 
 	generate() {
+		// Clean up old grid items before regenerating
+		this.cleanupGridItems();
+		
 		this.element.innerHTML = ""
 		//
 		const totalAvatars = this.totalSlots - (this.awardItems.length * 3) - (this.testimonialItems.length * 3)
@@ -85,8 +90,8 @@ export class cultureGrid {
 		})
 
 		
-		this.gridItems?.push(...this.element.children)
-		this.gridItems?.forEach(el => {
+		this.gridItems = Array.from(this.element.children);
+		this.gridItems.forEach(el => {
 			el.setScale = gsap.quickSetter(el, "css")
 			el.inView = true;
 
@@ -107,6 +112,29 @@ export class cultureGrid {
 
 	}
 	
+	cleanupGridItems() {
+		// Remove event listeners from old grid items
+		if (this.gridItems && this.gridItemClickHandlers) {
+			this.gridItems.forEach((item, index) => {
+				if (this.gridItemClickHandlers[index]) {
+					item.removeEventListener("click", this.gridItemClickHandlers[index]);
+				}
+			});
+		}
+		// Kill all GSAP tweens targeting grid items
+		if (this.gridItems) {
+			this.gridItems.forEach(item => {
+				gsap.killTweensOf(item);
+				if (item.scales) {
+					gsap.killTweensOf(item.scales);
+				}
+			});
+		}
+		// Clear the arrays
+		this.gridItems = [];
+		this.gridItemClickHandlers = [];
+	}
+	
 	animate() {
 		this.animated = false;
 
@@ -125,7 +153,7 @@ export class cultureGrid {
 		})
 
 		gsap.from(this.newsItems, {
-			opacity: 0,
+			autoAlpha: 0,
 			duration: 2,
 			y: 100,
 			ease: "expo.out",
@@ -155,7 +183,7 @@ export class cultureGrid {
 		})
 		
 		gsap.from(this.filterCities, {
-			opacity: 0,
+			autoAlpha: 0,
 			duration: 1,
 			ease: "expo.out",
 			delay: 1,
@@ -168,7 +196,7 @@ export class cultureGrid {
 		})
 	}
 
-	manipulate() {
+	bind() {
 		this.pos = {
 			dragging: false,
 			x: {new: 0, old: 0, stored: 0},
@@ -185,6 +213,7 @@ export class cultureGrid {
 
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
+			
 			if (
 				Math.abs(this.pos.x.stored + (this.pos.x.new - this.pos.x.old)) < (this.gridW - this.vw) / 2 &&
 				Math.abs(this.pos.y.stored + (this.pos.y.new - this.pos.y.old)) < (this.gridH - this.vh) / 2
@@ -225,8 +254,10 @@ export class cultureGrid {
 			this.element.style.pointerEvents = "auto"
 		}
 
+		// Store event handlers for proper cleanup
+		this.gridItemClickHandlers = [];
 		this.gridItems.forEach((item, index) => {
-			item.addEventListener("click", () => {
+			const clickHandler = () => {
 				// if this data id is the same as one of the team card data ids, append the team card on the modal
 				if (this.teamCards.some(card => card.dataset.id === item.dataset.id)) {
 					this.openModal(item.dataset.id)
@@ -235,7 +266,9 @@ export class cultureGrid {
 				if (item.classList.contains("testimonial")) {
 					this.openTestimonialModal(item.dataset.video, true)
 				}
-			})
+			};
+			this.gridItemClickHandlers[index] = clickHandler;
+			item.addEventListener("click", clickHandler);
 		})
 
 		this.modal.addEventListener('click', () => {
@@ -247,11 +280,15 @@ export class cultureGrid {
 		})
 
 		this.currentCity = "all";
-		this.filterCities.forEach(city => {
-			city.addEventListener('click', () => {
+		// Store filter city handlers for proper cleanup
+		this.filterCityHandlers = [];
+		this.filterCities.forEach((city, index) => {
+			const clickHandler = () => {
 				if (this.currentCity === city.dataset.city) { return; }
 				this.filterCity(city.dataset.city)
-			})
+			};
+			this.filterCityHandlers[index] = clickHandler;
+			city.addEventListener('click', clickHandler);
 		})
 
 		// Append events
@@ -315,12 +352,12 @@ export class cultureGrid {
 				? `https://player.vimeo.com/video/${video.split("/").pop()}?autoplay=1`
 				: `https://www.youtube.com/embed/${video.split("v=")[1]}?autoplay=1`;
 			this.testimonialModal.innerHTML = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-			gsap.to(this.testimonialModal, { opacity: 1, duration: 0.5, ease: "power2.out" });
+			gsap.to(this.testimonialModal, { autoAlpha: 1, duration: 0.5, ease: "power2.out" });
 			this.testimonialModal.style.pointerEvents = "auto";
 		} else {
 			this.testimonialModal.innerHTML = ""
 			gsap.to(this.testimonialModal, {
-				opacity: 0,
+				autoAlpha: 0,
 				duration: 0.5,
 				ease: "power2.out"
 			})
@@ -334,7 +371,7 @@ export class cultureGrid {
 			gsap.killTweensOf(this.modal)
 			this.modal.appendChild(this.teamCards.find(card => card.dataset.id === id).cloneNode(true))
 			gsap.to(this.modal, {
-				opacity: 1,
+				autoAlpha: 1,
 				duration: 0.5,
 				ease: "power2.out"
 			})
@@ -347,7 +384,7 @@ export class cultureGrid {
 			this.modal.style.pointerEvents = "auto"
 		} else {
 			gsap.to(this.modal, {
-				opacity: 0,
+				autoAlpha: 0,
 				duration: 0.5,
 				ease: "power2.out",
 			})
@@ -452,7 +489,6 @@ export class cultureGrid {
 				
 				if ((distanceFromCenter.x > this.vw / 2.1 || distanceFromCenter.y > this.vh / 2.1) && item.inView) {
 					gsap.to(item.scales, { border: 1, ease: "elastic.out(1, 0.8)" , duration: 2 })
-					console.log("once");
 					item.inView = false;
 				} else if (distanceFromCenter.x <= this.vw / 2.1 && distanceFromCenter.y <= this.vh / 2.1 && !item.inView) {
 					gsap.to(item.scales, { border: 0, ease: "elastic.out(1, 0.8)" , duration: 2 })
@@ -465,16 +501,38 @@ export class cultureGrid {
 	}
 
 	destroy() {
-		gsap.ticker.remove(this.ticker);
-		window.removeEventListener("resize", this.resize);
-		this.element.removeEventListener("mousedown", this.mouseDownEvent);
-		window.removeEventListener("mousemove", this.mouseMoveEvent);
-		window.removeEventListener("mouseup", this.mouseUpEvent);
-		this.modal.removeEventListener("click", this.openModal);
-		this.testimonialModal.removeEventListener("click", this.openTestimonialModal);
-		this.filterCities.forEach(city => {
-			city.removeEventListener("click", this.filterCities);
-		})
+		// Remove GSAP ticker
+		if (this.ticker) {
+			gsap.ticker.remove(this.ticker);
+		}
+		
+		// Kill all GSAP animations
+		gsap.killTweensOf(this.element);
+		gsap.killTweensOf(this.content);
+		gsap.killTweensOf(this.newsItems);
+		gsap.killTweensOf(this.filterCities);
+		
+		// Clean up grid items (removes listeners and kills tweens)
+		this.cleanupGridItems();
+		
+		// Remove window/element event listeners
+		if (this.resize) window.removeEventListener("resize", this.resize);
+		if (this.mouseDownEvent) this.element.removeEventListener("mousedown", this.mouseDownEvent);
+		if (this.mouseMoveEvent) window.removeEventListener("mousemove", this.mouseMoveEvent);
+		if (this.mouseUpEvent) window.removeEventListener("mouseup", this.mouseUpEvent);
+		if (this.modal && this.openModal) this.modal.removeEventListener("click", this.openModal);
+		if (this.testimonialModal && this.openTestimonialModal) {
+			this.testimonialModal.removeEventListener("click", this.openTestimonialModal);
+		}
+		
+		// Remove filter city listeners
+		if (this.filterCities && this.filterCityHandlers) {
+			this.filterCities.forEach((city, index) => {
+				if (this.filterCityHandlers[index]) {
+					city.removeEventListener("click", this.filterCityHandlers[index]);
+				}
+			});
+		}
 	}
 }
 
@@ -483,24 +541,41 @@ export class cultureToggler {
 		this.element = element
 		this.elements()
 		this.bind()
+		this.destroy = this.destroy.bind(this)
 	}
 
 	elements() {
 		this.togglers = Array.from(this.element.children);
-		console.log(this.togglers);
 	}
 	
 	bind() {
 		this.currentToggler = 0;
+		this.togglerHandlers = [];
 
 		this.togglers.forEach((toggler, index) => {
-			toggler.addEventListener("click", () => {
-				if (index === this.currentToggler) { console.log("huh"); return }
+			const clickHandler = () => {
+				if (index === this.currentToggler) { return }
 				this.togglers[this.currentToggler].classList.remove("active");
 				this.togglers[this.currentToggler].scrollTo({top: 0, behavior: "smooth"});
 				this.togglers[index].classList.add("active");
 				this.currentToggler = index;
-			})
+			};
+			this.togglerHandlers[index] = clickHandler;
+			toggler.addEventListener("click", clickHandler);
 		})
+	}
+	
+	destroy() {
+		// Remove all event listeners
+		if (this.togglers && this.togglerHandlers) {
+			this.togglers.forEach((toggler, index) => {
+				if (this.togglerHandlers[index]) {
+					toggler.removeEventListener("click", this.togglerHandlers[index]);
+				}
+			});
+		}
+		// Clear references
+		this.togglers = [];
+		this.togglerHandlers = [];
 	}
 }

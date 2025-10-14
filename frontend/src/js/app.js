@@ -6,9 +6,6 @@ export function loader() {
 }
 
 function init() {
-    console.log("init");
-    const g = {};
-    window.g = g;
     gsap.registerPlugin(SplitText);
 
     gsap.defaults({

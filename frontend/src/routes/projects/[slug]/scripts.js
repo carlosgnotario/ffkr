@@ -3,8 +3,6 @@ import gsap from "gsap"
 export class projectSlider {
     constructor(element) {
         this.element = element
-        console.log("once?=");
-        
 
         this.define()
         this.sizing()
@@ -12,7 +10,6 @@ export class projectSlider {
         this.animate()
         this.update()
         this.destroy = this.destroy.bind(this)
-        console.log(this.currentSlide);
     }
 
     define() {
@@ -49,6 +46,8 @@ export class projectSlider {
         }
 
         this.mouseDownEvent = (e) => {
+            console.log("clicking projectSlider");
+            
             this.pos.dragging = true;
             this.pos.x.old = this.pos.x.new = e.clientX;
         }
@@ -57,6 +56,7 @@ export class projectSlider {
             this.pos.x.new = e.clientX;
         }
         this.mouseUpEvent = (e) => {
+            console.log("clicking projectSlider up");
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
             if (this.pos.x.new - this.pos.x.old > 200) {        
@@ -78,8 +78,7 @@ export class projectSlider {
         this.ticker = (time) => {
             const currentPos = this.pos.x.stored + (this.pos.x.new - this.pos.x.old) + this.variationX
             easedPos += (currentPos - easedPos) * 0.05;
-
-            
+ 
             this.slides.forEach((slide, index) => {
                 let position = index * this.slideW + easedPos
 
@@ -102,6 +101,8 @@ export class projectSlider {
     }
 
     changeSlide(slide) {
+        console.log("changing slide");
+        
         this.pos.x.stored = slide * this.slideW
         this.currentSlide = slide;
     }
@@ -110,10 +111,12 @@ export class projectSlider {
         gsap.set(this.parent, {
             xPercent: 20,
 			duration: 2,
+            overwrite: true,
 			ease: "expo.out",
         })
         gsap.set(this.slides, {
-            autoAlpha: 0
+            autoAlpha: 0,
+            overwrite: true,
         })
         gsap.to(this.slides, {
             autoAlpha: 1,
@@ -127,6 +130,10 @@ export class projectSlider {
 			ease: "expo.out",
 			delay: 1
         })
+        gsap.set(this.info, {
+            overwrite: true,
+            rotateY: 90,
+        })
         gsap.to(this.info, {
             rotateY: 0,
 			delay: 1,
@@ -137,8 +144,6 @@ export class projectSlider {
         this.variationX = 0
         tl.to(this, {
             variationX: -200,
-            position: "relative",
-            zIndex: 100,
             duration: 1,
             delay: 2,
             ease: "expo.out"
@@ -149,13 +154,9 @@ export class projectSlider {
             // ease: "expo.out",
             // delay: 1
         })
-        console.log("once pls");
-        
     }
 
     destroy() {
-        console.log("destroying");
-        
         gsap.ticker.remove(this.ticker)
         window.removeEventListener("mousemove", this.mouseMoveEvent)
         window.removeEventListener("mouseup", this.mouseUpEvent)

@@ -38,7 +38,7 @@
         grid-template-rows: min-content min-content 1fr min-content;
         align-content: start;
         z-index: 1;
-        transform: perspective(ptr(2000)) rotateY(90deg);
+        transform: perspective(ptr(2000)) rotateY(0deg);
         transform-style: preserve-3d;
         transform-origin: left;
 
