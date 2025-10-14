@@ -21,7 +21,7 @@ export async function loadStudioData() {
 			project.category && project.category._id === category._id
 		).map(project => ({
 			...project,
-			url: `/projects/${project.slug.current}`
+			url: `/projects/${project.slug}`
 		}))
 	})
 	
@@ -66,9 +66,11 @@ export class studioGrid {
 			this.teamMemberCarousels[index] = new teamMembersCarousel(this.teamMembers[index], index)
 		})
 		
-		// Initialize first slider as active
-		this.projectSliders[0].setActive(true)
-		this.teamMemberCarousels[0].setActive(true)
+		// Initialize first slider as active (with safety check)
+		if (this.projectSliders[0] && this.teamMemberCarousels[0]) {
+			this.projectSliders[0].setActive(true)
+			this.teamMemberCarousels[0].setActive(true)
+		}
 	}
 	
 	animate() {
@@ -227,6 +229,13 @@ class projectsSlider {
 		this.index = index
 		this.isActive = false
 		
+		// Early return if element doesn't exist
+		if (!this.element) {
+			// Provide stub methods to prevent errors
+			this.setActive = () => {};
+			return;
+		}
+		
 		this.define()
 		this.sizing()		
 		this.bind()
@@ -235,6 +244,7 @@ class projectsSlider {
 
 	define() {
 		this.slides = this.element.querySelectorAll(".studio-category-project")
+		this.wrap = this.element.parentElement;
 		this.slides.forEach(slide => {
 			slide.loop = 0
 			slide.xPos = gsap.quickTo(slide, "x", {duration: 0.5, ease: "expo.out"})
@@ -259,7 +269,9 @@ class projectsSlider {
 
 			this.pos.x.new = e.clientX;
 			if (Math.abs(this.pos.x.new - this.pos.x.old) > 3) {
-				// this.element.style.pointerEvents = "none"
+				this.slides.forEach(slide => {
+					slide.style.pointerEvents = "none"
+				})
 			}
 			
 		}
@@ -269,10 +281,12 @@ class projectsSlider {
 			
 			this.pos.x.stored += this.pos.x.new - this.pos.x.old;
 			this.pos.x.old = this.pos.x.new = 0;
-			// this.element.style.pointerEvents = "auto"
+			this.slides.forEach(slide => {
+				slide.style.pointerEvents = "auto"
+			})
 		}
 
-		this.element.addEventListener("mousedown", this.mouseDownEvent)
+		this.wrap.addEventListener("mousedown", this.mouseDownEvent)
 		window.addEventListener("mousemove", this.mouseMoveEvent)
 		window.addEventListener("mouseup", this.mouseUpEvent)
 		window.addEventListener("resize", this.sizing)
@@ -336,6 +350,13 @@ class teamMembersCarousel {
 	constructor(element, index) {
 		this.element = element
 		this.isActive = false;
+		
+		// Early return if element doesn't exist
+		if (!this.element) {
+			// Provide stub methods to prevent errors
+			this.setActive = () => {};
+			return;
+		}
 		
 		this.define();
 		this.sizing();

@@ -10,7 +10,9 @@
 		const data = await loadStudioData()
 		categories = data.categories		
 		await tick()
-		grid = new studioGrid(studioSwiper)
+		if (studioSwiper) {
+			grid = new studioGrid(studioSwiper)
+		}
 	})
 
 	onDestroy(() => {
