@@ -36,7 +36,7 @@ $white: #FFFFFF;
   font-size: $font-size;
   line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: ptr(1.5);
   font-weight: 440;
 }
 
@@ -45,4 +45,94 @@ $white: #FFFFFF;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+@mixin timeline-story(
+  $img: (width: null, height: null, top: null, left: null, shadow: null),
+  $img2: (width: null, height: null, top: null, left: null),
+  $year: (left: null, top: null),
+  $text: (width: null, left: null, top: null),
+  $bar: (left: null, height: null, top: null),
+  $caption: none,
+  $before: (width: null, height: null, top: null, left: null),
+  $after: (width: null, left: null),
+) {
+  display: grid;
+  position: relative;
+
+  // if before is defined
+  @if map-get($before, width) {
+    &:before {
+      content: "";
+      position: absolute;
+      width: ptr(map-get($before, width));
+      height: ptr(map-get($before, height));
+      top: ptr(map-get($before, top));
+      left: ptr(map-get($before, left));
+      background-color: $red;
+      mix-blend-mode: multiply;
+    }
+  }
+
+  // if after is defined
+  @if map-get($after, width) {
+    &:after {
+      content: "";
+      position: absolute;
+      width: ptr(map-get($after, width));
+      height: 100vh;
+      top: 0;
+      z-index: -1;
+      left: ptr(map-get($after, left));
+      background: linear-gradient(218deg, #DADADA -1.74%, #FFF 85.38%);
+    }
+  }
+
+  .img1 {
+    position: absolute;
+    @if map-get($img, width) { width: ptr(map-get($img, width)); }
+    @if map-get($img, height) { height: ptr(map-get($img, height)); }
+    @if map-get($img, top) { top: ptr(map-get($img, top)); }
+    @if map-get($img, left) { left: ptr(map-get($img, left)); }
+    // if shadow is defined
+    @if map-get($img, shadow) {
+      box-shadow: 0 ptr(11) ptr(90) rgba($black, 0.55);
+    }
+  }
+
+  .img2 {
+    position: absolute;
+    @if map-get($img2, width) { width: ptr(map-get($img2, width)); }
+    @if map-get($img2, height) { height: ptr(map-get($img2, height)); }
+    @if map-get($img2, top) { top: ptr(map-get($img2, top)); }
+    @if map-get($img2, left) { left: ptr(map-get($img2, left)); }
+    // display none if unset
+    @if not map-get($img2, width) { display: none; }
+  }
+
+  .year {
+    position: absolute;
+    @if map-get($year, left) { left: ptr(map-get($year, left)); }
+    @if map-get($year, top) { top: ptr(map-get($year, top)); }
+  }
+
+  .text {
+    position: absolute;
+    @if map-get($text, width) { width: ptr(map-get($text, width)); }
+    @if map-get($text, left) { left: ptr(map-get($text, left)); }
+    @if map-get($text, top) { top: ptr(map-get($text, top)); }
+  }
+
+  .bar {
+    position: absolute;
+    @if map-get($bar, left) { left: ptr(map-get($bar, left)); }
+    @if map-get($bar, height) { height: ptr(map-get($bar, height)); }
+    @if map-get($bar, top) { top: ptr(map-get($bar, top)); }
+    width: ptr(2);
+    background-color: $red;
+  }
+
+  .caption {
+    display: $caption;
+  }
 }

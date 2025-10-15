@@ -98,6 +98,31 @@ export async function GET() {
           },
           alt
         }
+      },
+      timeline[] {
+        year,
+        text,
+        caption,
+        image1 {
+          asset->{
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          },
+          alt
+        },
+        image2 {
+          asset->{
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          },
+          alt
+        }
       }
     }`)
     

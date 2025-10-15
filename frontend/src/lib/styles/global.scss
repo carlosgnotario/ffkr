@@ -40,9 +40,9 @@ a:hover {
 }
 
 .container {
-	max-width: 800px;
+	max-width: ptr(800);
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 0 ptr(20);
 }
 
 h1, h2, h3 {
@@ -53,7 +53,7 @@ h1, h2, h3 {
 h2 {
 	font-family: "Tofino", sans-serif;
 	font-size: ptr(72);
-	letter-spacing: -1px;
+	letter-spacing: ptr(-1);
 	font-weight: 430;
 	line-height: 1.2;
 }

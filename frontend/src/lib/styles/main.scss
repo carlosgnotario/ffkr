@@ -3,6 +3,7 @@
 @use 'global.scss';
 @use 'pages/culture.scss';
 @use 'pages/studio.scss';
+@use 'pages/history.scss';
 @use 'settings.scss' as *;
 
 body {
@@ -29,7 +30,7 @@ h1, h2, h3 {
 h2 {
 	font-family: "Tofino", sans-serif;
 	font-size: ptr(72);
-	letter-spacing: -1px;
+	letter-spacing: ptr(-1);
 	font-weight: 430;
 	line-height: 1.2;
 }

@@ -123,7 +123,7 @@
                     bottom: calc(100% + ptr(80));
                     height: auto;
                     opacity: 0;
-                    transform: translateY(100px);
+                    transform: translateY(ptr(100));
                     box-shadow: ptr(10) ptr(4) ptr(45) 0 rgba($black, 0.2);
                     pointer-events: none;
                     /* GSAP elastic.out(1, 0.8) equivalent */
@@ -189,7 +189,7 @@
                 &:last-child {
                     place-self: end start;
                     background-color: rgba($white, 0.25);
-                    backdrop-filter: blur(5px);
+                    backdrop-filter: blur(ptr(5));
                 }
             }
 

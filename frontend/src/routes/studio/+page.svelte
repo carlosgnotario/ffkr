@@ -36,13 +36,15 @@
 					<!-- Projects Section -->
 					<div class="studio-category-projects-wrap">
 					<div class="studio-category-projects">
-						{#each category.projects || [] as project}
-						{@const featuredImage = project.photoGallery.find(img => img.isFeatured) || project.photoGallery[0]}
-							<a href={project.url} class="studio-category-project">
-								<span class="studio-category-project-name">{project.name || ""}</span>
+					{#each category.projects || [] as project}
+					{@const featuredImage = project.photoGallery?.find(img => img.isFeatured) || project.photoGallery?.[0]}
+						<a href={project.url} class="studio-category-project">
+							<span class="studio-category-project-name">{project.name || ""}</span>
+							{#if featuredImage?.image?.asset?.url}
 								<img class="studio-category-project-image" src={featuredImage.image.asset.url} alt={project.name} />
-								<span class="studio-category-project-location">{project.location || ""}</span>
-							</a>
+							{/if}
+							<span class="studio-category-project-location">{project.location || ""}</span>
+						</a>
 						{:else}
 							<p class="no-projects">No projects in this category yet.</p>
 						{/each}

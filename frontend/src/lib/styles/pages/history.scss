@@ -1,0 +1,715 @@
+// Empty styles file for history page
+@use '../settings.scss' as *;
+
+.timeline {
+    display: flex;
+    grid-auto-columns: auto;
+    height: 100vh;
+    overflow: hidden;
+    width: 100vw;
+
+    &-wrap {
+        display: grid;
+        grid-auto-columns: auto;
+        height: 100vh;
+        flex-shrink: 0;
+        width: ptr(39211);
+    }
+
+    // Parent html
+    @at-root html {
+        font-size: 1.49vh;
+    }
+
+    &-item {
+        grid-row: 1;
+        grid-area: 1 / 1;
+        display: none;
+        height: 100%;
+
+        > * {
+            grid-area: 1 / 1;
+            position: relative;
+            place-self: start;
+            font-family: "Tofino", sans-serif;
+            z-index: 2;
+
+            &:before, &:after {
+                content: "";
+                position: absolute;
+            }
+        }
+
+        .text {
+            // outline: 1px solid magenta;
+            font-size: ptr(45);
+            line-height: ptr(52);
+            
+            h3 {
+                font-weight: 400;
+            }
+        }
+
+        .caption {
+            // outline: 1px solid rgb(30, 209, 99);
+            font-size: ptr(33);
+
+        }
+
+        .year {
+            // outline: 1px solid rgb(0, 136, 255);
+            font-size: ptr(75);
+            font-weight: 600;
+        }
+
+        img {
+            max-width: none;
+        }
+
+    }
+    
+    .index-1 {
+        width: ptr(1712);
+        display: grid;
+
+        .text {
+            width: ptr(621);
+            left: ptr(320);
+            top: ptr(592);
+            z-index: 1;
+
+            &:before {
+                height: 120%;
+                width: ptr(1);
+                background-color: $red;
+                left: ptr(-38);
+            }
+
+            &:after {
+                width: ptr(913);
+                height: ptr(804);
+                left: ptr(-125);
+                top: calc(100% + ptr(155));
+                background-color: $red;
+                z-index: 1;
+                display: block;
+            }
+        }
+
+        .year {
+            left:ptr(201);
+            top: ptr(1898);
+            height: ptr(129);
+            display: flex;
+            align-items: end;
+            font-size: ptr(414.45);
+            line-height: ptr(60.9);
+            font-weight: 600;
+            mix-blend-mode: exclusion;
+            color: white;
+            z-index: 3;
+        }
+        
+        img {
+            left: ptr(38);
+            height: ptr(1185);
+            width: ptr(1897);
+            top: ptr(1064);
+        }
+    }
+
+    .index-2 {
+        @include timeline-story(
+            $img: (width: 985, height: 940, top: -40, left: 1683, shadow: true), 
+            $year: (left: 1415, top: 351), 
+            $text: (width: 232, left: 1415, top: 465), 
+            $bar: (height: 682, left: 1371, top: 351), 
+            $caption: none,
+            $after: (width: 545, left: 1540)
+        );
+    }
+
+    .index-3 {
+        @include timeline-story(
+            $img: (width: 1177, height: 789, top: 1358, left: 2153), 
+            $year: (left: 2153, top: 1229), 
+            $text: (width: 390, left: 2353, top: 1229), 
+            $bar: (height: 153, left: 2162, top: 1033), 
+            $caption: none
+        );
+    }
+
+    .index-4 {
+        @include timeline-story(
+            $img: (width: 844, height: 898, top: 360, left: 2829, shadow: true), 
+            $year: (left: 2742, top: 128), 
+            $text: (width: 854, left: 2742, top: 228), 
+            $bar: (height: 603, left: 2749, top: 430), 
+            $caption: none,
+            $before: (width: 160, height:785, top:515, left:3586)
+        );
+    }
+
+    .index-5 {
+        @include timeline-story(
+            $img: (width: 879, height: 701, top: 0, left: 3816), 
+            $year: (left: 3839, top: 737), 
+            $text: (width: 854, left: 3839, top: 837), 
+            $bar: (height: 275, left: 3816, top: 758), 
+            $caption: none
+        );
+    }
+
+    .index-6 {
+        @include timeline-story(
+            $img: (width: 835, height: 898, top: 565, left: 4600), 
+            $year: (left: 4791, top: 540), 
+            $text: (width: 509, left: 4791, top: 640), 
+            $bar: (left: 0, height: 0, top: 0, color: transparent), 
+            $caption: none
+        );
+
+        img {
+            z-index: 1;
+            outline: 1px solid red;
+        }
+    }
+
+    .index-7 {
+        @include timeline-story(
+            $img: (width: 1138, height: 1122, top: 165, left: 5557),
+            $year: (left: 5718, top: 240), 
+            $text: (width: 356, left: 5918, top: 240), 
+            $bar: (height: 496, left: 5486, top: 1032), 
+            $caption: none
+        );
+
+        img {
+            z-index: 1;
+            position: relative;
+        }
+
+        .year, .text {
+            color: $white;
+        }
+
+        .bar {
+            mix-blend-mode: multiply;
+            color: $white;
+            z-index: 1;
+
+            &:before {
+                content: "";
+                position: absolute;
+                width: ptr(876);
+                height: ptr(315);
+                background-color: $red;
+                left: ptr(71);
+                top: ptr(-865);
+            }
+        }
+    }
+
+    .index-8 {
+        @include timeline-story(
+            $img: (width: 1495, height: 847, top: 1300, left: 3816),
+            $year: (left: 5445, top: 1633), 
+            $text: (width: 437, left: 5445, top: 1733), 
+            $bar: (height: 767, left: 5484, top: 263), 
+            $caption: block
+        );
+        img {
+            z-index: 1;
+        }
+    }
+
+    .index-9 {
+        @include timeline-story(
+            $img: (width: 828, height:1023, top:1159, left:6353, shadow: true),
+            $year: (left: 5944, top:1588), 
+            $text: (width: 302, left:5944, top:1688), 
+            $bar: (height:508, left: 6045, top:1030), 
+            $caption: none,
+            $before: (width: 160, height:660, top:1394, left:6273)
+        );
+
+        .bar {
+            z-index: -1;
+        }
+    }
+
+    .index-10 {
+        @include timeline-story(
+            $img: (width:825, height:597, top:384, left:7030, shadow: true),
+            $year: (left: 7030, top:120), 
+            $text: (width: 490, left:7030, top:220), 
+            $bar: (height:896, left: 6922, top:135), 
+            $caption: none
+        );
+    }
+
+    .index-11 {
+        @include timeline-story(
+            $img: (width:1259, height:750, top:1397, left:7435, shadow: true),
+            $year: (left: 7442, top:1113), 
+            $text: (width: 411, left:7442, top:1213), 
+            $bar: (height:282, left: 7380, top:1034), 
+            $caption: none,
+            $after: (width: 664, left:7326)
+        );
+    }
+
+    .index-12 {
+        @include timeline-story(
+            $img: (width:723, height:648, top:0, left:7990),
+            $year: (left: 8134, top:659), 
+            $text: (width: 750, left:8134, top:759), 
+            $bar: (height:386, left: 8088, top:648), 
+            $caption: none
+        );
+    }
+
+    .index-13 {
+        @include timeline-story(
+            $img: (width:1479, height:1253, top:442, left:8932),
+            $year: (left: 8884, top:304), 
+            $text: (width: 319, left:8884, top:584), 
+            $bar: (height:386, left: 8088, top:648), 
+            $caption: none,
+            $before: (width:406, height:1046, top:760, left:8994),
+        );
+
+        img {
+            z-index: 1;
+        }
+
+        .year {
+            font-size: ptr(300);
+            line-height: 1;
+            z-index: 1;
+        }
+    }
+
+    .index-14 {
+        @include timeline-story(
+            $img: (width:800, height:533, top:1090, left:10394),
+            $year: (left: 10504, top:1823), 
+            $text: (width: 406, left:10504, top:1923), 
+            $bar: (height:399, left: 10515, top:1034), 
+            $caption: none,
+            $before: (width: 575, height:416, top:1361, left:10499)
+        );
+    }
+
+    .index-15 {
+        @include timeline-story(
+            $img: (width:1006, height:659, top:301, left:10874),
+            $year: (left: 10843, top:120), 
+            $text: (width: 700, left:11043, top:120), 
+            $bar: (height:914, left: 10813, top:120), 
+            $caption: none
+        );
+    }
+
+    .index-16 {
+        @include timeline-story(
+            $img: (width:669, height:744, top:1403, left:11190),
+            $year: (left:11227, top:1138), 
+            $text: (width:672, left:11227, top:1238), 
+            $bar: (height:308, left:11190, top:1034), 
+            $caption: none
+        );
+    }
+
+    .index-17 {
+        @include timeline-story(
+            $img: (width:1252, height:706, top:1128, left:12023, shadow: true),
+            $img2: (width:1050, height:998, top:84, left:12225),
+            $year: (left:12015, top:1909), 
+            $text: (width:819, left:12215, top:1909), 
+            $bar: (height:980, left:11957, top:1034), 
+            $caption: none
+        );
+    }
+
+    .index-18 {
+        @include timeline-story(
+            $img: (width:1937, height:984, top:391, left:13371),
+            $img2: (width:600, height:642, top:1124, left:13483),
+            $year: (left:14284, top:1375), 
+            $text: (width:527, left:14284, top:1640), 
+            $bar: (height:308, left:13000, top:1034), 
+            $caption: none,
+            $before: (width: 415, height:1833, top:165, left:13794),
+            $after: (width: 493, left: 13554)
+        );
+
+        .year {
+            font-size: ptr(300);
+            line-height: 1;
+            z-index: 1;
+        }
+    }
+
+    .index-19 {
+        @include timeline-story(
+            $img: (width:624, height:642, top:348, left:15316, shadow: true),
+            $year: (left:15317, top:97), 
+            $text: (width:529, left:15317, top:197), 
+            $bar: (height:929, left:15279, top:104), 
+            $caption: none
+        );
+    }
+
+    .index-20 {
+        @include timeline-story(
+            $img: (width:1179, height:689, top:1375, left:15342),
+            $year: (left:15397, top:1125), 
+            $text: (width:755, left:15397, top:1225), 
+            $bar: (height:280, left:15342, top:1033), 
+            $caption: none
+        );
+    }
+
+    .index-21 {
+        @include timeline-story(
+            $img: (width:1278, height:678, top:1, left:16115.6797, shadow: true),
+            $year: (left:16125, top:742), 
+            $text: (width:1167, left:16125, top:842), 
+            $bar: (height:291, left:16070, top:742), 
+            $caption: none
+        );
+    }
+
+    .index-22 {
+        @include timeline-story(
+            $img: (width:912, height:730, top:1140, left:16635),
+            $year: (left:16685, top:1920), 
+            $text: (width:605, left:16685, top:2020), 
+            $caption: none,
+            $after: (width: 493, left: 17054)
+        );
+    }
+
+    .index-23 {
+        @include timeline-story(
+            $img: (width:712, height:901, top:-16, left:18290, shadow: true),
+            $year: (left:17685, top:202), 
+            $text: (width:515, left:17685, top:302), 
+            $bar: (height:831, left:17617, top:202), 
+            $caption: none
+        );
+    }
+
+    .index-24 {
+        @include timeline-story(
+            $img: (width:1185, height:825, top:1457, left:17769, shadow: true),
+            $year: (left:17842, top:1181), 
+            $text: (width:663, left:17842, top:1281), 
+            $bar: (height:295, left:17769, top:1033), 
+            $caption: none,
+            $before: (width: 387, height:685, top:1480, left:17678)
+        );
+    }
+
+    .index-25 {
+        @include timeline-story(
+            $img: (width:596, height:596, top:362, left:19128),
+            $year: (left:19128, top:124), 
+            $text: (width:596, left:19128, top:224), 
+            $caption: none
+        );
+    }
+
+    .index-26 {
+        @include timeline-story(
+            $img: (width:1387, height:689, top:1140, left:19169, shadow: true),
+            $year: (left:19169, top:1924), 
+            $text: (width:958, left:19169, top:2024), 
+            $bar: (height:1042, left:19069, top:1035), 
+            $caption: none
+        );
+    }
+
+    .index-27 {
+        @include timeline-story(
+            $img: (width:806, height:615, top:0, left:19868),
+            $year: (left:19868, top:660), 
+            $text: (width:839, left:19868, top:760), 
+            $caption: none
+        );
+    }
+
+    .index-28 {
+        @include timeline-story(
+            $img: (width:1623, height:1132, top:584, left:20659),
+            $year: (left:20969, top:265), 
+            $text: (width:562, left:20969, top:535), 
+            $caption: none,
+            $before: (width: 317, height: 1695, top: 186, left: 21511),
+            $after: (width: 493, left: 22282)
+        );
+
+        .year {
+            font-size: ptr(300);
+            line-height: 1;
+            z-index: 1;
+        }
+    }
+
+    .index-29 {
+        @include timeline-story(
+            $img: (width:776, height:944, top:0, left:22589, shadow: true),
+            $year: (left:22113, top:294), 
+            $text: (width:338, left:22113, top:394), 
+            $bar: (height:682, left:22054, top:332), 
+            $caption: none
+        );
+
+        .bar {
+            z-index: -1;
+        }
+    }
+
+    .index-30 {
+        @include timeline-story(
+            $img: (width:897, height:664, top:1358, left:22399),
+            $year: (left:22399, top:1229), 
+            $text: (width:796, left:22599, top:1229), 
+            $bar: (height:152, left:22399, top:1033), 
+            $caption: none
+        );
+    }
+
+    .index-31 {
+        @include timeline-story(
+            $img: (width:691, height:657, top:446, left:23484, shadow: true),
+            $year: (left:23572, top:84), 
+            $text: (width:476, left:23572, top:184), 
+            $bar: (height:682, left:23528, top:210), 
+            $caption: none
+        );
+
+        .bar {
+            z-index: -1;
+        }
+    }
+
+    .index-32 {
+        @include timeline-story(
+            $img: (width:1110, height:634, top:1149, left:23555),
+            $year: (left:23555, top:1824), 
+            $text: (width:1032, left:23555, top:1924), 
+            $bar: (height:963, left:23499, top:1050), 
+            $caption: none
+        );
+
+        .bar {
+            z-index: -1;
+        }
+    }
+
+    .index-33 {
+        @include timeline-story(
+            $img: (width:801, height:905, top:0, left:24806),
+            $year: (left:24382, top:446), 
+            $text: (width:386, left:24382, top:546), 
+            $bar: (height:580, left:24338, top:453), 
+            $caption: none
+        );
+    }
+
+    .index-34 {
+        @include timeline-story(
+            $img: (width:570, height:55, top:1693, left:24783),
+            $year: (left:24864, top:1324), 
+            $text: (width:476, left:24864, top:1424), 
+            $bar: (height:495, left:24824, top:1034), 
+            $caption: none,
+            $before: (width: 323, height:570, top:1824, left:24783)
+        );
+    }
+
+    .index-35 {
+        @include timeline-story(
+            $img: (width:752, height:676, top:1102, left:25530),
+            $year: (left:25530, top:1819), 
+            $text: (width:732, left:25530, top:1919), 
+            $bar: (height:989, left:25470, top:1034), 
+            $caption: none
+        );
+    }
+
+    .index-36 {
+        @include timeline-story(
+            $img: (width:678, height:761, top:-83, left:25943, shadow: true),
+            $year: (left:26005, top:731), 
+            $text: (width:588, left:26005, top:831), 
+            $bar: (height:309, left:25943, top:726), 
+            $caption: none
+        );
+    }
+
+    .index-37 {
+        @include timeline-story(
+            $img: (width:1688, height:1451, top:648, left:26455),
+            $year: (left:27024, top:183), 
+            $text: (width:830, left:27024, top:463), 
+            $caption: none,
+            $before: (width: 513, height:1599, top:726, left:27019),
+            $after: (width: 410, left:27419)
+        );
+
+        .year {
+            font-size: ptr(300);
+            line-height: 1;
+            z-index: 1;
+        }
+    }
+
+    .index-38 {
+        @include timeline-story(
+            $img: (width:1006, height:616, top:369, left:27957, shadow: true),
+            $year: (left:27957, top:85), 
+            $text: (width:1027, left:27957, top:185), 
+            $bar: (height:935, left:27920, top:98), 
+            $caption: none
+        );
+
+        .bar {
+            z-index: -1;
+        }
+    }
+
+    .index-39 {
+        @include timeline-story(
+            $img: (width:665, height:663, top:1351, left:28298, shadow: true),
+            $year: (left:28298, top:1094), 
+            $text: (width:555, left:28298, top:1194), 
+            $bar: (height:260, left:28270, top:1034), 
+            $caption: none
+        );
+    }
+
+    .index-40 {
+        @include timeline-story(
+            $img: (width:652, height:668, top:0, left:29112),
+            $year: (left:29112, top:712), 
+            $text: (width:652, left:29112, top:812), 
+            $bar: (height:260, left:28270, top:1034), 
+            $caption: none
+        );
+    }
+
+    .index-41 {
+        @include timeline-story(
+            $img: (width:808, height:683, top:1100, left:29198),
+            $year: (left:29112, top:1848), 
+            $text: (width:398, left:29112, top:1948), 
+            $bar: (height:1041, left:29062, top:1050), 
+            $caption: none
+        );
+    }
+
+    .index-42 {
+        @include timeline-story(
+            $img: (width:821, height:853, top:-4, left:30227, shadow: true),
+            $year: (left:29952, top:351), 
+            $text: (width:257, left:29952, top:451), 
+            $bar: (height:644, left:29921, top:390), 
+            $caption: none,
+            $after: (width:871, left:29846)
+        );
+    }
+
+    .index-43 { 
+        @include timeline-story(
+            $img: (width:804, height:775, top:1372, left:30168),
+            $year: (left:30242, top:1074), 
+            $text: (width:457, left:30242, top:1174), 
+            $bar: (height:243, left:30210, top:1033), 
+            $caption: none
+        );
+    }
+
+    .index-44 {
+        @include timeline-story(
+            $img: (width:1108, height:840, top:354, left:31211, shadow: true),
+            $year: (left:31313, top:83), 
+            $text: (width:370, left:31313, top:183), 
+            $bar: (height:590, left:31269, top:99), 
+            $caption: none
+        );
+
+        .bar {
+            z-index: -1;
+        }
+    }
+
+    .index-45 {
+        @include timeline-story(
+            $img: (width:910, height:664, top:1483, left:31167),
+            $year: (left:31167, top:1336), 
+            $text: (width:722, left:31367, top:1336), 
+            $caption: none
+        );
+    }
+
+    .index-46 {
+        @include timeline-story(
+            $img: (width:1518, height:1746, top:443, left:32404),
+            $year: (left:32435, top:127), 
+            $text: (width:601, left:32435, top:380), 
+            $caption: none,
+            $before: (width:305, height:1651, top:618, left:32557),
+            $after: (width: 687, left:32852)
+        );
+
+        img {
+            z-index: 1;
+        }
+
+        .year {
+            font-size: ptr(300);
+            line-height: 1;
+            z-index: 1;
+        }
+    }
+
+    .index-47 {
+        @include timeline-story(
+            $img: (width:1108, height:776, top:354, left:33867),
+            $year: (left:33861, top:125), 
+            $text: (width:580, left:33861, top:225), 
+            $caption: none
+        );
+    }
+
+    .index-48 {
+        @include timeline-story(
+            $img: (width:725, height:859, top:1198, left:34393),
+            $year: (left:33867, top:1291), 
+            $text: (width:461, left:33867, top:1391), 
+            $caption: none
+        );
+    }
+
+    .index-49 {
+        @include timeline-story(
+            $img: (width:712, height:850, top:0, left:35763),
+            $year: (left:35180, top:125), 
+            $text: (width:529, left:35180, top:225), 
+            $bar: (height:889, left:35118, top:145), 
+            $caption: none
+        );
+    }
+
+    .index-50 {
+        @include timeline-story(
+            $img: (width:1167, height:838, top:1418, left:35309),
+            $year: (left:35309, top:1130), 
+            $text: (width:712, left:35309, top:1230), 
+            $caption: none
+        );
+    }
+}

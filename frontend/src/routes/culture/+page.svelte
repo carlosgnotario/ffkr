@@ -58,7 +58,9 @@
 				{#if member.photo}
 				<div class="avatar" data-id={member._id} data-city={member.location?.name || 'Unknown'}>
 					<div class="wrap">
-						<img src={member.photo.asset?.url} alt={member.photo.alt || member.name} />
+						<!-- sanity image -->
+						<SanityImage image={member.photo} width={400} height={400} alt={member.photo.alt || member.name} />
+						<!-- <img src={member.photo.asset?.url} alt={member.photo.alt || member.name} /> -->
 					</div>
 				</div>
 				{/if}
@@ -68,7 +70,9 @@
 				<div class="award">
 					<div class="wrap">
 						{#if award.logo}
-							<img class="award-logo" src={award.logo.asset.url} alt={award.name} />
+							<!-- sanity image -->
+							<SanityImage image={award.logo} width={400} height={400} alt={award.name} className="award-logo" />
+							<!-- <img class="award-logo" src={award.logo.asset.url} alt={award.name} /> -->
 						{/if}
 						<span class="award-name">{award.name}</span>
 						<span class="award-date">{award.formattedDate}</span>
@@ -81,7 +85,8 @@
 					<div class="testimonial" data-video={testimonial.videoUrl}>
 						<div class="wrap">
 							{#if testimonial.thumbnail}
-								<img class="testimonial-thumbnail" src={testimonial.thumbnail.asset.url} alt={testimonial.title} />
+								<!-- sanity image -->
+								<SanityImage image={testimonial.thumbnail} width={400} height={400} alt={testimonial.title} className="testimonial-thumbnail" />
 							{/if}
 							<span class="testimonial-title">{testimonial.title}</span>
 						</div>
