@@ -8,6 +8,15 @@
     overflow: hidden;
     width: 100vw;
 
+    &-line {
+        position: absolute;
+        height: ptr(1);
+        top: calc(50% - ptr(43));
+        background-color: $red;
+        left: ptr(1846);
+        right: 0;
+    }
+
     &-wrap {
         display: grid;
         grid-auto-columns: auto;
@@ -165,13 +174,11 @@
             $img: (width: 835, height: 898, top: 565, left: 4600), 
             $year: (left: 4791, top: 540), 
             $text: (width: 509, left: 4791, top: 640), 
-            $bar: (left: 0, height: 0, top: 0, color: transparent), 
             $caption: none
         );
 
         img {
             z-index: 1;
-            outline: 1px solid red;
         }
     }
 
@@ -180,7 +187,7 @@
             $img: (width: 1138, height: 1122, top: 165, left: 5557),
             $year: (left: 5718, top: 240), 
             $text: (width: 356, left: 5918, top: 240), 
-            $bar: (height: 496, left: 5486, top: 1032), 
+            $bar: (height: 496, left: 5486, top: 1034), 
             $caption: none
         );
 
@@ -228,7 +235,7 @@
             $img: (width: 828, height:1023, top:1159, left:6353, shadow: true),
             $year: (left: 5944, top:1588), 
             $text: (width: 302, left:5944, top:1688), 
-            $bar: (height:508, left: 6045, top:1030), 
+            $bar: (height:508, left: 6045, top:1034), 
             $caption: none,
             $before: (width: 160, height:660, top:1394, left:6273)
         );
@@ -366,7 +373,7 @@
             $img: (width:1179, height:689, top:1375, left:15342),
             $year: (left:15397, top:1125), 
             $text: (width:755, left:15397, top:1225), 
-            $bar: (height:280, left:15342, top:1033), 
+            $bar: (height:280, left:15342, top:1034), 
             $caption: none
         );
     }
@@ -406,7 +413,7 @@
             $img: (width:1185, height:825, top:1457, left:17769, shadow: true),
             $year: (left:17842, top:1181), 
             $text: (width:663, left:17842, top:1281), 
-            $bar: (height:295, left:17769, top:1033), 
+            $bar: (height:295, left:17769, top:1034), 
             $caption: none,
             $before: (width: 387, height:685, top:1480, left:17678)
         );
@@ -426,7 +433,7 @@
             $img: (width:1387, height:689, top:1140, left:19169, shadow: true),
             $year: (left:19169, top:1924), 
             $text: (width:958, left:19169, top:2024), 
-            $bar: (height:1042, left:19069, top:1035), 
+            $bar: (height:1042, left:19069, top:1034), 
             $caption: none
         );
     }
@@ -476,7 +483,7 @@
             $img: (width:897, height:664, top:1358, left:22399),
             $year: (left:22399, top:1229), 
             $text: (width:796, left:22599, top:1229), 
-            $bar: (height:152, left:22399, top:1033), 
+            $bar: (height:152, left:22399, top:1034), 
             $caption: none
         );
     }
@@ -500,7 +507,7 @@
             $img: (width:1110, height:634, top:1149, left:23555),
             $year: (left:23555, top:1824), 
             $text: (width:1032, left:23555, top:1924), 
-            $bar: (height:963, left:23499, top:1050), 
+            $bar: (height:963, left:23499, top:1034), 
             $caption: none
         );
 
@@ -606,7 +613,7 @@
             $img: (width:808, height:683, top:1100, left:29198),
             $year: (left:29112, top:1848), 
             $text: (width:398, left:29112, top:1948), 
-            $bar: (height:1041, left:29062, top:1050), 
+            $bar: (height:1041, left:29062, top:1034), 
             $caption: none
         );
     }
@@ -627,7 +634,7 @@
             $img: (width:804, height:775, top:1372, left:30168),
             $year: (left:30242, top:1074), 
             $text: (width:457, left:30242, top:1174), 
-            $bar: (height:243, left:30210, top:1033), 
+            $bar: (height:243, left:30210, top:1034), 
             $caption: none
         );
     }

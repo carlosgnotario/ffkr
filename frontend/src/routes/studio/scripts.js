@@ -34,6 +34,7 @@ export async function loadStudioData() {
 export class studioGrid {
 	constructor(element) {
 		this.element = element
+		this.resize = this.resize.bind(this)
 		this.elements()
 		this.resize()
 		this.bind()
@@ -62,8 +63,12 @@ export class studioGrid {
 		// Basic element setup
 		// this.gridItems = this.element.querySelectorAll(".studio-item")
 		this.slides.forEach((slide, index) => {
-			this.projectSliders[index] = new projectsSlider(this.projects[index], index)
-			this.teamMemberCarousels[index] = new teamMembersCarousel(this.teamMembers[index], index)
+			if (this.projects[index]) {
+				this.projectSliders[index] = new projectsSlider(this.projects[index], index)
+			}
+			if (this.teamMembers[index].querySelectorAll(".studio-category-member").length > 0) {
+				this.teamMemberCarousels[index] = new teamMembersCarousel(this.teamMembers[index], index)
+			}
 		})
 		
 		// Initialize first slider as active (with safety check)
@@ -99,7 +104,7 @@ export class studioGrid {
 				delay: (i, el, arr) => 1 + Math.pow(Math.min(i, arr.length - i), 1.8) * 0.1
 			})
 
-			gsap.from(statItems, {
+			statItems.length && gsap.from(statItems, {
 				autoAlpha: 0,
 				y: 100,
 				delay: 1,
@@ -114,7 +119,7 @@ export class studioGrid {
 				stagger: 0.3
 			})
 
-			gsap.from(avatarItems, {
+			avatarItems.length && gsap.from(avatarItems, {
 				autoAlpha: 0,
 				top: 200,
 				position: "relative",
@@ -137,7 +142,7 @@ export class studioGrid {
 	resize() {
 		this.W = this.element.clientWidth
 		this.H = this.element.clientHeight
-		this.slideW = this.slides[0].clientWidth;
+		this.slideW = this.slides[0] ? this.slides[0].clientWidth : 0;
 		this.vw = window.innerWidth
 		this.vh = window.innerHeight
 	}
@@ -147,13 +152,16 @@ export class studioGrid {
 			dragging: false,
 			x: {new: 0, old: 0, stored: 0},
 		}
+		const getClientX = (e) => {
+            return e.touches ? e.touches[0].clientX : e.clientX;
+        }
 		this.mouseDownEvent = (e) => {
 			this.pos.dragging = true;
-			this.pos.x.old = this.pos.x.new = e.clientX;
+			this.pos.x.old = this.pos.x.new = getClientX(e);
 		}
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
-			this.pos.x.new = e.clientX;
+			this.pos.x.new = getClientX(e);
 		}
 		this.mouseUpEvent = (e) => {
 			if (!this.pos.dragging) return;
@@ -177,11 +185,17 @@ export class studioGrid {
 			this.pos.x.old = this.pos.x.new = 0;
 		}
 
-		// Bind events
-		this.element.addEventListener("mousedown", this.mouseDownEvent)
+		// Touch events
+        this.element.addEventListener("touchstart", this.mouseDownEvent)
+        window.addEventListener("touchmove", this.mouseMoveEvent)
+        window.addEventListener("touchend", this.mouseUpEvent)
+        
+        // Mouse events
+        this.element.addEventListener("mousedown", this.mouseDownEvent)
+        window.addEventListener("mousemove", this.mouseMoveEvent)
+        window.addEventListener("mouseup", this.mouseUpEvent)
+
 		window.addEventListener("resize", this.resize)
-		window.addEventListener("mousemove", this.mouseMoveEvent)
-		window.addEventListener("mouseup", this.mouseUpEvent)
 	}
 
 	update() {
@@ -197,24 +211,31 @@ export class studioGrid {
 	}
 
 	changeSlide(slide) {
-		this.projectSliders[this.currentSlide].setActive(false)
-		this.teamMemberCarousels[this.currentSlide].setActive(false)
+		this.projectSliders[this.currentSlide]?.setActive(false)
+
+		this.teamMemberCarousels[this.currentSlide]?.setActive(false)
 		
 		this.slides[this.currentSlide].classList.remove("active");
 		
 		this.slides[slide].classList.add("active");
 		this.currentSlide = slide;
 		
-		this.projectSliders[this.currentSlide].setActive(true)
-		this.teamMemberCarousels[this.currentSlide].setActive(true)
+		this.projectSliders[this.currentSlide]?.setActive(true)
+		this.teamMemberCarousels[this.currentSlide]?.setActive(true)
 	}
 
 	destroy() {
 		// Cleanup when component is destroyed
 		gsap.ticker.remove(this.ticker)
+
+		this.element.removeEventListener("mousedown", this.mouseDownEvent)
+		window.removeEventListener("touchmove", this.mouseMoveEvent)
+		window.removeEventListener("touchend", this.mouseUpEvent)
+		
+		this.element.removeEventListener("touchstart", this.mouseDownEvent)
 		window.removeEventListener("mousemove", this.mouseMoveEvent)
 		window.removeEventListener("mouseup", this.mouseUpEvent)
-		this.element.removeEventListener("mousedown", this.mouseDownEvent)
+		
 		window.removeEventListener("resize", this.resize)
 		
 		this.projectSliders.forEach(slider => slider.destroy())
@@ -236,6 +257,7 @@ class projectsSlider {
 			return;
 		}
 		
+		this.sizing = this.sizing.bind(this)
 		this.define()
 		this.sizing()		
 		this.bind()
@@ -257,17 +279,20 @@ class projectsSlider {
 			dragging: false,
 			x: {new: 0, old: 0, stored: 0},
 		}
+		const getClientX = (e) => {
+            return e.touches ? e.touches[0].clientX : e.clientX;
+        }
 		this.mouseDownEvent = (e) => {
 			e.stopPropagation()
 			
 			this.pos.dragging = true;
-			this.pos.x.old = this.pos.x.new = e.clientX;
+			this.pos.x.old = this.pos.x.new = getClientX(e);
 		}
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
 			e.stopPropagation()
 
-			this.pos.x.new = e.clientX;
+			this.pos.x.new = getClientX(e);
 			if (Math.abs(this.pos.x.new - this.pos.x.old) > 3) {
 				this.slides.forEach(slide => {
 					slide.style.pointerEvents = "none"
@@ -286,15 +311,22 @@ class projectsSlider {
 			})
 		}
 
+		// Touch events
+        this.element.addEventListener("touchstart", this.mouseDownEvent)
+        window.addEventListener("touchmove", this.mouseMoveEvent)
+        window.addEventListener("touchend", this.mouseUpEvent)
+        
+        // Mouse events
 		this.wrap.addEventListener("mousedown", this.mouseDownEvent)
 		window.addEventListener("mousemove", this.mouseMoveEvent)
 		window.addEventListener("mouseup", this.mouseUpEvent)
+
 		window.addEventListener("resize", this.sizing)
 	}
 
 	sizing() {
-		this.sliderW = this.element.clientWidth
-		this.slideW = this.slides[0].clientWidth
+		this.sliderW = this.element.offsetWidth
+		this.slideW = this.slides[0].offsetWidth
 		this.slidesW = this.slides.length * this.slideW
 		this.edge = this.slidesW / 2
 
@@ -338,10 +370,18 @@ class projectsSlider {
 	}
 
 	destroy() {
+		// Cleanup when component is destroyed
 		gsap.ticker.remove(this.ticker)
+		
+		// Remove touch events
+		this.element.removeEventListener("touchstart", this.mouseDownEvent)
+		window.removeEventListener("touchmove", this.mouseMoveEvent)
+		window.removeEventListener("touchend", this.mouseUpEvent)
+		// Remove mouse events
+		this.element.removeEventListener("mousedown", this.mouseDownEvent)
 		window.removeEventListener("mousemove", this.mouseMoveEvent)
 		window.removeEventListener("mouseup", this.mouseUpEvent)
-		this.element.removeEventListener("mousedown", this.mouseDownEvent)
+		
 		window.removeEventListener("resize", this.sizing)
 	}
 }
@@ -358,6 +398,7 @@ class teamMembersCarousel {
 			return;
 		}
 		
+		this.sizing = this.sizing.bind(this)
 		this.define();
 		this.sizing();
 		this.bind();
@@ -404,9 +445,10 @@ class teamMembersCarousel {
 	bind() {
 		this.currentCard = null;
 		this.cardOpen = null;
-
+		
 		this.members.forEach((member, index) => {
-			member.addEventListener("mousedown", (e) => {
+			member.touchEvent = (e) => {
+				e.preventDefault()
 				if (!this.isActive) return;
 				if (this.cardOpen === index) return;
 				e.stopPropagation()
@@ -430,10 +472,13 @@ class teamMembersCarousel {
 					this.cardOpen = index;
 					
 				}
-			})
+			}
+
+			member.addEventListener("touchstart", member.touchEvent)
+			member.addEventListener("mousedown", member.touchEvent)
 		})
 
-		window.addEventListener("mouseup", () => {
+		this.mouseUpEvent = (e) => {
 			if (this.cardOpen !== null) {
 				this.cardOpen = null;
 				this.memberCardWrap.innerHTML = ""
@@ -444,10 +489,11 @@ class teamMembersCarousel {
 					duration: 2
 				})
 			}
-		})
+		}
 
-		window.addEventListener("mousedown", this.mouseDownEvent)
 		window.addEventListener("mouseup", this.mouseUpEvent)
+		window.addEventListener("touchend", this.mouseUpEvent)
+		window.addEventListener("resize", this.sizing)
 	}
 
 	update() {
@@ -475,7 +521,9 @@ class teamMembersCarousel {
 
 	destroy() {
 		gsap.ticker.remove(this.ticker)
+				
+		window.removeEventListener("touchend", this.mouseUpEvent)
 		window.removeEventListener("mouseup", this.mouseUpEvent)
-		window.removeEventListener("mousedown", this.mouseDownEvent)
+		window.removeEventListener("resize", this.sizing)
 	}
 }

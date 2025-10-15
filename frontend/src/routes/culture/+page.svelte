@@ -59,7 +59,7 @@
 				<div class="avatar" data-id={member._id} data-city={member.location?.name || 'Unknown'}>
 					<div class="wrap">
 						<!-- sanity image -->
-						<SanityImage image={member.photo} width={400} height={400} alt={member.photo.alt || member.name} />
+						<SanityImage image={member.photo} width={100} height={100} alt={member.photo.alt || member.name} />
 						<!-- <img src={member.photo.asset?.url} alt={member.photo.alt || member.name} /> -->
 					</div>
 				</div>
@@ -117,6 +117,7 @@
 						</div>
 						<div class="team-member-credentials">
 							{#if member.credentials && member.credentials.length > 0}
+							<span>Credentials</span>
 							{#each member.credentials as credential}
 								<span>
 									{credential}

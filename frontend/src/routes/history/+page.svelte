@@ -47,6 +47,7 @@
 	{:else if timeline.length > 0}
 		<div class="timeline" bind:this={timelineElement}>
 			<div class="timeline-wrap">
+			<div class="timeline-line"></div>
 			{#each timeline as item, index}
 				<div class="timeline-item index-{index + 1}">
 					<div class="year">{item.year}</div>

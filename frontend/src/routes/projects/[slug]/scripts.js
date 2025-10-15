@@ -46,15 +46,19 @@ export class projectSlider {
             x: {new: 0, old: 0, stored: 0},
         }
 
+        const getClientX = (e) => {
+            return e.touches ? e.touches[0].clientX : e.clientX;
+        }
+
         this.mouseDownEvent = (e) => {
             console.log("clicking projectSlider");
             
             this.pos.dragging = true;
-            this.pos.x.old = this.pos.x.new = e.clientX;
+            this.pos.x.old = this.pos.x.new = getClientX(e);
         }
         this.mouseMoveEvent = (e) => {
             if (!this.pos.dragging) return;
-            this.pos.x.new = e.clientX;
+            this.pos.x.new = getClientX(e);
         }
         this.mouseUpEvent = (e) => {
             console.log("clicking projectSlider up");
@@ -68,9 +72,16 @@ export class projectSlider {
             this.pos.x.old = this.pos.x.new = 0;
         }
 
+        // Touch events
+        this.element.addEventListener("touchstart", this.mouseDownEvent)
+        window.addEventListener("touchmove", this.mouseMoveEvent)
+        window.addEventListener("touchend", this.mouseUpEvent)
+        
+        // Mouse events
         this.element.addEventListener("mousedown", this.mouseDownEvent)
         window.addEventListener("mousemove", this.mouseMoveEvent)
         window.addEventListener("mouseup", this.mouseUpEvent)
+
         window.addEventListener("resize", this.sizing)
     }
 
@@ -160,9 +171,15 @@ export class projectSlider {
 
     destroy() {
         gsap.ticker.remove(this.ticker)
+
+        this.element.removeEventListener("touchstart", this.mouseDownEvent)
+        window.removeEventListener("touchmove", this.mouseMoveEvent)
+        window.removeEventListener("touchend", this.mouseUpEvent)
+
+        this.element.removeEventListener("mousedown", this.mouseDownEvent)
         window.removeEventListener("mousemove", this.mouseMoveEvent)
         window.removeEventListener("mouseup", this.mouseUpEvent)
-        this.element.removeEventListener("mousedown", this.mouseDownEvent)
+        
         window.removeEventListener("resize", this.sizing)
     }
 }

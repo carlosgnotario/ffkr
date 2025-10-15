@@ -401,14 +401,14 @@
         display: flex;
         flex-direction: column;
         padding: 0 ptr(24);
-        
-        &:before {
+
+        span:nth-child(1) {
             padding-top: ptr(15);
             border-top: ptr(1) solid $gray;
             content: "Credentials";
             color: $dark-gray;
             margin-bottom: ptr(15);
-        }
+        }        
     }
 
     &-location {

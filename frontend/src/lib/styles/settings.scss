@@ -130,6 +130,29 @@ $white: #FFFFFF;
     @if map-get($bar, top) { top: ptr(map-get($bar, top)); }
     width: ptr(2);
     background-color: $red;
+
+    // if bar top == 1034
+    // if bar defined
+    @if map-get($bar, height) {
+      &:after {
+        content: "";
+        position: absolute;
+        height: ptr(19);
+        width: ptr(19);
+        background-color: $red;
+        @if map-get($bar, top) == 1034 {
+          top: 0;
+          translate: -50% -50%;
+        } @else {
+          bottom: 0;
+          translate: -50% 50%;
+        }
+          left: 50%;
+          border-radius: 50%;
+        }
+    } else {
+      display: none;
+    }
   }
 
   .caption {

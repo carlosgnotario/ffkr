@@ -14,11 +14,20 @@ export class History{
     elements() {
         this.wrap = this.element.querySelector(".timeline-wrap")
         this.xPos = gsap.quickTo(this.wrap, "x", {duration: 2, ease: "expo.out"})
+        this.timelineItems = this.element.querySelectorAll(".timeline-item")
     }
 
     sizing() {
         this.W = this.wrap.clientWidth
         this.vw = window.innerWidth
+
+        this.timelineItems.forEach(item => {
+            item.left = item.querySelector("img").offsetLeft
+            
+        })
+        this.timelineItems.forEach(item => {
+            console.log(item.left);
+        })
     }
 
     bind() {

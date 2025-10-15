@@ -32,6 +32,7 @@ export class Screensaver {
 
     show() {
         this.logo.classList.add('invert')
+        gsap.set(this.element, { pointerEvents: "all", })
         if (this.currentSlide) {
             console.log(this.currentSlide);
             this.currentSlide.remove()
@@ -54,6 +55,7 @@ export class Screensaver {
     }
 
     hide() {
+        gsap.set(this.element, { pointerEvents: "none", })
         gsap.to(this.element, {
             autoAlpha: 0,
             duration: 2,

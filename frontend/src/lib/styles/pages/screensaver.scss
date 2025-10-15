@@ -63,7 +63,7 @@
         grid-column: 2/3;
         grid-row: 1;
         display: grid;
-        background-color: blue;
+        background-color: $black;
         grid-template-rows: minmax(0, 1fr);
 
         &.active {
