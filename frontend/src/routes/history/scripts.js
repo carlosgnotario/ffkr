@@ -9,6 +9,7 @@ export class History{
         this.sizing();
         this.bind()
         this.update()
+        this.animate()
     }
 
     elements() {
@@ -22,7 +23,7 @@ export class History{
         this.vw = window.innerWidth
 
         this.timelineItems.forEach(item => {
-            item.left = item.querySelector("img").offsetLeft
+            item.left = item.querySelector(".img1").offsetLeft
             
         })
         this.timelineItems.forEach(item => {
@@ -46,13 +47,13 @@ export class History{
             this.pos.x.old = this.pos.x.new = getClientX(e);
         }
         this.mouseMoveEvent = (e) => {
-            console.log("mouse/touch move")
             if (!this.pos.dragging) return;
+            console.log("mouse/touch move")
             this.pos.x.new = getClientX(e);
         }
         this.mouseUpEvent = (e) => {
-            console.log("mouse/touch up")
             if (!this.pos.dragging) return;
+            console.log("mouse/touch up")
             this.pos.dragging = false;
             this.pos.x.stored += this.pos.x.new - this.pos.x.old;
             this.pos.x.old = this.pos.x.new = 0;
@@ -77,11 +78,90 @@ export class History{
         window.addEventListener("mouseup", this.mouseUpEvent)
     }
 
+    animate() {
+        this.timelineItems.forEach(item => {
+            item.yearNumber = item.querySelector(".year").innerText
+            item.animated = false;
+            item.imageWrap = item.querySelector(".img1")
+            item.image = item.querySelector(".img1 img")
+            item.year = item.querySelector(".year")
+            item.text = item.querySelector(".text")
+            item.bar = item.querySelector(".bar")
+
+            gsap.set(item.imageWrap, {
+                autoAlpha: 0,
+            })
+            gsap.set(item.year, {
+                autoAlpha: 0,
+            })
+            gsap.set(item.bar, {
+                scaleY: 0,
+            })
+            gsap.set(item.text, {
+                autoAlpha: 0,
+            })
+            gsap.set(item.image, {
+                clipPath: "inset(0 100% 0 0)",
+                scale: 1.3
+            })
+
+            item.animateIn = () => {
+                console.log("animating in")
+                const tl = gsap.timeline()
+                tl.to(item.imageWrap, {
+                    autoAlpha: 1,
+                    ease: "expo.out",
+                    duration: 2,
+                })
+                tl.to(item.image, {
+                    clipPath: "inset(0 0% 0 0)",
+                    scale: 1,
+                    ease: "expo.out",
+                    duration: 2,
+                }, 0)
+                tl.to(item.year, {
+                    autoAlpha: 1,
+                    ease: "expo.out",
+                    duration: 2,
+                }, 0.2)
+                tl.from(item.year, {
+                    textContent: item.yearNumber - 150,
+                    roundProps: "textContent",
+                    ease: "expo.out",
+                    duration: 2,
+                }, 0.2)
+                
+
+                tl.to(item.text, {
+                    autoAlpha: 1,
+                    ease: "expo.out",
+                    duration: 2,
+                }, 0.6)
+
+                tl.to(item.bar, {
+                    scaleY: 1,
+                    ease: "expo.out",
+                    duration: 1,
+                }, 0.2)
+
+            }
+        })
+    }
+
     update() {
         this.ticker = () => {
-            console.log("ticking")
             const currentPosX = (this.pos.x.new - this.pos.x.old) + this.pos.x.stored
+            
             this.xPos(currentPosX)
+
+            this.timelineItems.forEach(item => {
+                if (-currentPosX > item.left - this.vw * 0.8 && !item.animated) {
+                    item.animateIn()
+                    item.animated = true;
+                } else {
+                    item.classList.remove("active")
+                }
+            })
         }
 
         gsap.ticker.add(this.ticker)

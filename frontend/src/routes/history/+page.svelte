@@ -58,10 +58,14 @@
 						{/if}
 					</div>
 					{#if item.image1}
-						<img class="img1" src={item.image1.asset.url} alt={`Timeline ${item.year}`} />
+						<div class="img1">
+							<SanityImage image={item.image1} alt={`Timeline ${item.year}`} />
+						</div>
 					{/if}
 					{#if item.image2}
-						<img class="img2" src={item.image2.asset.url} alt={`Timeline ${item.year}`} />
+						<div class="img2">
+							<SanityImage image={item.image2} alt={`Timeline ${item.year}`} />
+						</div>
 					{/if}
 					<div class="bar"></div>
 				</div>
