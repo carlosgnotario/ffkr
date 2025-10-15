@@ -93,6 +93,7 @@ export class History{
             })
             gsap.set(item.year, {
                 autoAlpha: 0,
+                textContent: item.yearNumber - 150,
             })
             gsap.set(item.bar, {
                 scaleY: 0,
@@ -121,17 +122,11 @@ export class History{
                 }, 0)
                 tl.to(item.year, {
                     autoAlpha: 1,
-                    ease: "expo.out",
-                    duration: 2,
-                }, 0.2)
-                tl.from(item.year, {
-                    textContent: item.yearNumber - 150,
+                    textContent: item.yearNumber,
                     roundProps: "textContent",
                     ease: "expo.out",
                     duration: 2,
                 }, 0.2)
-                
-
                 tl.to(item.text, {
                     autoAlpha: 1,
                     ease: "expo.out",
@@ -143,7 +138,36 @@ export class History{
                     ease: "expo.out",
                     duration: 1,
                 }, 0.2)
+            }
 
+            item.animateOut = () => {
+                console.log("animating out")
+                const tl = gsap.timeline()
+                tl.to(item.imageWrap, {
+                    autoAlpha: 0,
+                    overwrite: true,
+                }, 0)
+                tl.to(item.year, {
+                    autoAlpha: 0,
+                    overwrite: true,
+                }, 0)
+                tl.to(item.text, {
+                    autoAlpha: 0,
+                    overwrite: true,
+                }, 0)
+                tl.to(item.bar, {
+                    scaleY: 0,
+                    overwrite: true,
+                }, 0)
+                tl.to(item.image, {
+                    clipPath: "inset(0 100% 0 0)",
+                    scale: 1.3,
+                    overwrite: true,
+                }, 0)
+                tl.to(item.imageWrap, {
+                    autoAlpha: 0,
+                    overwrite: true,
+                }, 0)
             }
         })
     }
@@ -158,8 +182,9 @@ export class History{
                 if (-currentPosX > item.left - this.vw * 0.8 && !item.animated) {
                     item.animateIn()
                     item.animated = true;
-                } else {
-                    item.classList.remove("active")
+                } else if (-currentPosX < item.left - this.vw * 0.8 && item.animated) {
+                    item.animateOut()
+                    item.animated = false;
                 }
             })
         }
