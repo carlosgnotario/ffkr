@@ -226,6 +226,17 @@ export class studioGrid {
 		this.teamMemberCarousels[this.currentSlide]?.setActive(true)
 	}
 
+	// Method to navigate to a specific slide (used by menu)
+	goToSlide(slideIndex) {
+		if (slideIndex < 0 || slideIndex >= this.slides.length) return
+		
+		// Animate to position
+		this.pos.x.stored = -(slideIndex * this.slideW)
+		
+		// Change slide
+		this.changeSlide(slideIndex)
+	}
+
 	destroy() {
 		// Cleanup when component is destroyed
 		gsap.ticker.remove(this.ticker)

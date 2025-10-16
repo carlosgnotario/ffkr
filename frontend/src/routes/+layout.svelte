@@ -3,6 +3,7 @@
 	import '../lib/styles/main.scss';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import Screensaver from '$lib/components/Screensaver.svelte';
+	import Menu from '$lib/components/Menu.svelte';
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition';
 	import { page } from '$app/stores';
@@ -30,3 +31,4 @@
 	{/key}
 </main>
 <Screensaver />
+<Menu />

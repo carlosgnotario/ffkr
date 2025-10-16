@@ -12,6 +12,10 @@
 		await tick()
 		if (studioSwiper) {
 			grid = new studioGrid(studioSwiper)
+			// Expose globally for menu navigation
+			if (typeof window !== 'undefined') {
+				;(window as any).studioGridInstance = grid
+			}
 		}
 	})
 

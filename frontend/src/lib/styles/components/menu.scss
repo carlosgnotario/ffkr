@@ -1,0 +1,100 @@
+@use '../settings.scss' as *;
+
+.menu-toggle {
+    position: fixed;
+    top: ptr(240);
+    left: 0;
+    width: ptr(100);
+    z-index: 1;
+    width: ptr(100);
+    grid-template-columns: max-content;
+    background-color: $red;
+    display: flex;
+    flex-direction: column;
+    gap: ptr(20);
+    justify-content: center;
+    align-items: center;
+    padding: ptr(25);
+    gap: ptr(40);
+    font-size: 0;
+
+    .back-button {
+        @include back-button();
+        height: ptr(50);
+        width: ptr(50);
+    }
+
+    .open-button {
+        @include open-button();
+        height: ptr(50);
+        width: ptr(50);
+    }
+
+    .drag {
+        @include drag();
+        height: ptr(50);
+        width: ptr(50);
+        cursor: grab;
+    }
+}
+
+.menu {
+    display: grid;
+    background-color: $red;
+    height: calc(100vh - ptr(480));
+    top: ptr(240);
+    z-index: 100;
+    position: fixed;
+    color: $white;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transform: translateZ(1px);
+
+    width: ptr(0);
+    grid-template-columns: max-content;
+
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+    
+    li {
+        list-style: none;   
+        padding: 0;
+        margin: 0;
+    }
+
+    &-display {
+        height: 100%;
+        width: 100%;
+        padding: ptr(60) ptr(100);
+
+        li {
+            display: flex;
+            flex-direction: column;
+
+            li {
+                padding: ptr(15) ptr(0);
+                
+                a {
+                    color: rgba($white, 0.7);
+                }
+
+                &:last-child {
+                    padding-bottom: ptr(30);
+                }
+            }
+        }
+
+        > ul > li > a {
+            @include decor-font(ptr(30));
+            padding: ptr(25) ptr(0);
+        }
+
+        > ul > li {
+            border-top: 1px solid $white;
+        }
+        
+    }
+}
+
