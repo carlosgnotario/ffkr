@@ -242,6 +242,8 @@ export class History{
             let xPos = 0;
             let yPos = 0;
             let randomFreq = Math.random() * 4;
+            const xVariance = this.vw * 0.5;
+            const yVariance = this.vh * 0.5;
 
             tl.set(particle, {
                 scale: "random(0.5, 1.5)", y: 0, x: 0,
@@ -250,8 +252,8 @@ export class History{
                 rotateZ: "random(0, 360)",
             })
             .to(particle, {
-                x: `random(${-800}, ${+800})`,
-                y: `random(${-400}, ${-800})`,
+                x: `random(${-xVariance}, ${+xVariance})`,
+                y: `random(${-yVariance}, ${-yVariance})`,
                 duration:  Math.random(),
                 ease: "power2.out",
                 zIndex: Math.round(Math.random()),
@@ -261,7 +263,7 @@ export class History{
                 }
             })
             .to(particle, {
-                y: this.vh / 2,
+                y: yVariance,
                 duration: 2 + Math.random() * 2,
                 rotateX: "random(0, -360)",
                 rotateZ: "random(0, -360)",
