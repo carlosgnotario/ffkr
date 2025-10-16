@@ -271,6 +271,7 @@ class projectsSlider {
 			slide.loop = 0
 			slide.xPos = gsap.quickTo(slide, "x", {duration: 0.5, ease: "expo.out"})
 			slide.zPos = gsap.quickTo(slide, "z", {duration: 0.5, ease: "expo.out"})
+			slide.alpha = gsap.quickTo(slide, "opacity", {duration: 0.5, ease: "expo.out"})
 		})
 	}
 
@@ -358,10 +359,18 @@ class projectsSlider {
 				} else if (position + (slide.loop * this.slidesW) < -this.edge) {
 					slide.loop += 1
 				}
-				slide.xPos(position + (slide.loop * this.slidesW))
-				slide.zPos(Math.abs(position + (slide.loop * this.slidesW)) * -0.4)
+				slide.xPos(position + (slide.loop * this.slidesW) - ((position + (slide.loop * this.slidesW)) * (this.sliderW * 0.0003)))
+				slide.zPos(Math.abs(position + (slide.loop * this.slidesW)) * -(this.sliderW * 0.0002))
+				if (Math.abs(position + (slide.loop * this.slidesW)) > this.sliderW) {
+					slide.alpha(0)
+				} else {
+					slide.alpha(1)
+				}
 			})
 		}
+
+		console.log(this.sliderW);
+		
 		gsap.ticker.add(this.ticker)
 	}
 	

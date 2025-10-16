@@ -27,7 +27,7 @@
 
     // Parent html
     @at-root html {
-        font-size: 1.49vh;
+        font-size: 1.49vh!important;
     }
 
     &-item {
@@ -42,6 +42,7 @@
             place-self: start;
             font-family: "Tofino", sans-serif;
             z-index: 2;
+            color: $black;
 
             &:before, &:after {
                 content: "";
@@ -50,12 +51,19 @@
         }
 
         .text {
-            // outline: 1px solid magenta;
-            font-size: ptr(45);
+            font-size: ptr(38);
+            letter-spacing: ptr(-0.9);
             line-height: ptr(52);
+            min-height: ptr(90);
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            gap: ptr(20);
+            
             
             h3 {
                 font-weight: 400;
+                margin-bottom: 0;
             }
         }
 
@@ -68,7 +76,7 @@
         .year {
             // outline: 1px solid rgb(0, 136, 255);
             font-size: ptr(75);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         &.active {
@@ -127,7 +135,7 @@
             align-items: end;
             font-size: ptr(414.45);
             line-height: ptr(60.9);
-            font-weight: 600;
+            font-weight: 500;
             mix-blend-mode: exclusion;
             color: white;
             z-index: 3;
@@ -156,8 +164,8 @@
         @include timeline-story(
             $img: (width: 1177, height: 789, top: 1358, left: 2153), 
             $year: (left: 2153, top: 1229), 
-            $text: (width: 390, left: 2353, top: 1229), 
-            $bar: (height: 153, left: 2162, top: 1033), 
+            $text: (width: 399, left: 2353, top: 1229), 
+            $bar: (height: 153, left: 2162, top: 1034), 
             $caption: none
         );
     }

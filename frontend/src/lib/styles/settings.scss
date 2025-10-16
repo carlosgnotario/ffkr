@@ -9,12 +9,131 @@ $white: #FFFFFF;
 // Import Roboto from Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-// Font family tofino
+// Font family Tofino - all weights and styles
 @font-face {
   font-family: 'Tofino';
-  src: url('../assets/fonts/tofino-pro-personal-regular.otf') format('opentype');
+  src: url('../assets/fonts/Tofino-ThinPersonal.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-ThinItalicPersonal.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-LightPersonal.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-LightItalicPersonal.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-BookPersonal.otf') format('opentype');
+  font-weight: 350;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-BookItalicPersonal.otf') format('opentype');
+  font-weight: 350;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-RegularPersonal.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-RegularItalicPersonal.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-MediumPersonal.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-MediumItalicPersonal.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-SemiboldPersonal.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-SemiboldItalicPersonal.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-BoldPersonal.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-BoldItalicPersonal.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-BlackPersonal.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-BlackItalicPersonal.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-UltraPersonal.otf') format('opentype');
+  font-weight: 950;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino';
+  src: url('../assets/fonts/Tofino-UltraItalicPersonal.otf') format('opentype');
+  font-weight: 950;
+  font-style: italic;
 }
 
 @function ptr($px-value) {
@@ -97,6 +216,7 @@ $white: #FFFFFF;
     // if shadow is defined
     @if map-get($img, shadow) {
       box-shadow: 0 ptr(11) ptr(90) rgba($black, 0.55);
+      background: radial-gradient(circle at center, rgba($black, 0) 0%, rgba($black, 0.4) 100%);
     }
   }
 
@@ -142,10 +262,10 @@ $white: #FFFFFF;
         background-color: $red;
         @if map-get($bar, top) == 1034 {
           top: 0;
-          translate: -50% -50%;
+          transform: translate(-50%, -50%);
         } @else {
           bottom: 0;
-          translate: -50% 50%;
+          transform: translate(-50%, 50%);
         }
           left: 50%;
           border-radius: 50%;
