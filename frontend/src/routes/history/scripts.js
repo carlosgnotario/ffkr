@@ -4,6 +4,7 @@ export class History{
     constructor(element) {
         this.element = element;
         this.sizing = this.sizing.bind(this)
+        window.movementModifier = 2;
         
         this.elements()
         this.sizing();
@@ -73,7 +74,7 @@ export class History{
         this.mouseUpEvent = (e) => {
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
-            this.pos.x.stored += this.pos.x.new - this.pos.x.old;
+            this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
             this.pos.x.old = this.pos.x.new = 0;
 
             if (-this.pos.x.stored < 0) {
@@ -190,7 +191,7 @@ export class History{
 
     update() {
         this.ticker = () => {
-            const currentPosX = (this.pos.x.new - this.pos.x.old) + this.pos.x.stored
+            const currentPosX = (this.pos.x.new - this.pos.x.old) * window.movementModifier + this.pos.x.stored
             
             this.xPos(currentPosX)
 

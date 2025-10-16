@@ -31,12 +31,18 @@ export class Menu {
     
     elements() {
         this.menuOpen = false
+        this.hiddenMenuOpen = false
         
         this.menuBurger = document.querySelector('.menu-toggle')
-        this.toggle = document.querySelector('.menu-toggle a.open-button')
+        this.toggle = document.querySelector('.menu-toggle .open-button')
         this.drag = document.querySelector('.menu-toggle .drag')
         this.studiosContainer = this.element.querySelector('.menu-studios')
         this.pagesContainer = this.element.querySelector('.menu-pages')
+        this.hiddenMenu = document.querySelector('.menu-hidden')
+        this.hiddenMenuClose = document.querySelector('.menu-hidden-close')
+        this.hiddenMenuOverlay = document.querySelector('.menu-hidden-overlay')
+        this.movementSlider = document.querySelector('.movement-slider')
+        this.sliderValue = document.querySelector('.slider-value')
     }
     
     populateStudios() {
@@ -101,6 +107,37 @@ export class Menu {
             }
         })
 
+        // triple click event on drag
+        let tripleClickCount = 0
+        let tripleClickTimeout = null
+        this.dragClickEvent = (e) => {
+            e.preventDefault()
+            tripleClickCount++
+            
+            // Clear existing timeout
+            if (tripleClickTimeout) {
+                clearTimeout(tripleClickTimeout)
+            }
+            
+            // Check if we've reached 3 clicks
+            if (tripleClickCount === 3) {
+                console.log("TRIPLE CLICK DETECTED!");
+                // Toggle hidden menu
+                this.toggleHiddenMenu()
+                
+                // Reset counter
+                tripleClickCount = 0
+                tripleClickTimeout = null
+            } else {
+                // Reset counter after 300ms if no more clicks
+                tripleClickTimeout = setTimeout(() => {
+                    tripleClickCount = 0
+                }, 300)
+            }
+        }
+
+        this.drag.addEventListener("click", this.dragClickEvent)
+
         this.mouseDownEvent = (e) => {
             if (!this.pos.dragging) {
                 gsap.to(this.menuBurger, {
@@ -156,6 +193,33 @@ export class Menu {
 
         window.addEventListener("touchstart", this.closeEvent)
         window.addEventListener("mousedown", this.closeEvent)
+
+        // Hidden menu close handlers
+        this.hiddenMenuClose?.addEventListener('click', () => {
+            this.toggleHiddenMenu(false)
+        })
+        
+        this.hiddenMenuOverlay?.addEventListener('click', () => {
+            this.toggleHiddenMenu(false)
+        })
+
+        // Movement modifier slider
+        this.movementSlider?.addEventListener('input', (e) => {
+            const value = parseFloat(e.target.value)
+            if (this.sliderValue) {
+                this.sliderValue.textContent = value.toFixed(1)
+            }
+            // Set global movement modifier
+            if (typeof window !== 'undefined') {
+                window.movementModifier = value
+                console.log('Movement Modifier:', value)
+            }
+        })
+
+        // Initialize movement modifier
+        if (typeof window !== 'undefined') {
+            window.movementModifier = 1.0
+        }
     }
 
     update() {
@@ -206,12 +270,37 @@ export class Menu {
 
         this.menuOpen = !this.menuOpen
     }
+
+    toggleHiddenMenu(open) {
+        const shouldOpen = open !== undefined ? open : !this.hiddenMenuOpen
+        
+        if (shouldOpen) {
+            gsap.to(this.hiddenMenu, {
+                autoAlpha: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            })
+            gsap.fromTo(this.hiddenMenu.querySelector('.menu-hidden-content'), 
+                { scale: 0.8, y: 50 },
+                { scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }
+            )
+            this.hiddenMenuOpen = true
+        } else {
+            gsap.to(this.hiddenMenu, {
+                autoAlpha: 0,
+                duration: 0.3,
+                ease: "power2.in"
+            })
+            this.hiddenMenuOpen = false
+        }
+    }
     
     destroy() {
         // Cleanup if needed
         gsap.ticker.remove(this.update)
-        this.drag.removeEventListener("touchstart", this.mouseDownEvent)
-        this.drag.removeEventListener("mousedown", this.mouseDownEvent)
+        this.drag?.removeEventListener("touchstart", this.mouseDownEvent)
+        this.drag?.removeEventListener("mousedown", this.mouseDownEvent)
+        this.drag?.removeEventListener("click", this.dragClickEvent)
         window.removeEventListener("touchmove", this.mouseMoveEvent)
         window.removeEventListener("mousemove", this.mouseMoveEvent)
         window.removeEventListener("touchend", this.mouseUpEvent)
