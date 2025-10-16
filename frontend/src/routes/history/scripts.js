@@ -3,7 +3,7 @@ import gsap from "gsap"
 export class History{
     constructor(element) {
         this.element = element;
-        console.log(this.element);
+        this.sizing = this.sizing.bind(this)
         
         this.elements()
         this.sizing();
@@ -14,20 +14,25 @@ export class History{
 
     elements() {
         this.wrap = this.element.querySelector(".timeline-wrap")
-        this.xPos = gsap.quickTo(this.wrap, "x", {duration: 2, ease: "expo.out"})
+        this.timelineEnd = this.element.querySelector(".timeline-end")
+        this.timelineDecoration = this.element.querySelector(".timeline-decoration")
         this.timelineItems = this.element.querySelectorAll(".timeline-item")
+        this.reachedEnd = false;
+
+        this.xPos = gsap.quickTo(this.wrap, "x", {duration: 2, ease: "expo.out"})
+        this.rotation = gsap.quickTo(this.timelineDecoration, "rotationY", {duration: 2, ease: "expo.out"})
     }
 
     sizing() {
         this.W = this.wrap.clientWidth
         this.vw = window.innerWidth
+        this.vh = window.innerHeight
+        console.log("yoo");
+        
 
         this.timelineItems.forEach(item => {
             item.left = item.querySelector(".img1").offsetLeft
             
-        })
-        this.timelineItems.forEach(item => {
-            console.log(item.left);
         })
     }
 
@@ -40,20 +45,33 @@ export class History{
         const getClientX = (e) => {
             return e.touches ? e.touches[0].clientX : e.clientX;
         }
+
+        this.clickEvent = (e) => {  
+            this.confetti()
+            const tl = gsap.timeline()
+            tl.to(this.timelineDecoration, {
+                scale: 0.9,
+                duration: 0.2,
+                ease: "expo.out",
+            })
+            tl.to(this.timelineDecoration, {
+                scale: 1,
+                duration: 1,
+                ease: "expo.out",
+            })
+        }
+        this.timelineDecoration.addEventListener("click", this.clickEvent)
         
         this.mouseDownEvent = (e) => {
-            console.log("mouse/touch down")
             this.pos.dragging = true;
             this.pos.x.old = this.pos.x.new = getClientX(e);
         }
         this.mouseMoveEvent = (e) => {
             if (!this.pos.dragging) return;
-            console.log("mouse/touch move")
             this.pos.x.new = getClientX(e);
         }
         this.mouseUpEvent = (e) => {
             if (!this.pos.dragging) return;
-            console.log("mouse/touch up")
             this.pos.dragging = false;
             this.pos.x.stored += this.pos.x.new - this.pos.x.old;
             this.pos.x.old = this.pos.x.new = 0;
@@ -107,7 +125,6 @@ export class History{
             })
 
             item.animateIn = () => {
-                console.log("animating in")
                 const tl = gsap.timeline()
                 tl.to(item.imageWrap, {
                     autoAlpha: 1,
@@ -141,7 +158,6 @@ export class History{
             }
 
             item.animateOut = () => {
-                console.log("animating out")
                 const tl = gsap.timeline()
                 tl.to(item.imageWrap, {
                     autoAlpha: 0,
@@ -187,9 +203,88 @@ export class History{
                     item.animated = false;
                 }
             })
+
+            if (-currentPosX > this.W - this.vw * 2) {
+                console.log("yooooo");
+                
+                this.rotation(Math.min(180 - ((-currentPosX - (this.W - this.vw * 2)) / this.vw) * 180, 90))
+            }
+
+            if (-currentPosX >= this.W - this.vw && !this.reachedEnd) {
+                this.reachedEnd = true;
+                this.confetti();
+            } else if (-currentPosX < this.W - this.vw && this.reachedEnd) {
+                this.reachedEnd = false;
+            }
+            
         }
 
         gsap.ticker.add(this.ticker)
+    }
+
+    confetti() {
+        const amount = 100;
+        const priorParticles = this.timelineEnd.querySelectorAll(".confetti-particle");
+        const particles = [];
+        
+        
+        if (priorParticles.length < 300) {
+            for (let i = 0; i < amount; i++) {
+                const particle = document.createElement("div");
+                particle.classList.add("confetti-particle");
+                this.timelineEnd.appendChild(particle);
+                particles.push(particle);
+            }
+        }
+
+        particles.forEach((particle, index) => {
+            const tl = gsap.timeline()
+            let xPos = 0;
+            let yPos = 0;
+            let randomFreq = Math.random() * 4;
+
+            tl.set(particle, {
+                scale: "random(0.5, 1.5)", y: 0, x: 0,
+                backgroundColor: `rgba(${(-40 + Math.random() * 40) + 207}, ${(-40 + Math.random() * 40) + 142}, 52, ${0.5 + Math.random() * 0.5})`,
+                rotateX: "random(0, 360)",
+                rotateZ: "random(0, 360)",
+            })
+            .to(particle, {
+                x: `random(${-800}, ${+800})`,
+                y: `random(${-400}, ${-800})`,
+                duration:  Math.random(),
+                ease: "power2.out",
+                zIndex: Math.round(Math.random()),
+                onComplete: () => {
+                    xPos = gsap.getProperty(particle, "x");
+                    yPos = gsap.getProperty(particle, "y");
+                }
+            })
+            .to(particle, {
+                y: this.vh / 2,
+                duration: 2 + Math.random() * 2,
+                rotateX: "random(0, -360)",
+                rotateZ: "random(0, -360)",
+                ease: "power1.in",
+                onUpdate: function() {
+                    const y = gsap.getProperty(particle, "y"); // current vertical position
+                    const startY = yPos; // or the initial y position of the particle
+                    const endY = this.vars.y; // target y position
+                    const progress = (y - startY) / (endY - startY); // 0 -> 1 based on actual movement
+                    
+                    const wave = Math.sin(progress * Math.PI * randomFreq) * 100;
+                    gsap.set(particle, { x: xPos + wave });
+                }
+            })
+            tl.to(particle, {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "expo.out",
+                onComplete: () => {
+                    particle.remove();
+                }
+            })
+        })
     }
 
     destroy() {
@@ -197,6 +292,7 @@ export class History{
         
         // Remove touch events
         this.element.removeEventListener("touchstart", this.mouseDownEvent)
+        this.timelineDecoration.removeEventListener("click", this.clickEvent)
         window.removeEventListener("touchmove", this.mouseMoveEvent)
         window.removeEventListener("touchend", this.mouseUpEvent)
         
@@ -206,5 +302,7 @@ export class History{
         window.removeEventListener("mouseup", this.mouseUpEvent)
         
         window.removeEventListener("resize", this.sizing)
+        
+        console.clear();
     }
 }

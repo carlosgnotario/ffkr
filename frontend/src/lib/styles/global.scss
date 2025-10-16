@@ -68,6 +68,6 @@ img {
 	height: auto;
 }
 
-.char {
-	transform: perspective(ptr(400));
+.splitword {
+	perspective: 100px;
 }

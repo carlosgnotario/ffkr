@@ -85,12 +85,14 @@ export class studioGrid {
 			const slideItems = slide.querySelectorAll(".studio-category-project")
 			const avatarItems = slide.querySelectorAll(".studio-category-member")
 			const achievementsItems = slide.querySelectorAll(".studio-category-achievements-item")
-			const split = SplitText.create(heading, { type: "words, chars", charsClass: "char" })
+			const split = SplitText.create(heading, { type: "words, chars", wordsClass: "splitword", charsClass: "char" });
 
 			gsap.from(split.chars, {
 				autoAlpha: 0,
-				y: 20,
-				rotateY: 50,
+				y: "0.3em",
+				x: "-0.3em",
+				rotateY: -90,
+				transformOrigin: "top center",
 				stagger: {
 					amount: 1,
 				},

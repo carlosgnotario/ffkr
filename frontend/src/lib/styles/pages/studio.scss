@@ -71,6 +71,10 @@
             grid-row: 1 / 2;
             line-height: 1;
             font-size: ptr(120);
+            // background-color: red;
+            perspective: 500px;
+            transform-style: preserve-3d;
+            transform-origin: top left;
         }
 
         &-projects {

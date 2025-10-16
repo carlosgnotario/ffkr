@@ -2,6 +2,7 @@
 	import { onMount, tick, onDestroy } from 'svelte'
 	import SanityImage from '$lib/components/SanityImage.svelte'
 	import { History } from './scripts.js'
+	import celebratingImage from '$lib/assets/celebrating.png'
 
 	let timeline: any[] = []
 	let loading = true
@@ -47,29 +48,34 @@
 	{:else if timeline.length > 0}
 		<div class="timeline" bind:this={timelineElement}>
 			<div class="timeline-wrap">
-			<div class="timeline-line"></div>
-			{#each timeline as item, index}
-				<div class="timeline-item index-{index + 1}">
-					<div class="year">{item.year}</div>
-					<div class="text">
-						<h3>{item.text}</h3>
-						{#if item.caption}
-							<div class="caption">{item.caption}</div>
+				<div class="timeline-line"></div>
+				{#each timeline as item, index}
+					<div class="timeline-item index-{index + 1}">
+						<div class="year">{item.year}</div>
+						<div class="text">
+							<h3>{item.text}</h3>
+							{#if item.caption}
+								<div class="caption">{item.caption}</div>
+							{/if}
+						</div>
+						{#if item.image1}
+							<div class="img1">
+								<SanityImage image={item.image1} alt={`Timeline ${item.year}`} />
+							</div>
 						{/if}
+						{#if item.image2}
+							<div class="img2">
+								<SanityImage image={item.image2} alt={`Timeline ${item.year}`} />
+							</div>
+						{/if}
+						<div class="bar"></div>
 					</div>
-					{#if item.image1}
-						<div class="img1">
-							<SanityImage image={item.image1} alt={`Timeline ${item.year}`} />
-						</div>
-					{/if}
-					{#if item.image2}
-						<div class="img2">
-							<SanityImage image={item.image2} alt={`Timeline ${item.year}`} />
-						</div>
-					{/if}
-					<div class="bar"></div>
+				{/each}
+				<div class="timeline-end">
+					<div class="timeline-decoration">
+						<img src={celebratingImage} alt="Celebrating" />
+					</div>
 				</div>
-			{/each}
 			</div>
 		</div>
 	{:else}

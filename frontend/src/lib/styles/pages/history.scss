@@ -14,7 +14,47 @@
         top: calc(50% - ptr(43));
         background-color: $red;
         left: ptr(1846);
-        right: 0;
+        right: 100vw;
+    }
+
+    &-end {
+        grid-area: 1 / 1;
+        width: 100vw;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: perspective(ptr(200));
+        z-index: 4;
+        position: relative;
+        background-color: white;
+
+    }
+    
+    &-decoration {
+        height: 50vh;
+        background-color: white;
+        border-radius: 50%;
+        padding: ptr(40);
+        box-shadow: ptr(10) ptr(4) ptr(45) rgba($black, 0.2);
+        // transform: rotateY(60deg);
+        z-index: 1;
+        left: 0;
+        top: 0;
+        position: relative;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .confetti-particle {
+        position: absolute;
+        width: ptr(50);
+        height: ptr(50);
+        // background-color: $red;
+        // border-radius: 50%;
     }
 
     &-wrap {
@@ -22,7 +62,7 @@
         grid-auto-columns: auto;
         height: 100vh;
         flex-shrink: 0;
-        width: ptr(39211);
+        width: calc(ptr(36600) + 100vw);
     }
 
     // Parent html

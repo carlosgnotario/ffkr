@@ -93,7 +93,7 @@ export class Screensaver {
         const category = this.currentSlide.querySelector('.category')
         const info = this.currentSlide.querySelector('.screensaver-project-info')
 
-        const split = SplitText.create(heading, { type: "words, chars", charsClass: "char" });
+        const split = SplitText.create(heading, { type: "words, chars", wordsClass: "splitword", charsClass: "char" });
 
         gsap.from(this.currentSlide, {
             autoAlpha: 0,
@@ -108,11 +108,14 @@ export class Screensaver {
 
         gsap.from(split.chars, {
             autoAlpha: 0,
-            y: 20,
-            rotateY: 50,
+            y: "0.3em",
+            x: "-0.3em",
+            rotateY: -90,
+            transformOrigin: "top center",
             stagger: {
                 amount: 1,
             },
+            delay: 1,
             onComplete: () => split.revert()
         })
         gsap.from(location, {

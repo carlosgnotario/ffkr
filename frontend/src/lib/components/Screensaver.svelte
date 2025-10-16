@@ -22,7 +22,7 @@
 
 <div class="screensaver" bind:this={screensaver}>
 	<div class="screensaver-text">
-		<p>Click anywhere to continue</p>
+		<p>Tap anywhere to continue</p>
 	</div>
 	<div class="screensaver-menu">
 		<a href="/studio">
