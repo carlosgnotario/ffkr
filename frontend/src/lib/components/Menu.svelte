@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
+	import { goto } from '$app/navigation'
 	import { Menu } from './menu-scripts.js'
 	import '$lib/styles/components/menu.scss'
 
@@ -8,7 +9,7 @@
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
-			menuInstance = new Menu(menuElement)
+			menuInstance = new Menu(menuElement, goto)
             
 		}
 	})

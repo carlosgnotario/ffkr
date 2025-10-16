@@ -15,6 +15,20 @@
 			// Expose globally for menu navigation
 			if (typeof window !== 'undefined') {
 				;(window as any).studioGridInstance = grid
+				
+				// Check if there's a stored slide index from menu navigation
+				const storedSlideIndex = sessionStorage.getItem('studioSlideIndex')
+				if (storedSlideIndex) {
+					const slideIndex = parseInt(storedSlideIndex)
+					if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < categories.length) {
+						// Navigate to the specified slide
+						setTimeout(() => {
+							grid.goToSlide(slideIndex)
+							// Clear the stored index after use
+							sessionStorage.removeItem('studioSlideIndex')
+						}, 100)
+					}
+				}
 			}
 		}
 	})

@@ -1,8 +1,9 @@
 import gsap from "gsap"
 
 export class Menu {
-    constructor(element) {
+    constructor(element, gotoFunction) {
         this.element = element
+        this.goto = gotoFunction
 
         
         this.init()
@@ -46,9 +47,11 @@ export class Menu {
         this.categories.forEach((category, index) => {
             const li = document.createElement('li')
             const a = document.createElement('a')
-            a.href = `/studio#${category.slug}`
+            const categorySlug = category.slug?.current || category.slug || category._id
+            a.href = `/studio#${categorySlug}`
             a.textContent = category.title
             a.dataset.index = index
+            a.dataset.slug = categorySlug
             
             // Add click handler to navigate to slide
             a.addEventListener('click', (e) => {
@@ -64,8 +67,13 @@ export class Menu {
                         this.openMenu(false)
                     }
                 } else {
-                    // Navigate to studio page with hash
-                    window.location.href = `/studio#${category.slug}`
+                    // Store the slide index in sessionStorage and navigate to studio
+                    sessionStorage.setItem('studioSlideIndex', index.toString())
+                    if (this.goto) {
+                        this.goto('/studio')
+                    } else {
+                        window.location.href = '/studio'
+                    }
                 }
             })
             
