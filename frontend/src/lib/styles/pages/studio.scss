@@ -37,6 +37,7 @@
         place-self: center stretch;
         place-self: end stretch;
         padding: 0 ptr(110 + 80/2);
+        clip-path: inset(-10% ptr(30) 0 ptr(30));
         transition: height 1s cubic-bezier(0.19, 1, 0.22, 1);
         
         .wrap {

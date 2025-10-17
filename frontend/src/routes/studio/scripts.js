@@ -164,6 +164,8 @@ export class studioGrid {
 		}
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
+			console.log("dragging");
+			
 			this.pos.x.new = getClientX(e);
 			if (!this.pos.blockClicks && Math.abs(this.pos.x.new - this.pos.x.old) > 3) {
 				this.pos.blockClicks = true;
@@ -171,7 +173,7 @@ export class studioGrid {
 		}
 		this.mouseUpEvent = (e) => {
 			if (!this.pos.dragging) return;
-			this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
+			this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1);
 			
 			if (-this.pos.x.stored < 0) {
 				this.pos.x.stored = 0;
@@ -200,7 +202,6 @@ export class studioGrid {
 				
 				if (i === this.currentSlide) return;
 				if (this.pos.blockClicks) return;
-				console.log("clicky");
 				this.changeSlide(i)
 			})
 		});
@@ -221,9 +222,13 @@ export class studioGrid {
 	update() {
 		const moveSlider = gsap.quickTo(this.element, "x", {duration: 2, ease: "expo.out"})
 		const moveBar = gsap.quickTo(this.bar, "width", {duration: 1, ease: "expo.out"})
+		console.log(this.element);
+		
 
 		this.ticker = (time) => {
-			const currentPos = -(this.currentSlide * this.slideW) + ((this.pos.x.new - this.pos.x.old) * window.movementModifier)
+			const currentPos = -(this.currentSlide * this.slideW) + ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1))
+			console.log(currentPos);
+			
 			moveSlider(currentPos)
 			moveBar((-currentPos / (this.W - this.vw) * this.vw))
 		}
@@ -336,7 +341,7 @@ class projectsSlider {
 			if (!this.pos.dragging) return;
 			this.pos.dragging = false;
 			
-			this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
+			this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1);
 			this.pos.x.old = this.pos.x.new = 0;
 			this.slides.forEach(slide => {
 				slide.style.pointerEvents = "auto"
@@ -380,9 +385,8 @@ class projectsSlider {
 	update() {
 		this.ticker = (time) => {
 			if (!this.isActive) return;
-			console.log(window.movementModifier);
 			
-			const currentPos = this.pos.x.stored + ((this.pos.x.new - this.pos.x.old) * window.movementModifier)
+			const currentPos = this.pos.x.stored + ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1))		
 
 			this.slides.forEach((slide, index) => {				
 				let position = index * this.slideW + currentPos
@@ -402,8 +406,6 @@ class projectsSlider {
 			})
 		}
 
-		console.log(this.sliderW);
-		
 		gsap.ticker.add(this.ticker)
 	}
 	
@@ -508,7 +510,8 @@ class teamMembersCarousel {
 					gsap.from(this.memberCardWrap.querySelector(".team-member"), {
 						autoAlpha: 0,
 						y: 100,
-						ease: "elastic.out(1, 0.8)"
+						ease: "elastic.out(1, 0.8)",
+						delay: 0.1
 					})
 
 					this.cardOpen = index;
@@ -516,8 +519,7 @@ class teamMembersCarousel {
 				}
 			}
 
-			member.addEventListener("touchstart", member.touchEvent)
-			member.addEventListener("mousedown", member.touchEvent)
+			member.addEventListener("click", member.touchEvent)
 		})
 
 		this.mouseUpEvent = (e) => {
@@ -528,13 +530,13 @@ class teamMembersCarousel {
 				gsap.to(this, {
 					speed: 0.4,
 					ease: "expo.out",
-					duration: 2
+					duration: 2,
 				})
 			}
 		}
 
-		window.addEventListener("mouseup", this.mouseUpEvent)
-		window.addEventListener("touchend", this.mouseUpEvent)
+		window.addEventListener("click", this.mouseUpEvent)
+		// window.addEventListener("touchend", this.mouseUpEvent)
 		window.addEventListener("resize", this.sizing)
 	}
 

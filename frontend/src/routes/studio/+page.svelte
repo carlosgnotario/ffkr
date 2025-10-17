@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy, tick } from 'svelte'
+	import SanityImage from '$lib/components/SanityImage.svelte'
 	import { loadStudioData, studioGrid } from './scripts.js'
 
 	let categories: any[] = []
@@ -41,8 +42,8 @@
 </script>
 
 <svelte:head>
-	<title>Studio - Sanity + SvelteKit</title>
-	<meta name="description" content="Our creative studio" />
+	<title>FFKR Studio</title>
+	<meta name="description" content="FFKR Studio" />
 </svelte:head>
 
 <section class="studio">
@@ -59,7 +60,8 @@
 						<a href={project.url} class="studio-category-project">
 							<span class="studio-category-project-name">{project.name || ""}</span>
 							{#if featuredImage?.image?.asset?.url}
-								<img class="studio-category-project-image" src={featuredImage.image.asset.url} alt={project.name} />
+								<!-- sanity image -->
+								<SanityImage image={featuredImage.image} width={800} height={602} alt={project.name} className="studio-category-project-image" />
 							{/if}
 							<span class="studio-category-project-location">{project.location || ""}</span>
 						</a>
