@@ -45,6 +45,7 @@ export class projectSlider {
     bind() {
         this.pos = {
             dragging: false,
+            blockClicks: false,
             x: {new: 0, old: 0, stored: 0},
         }
 
@@ -61,6 +62,9 @@ export class projectSlider {
         this.mouseMoveEvent = (e) => {
             if (!this.pos.dragging) return;
             this.pos.x.new = getClientX(e);
+            if (!this.pos.blockClicks && Math.abs(this.pos.x.new - this.pos.x.old) > 3) {
+                this.pos.blockClicks = true;
+            }
         }
         this.mouseUpEvent = (e) => {
             console.log("clicking projectSlider up");
@@ -72,10 +76,18 @@ export class projectSlider {
                 this.changeSlide(this.currentSlide - 1)
             }
             this.pos.x.old = this.pos.x.new = 0;
+            setTimeout(() => {
+                this.pos.blockClicks = false;
+            }, 10);
+        }
+        this.tapEvent = (e) => {
+            if (this.pos.blockClicks) return;
+            this.changeSlide(this.currentSlide - 1)
         }
 
         // Touch events
         this.element.addEventListener("touchstart", this.mouseDownEvent)
+        this.element.addEventListener("click", this.tapEvent)
         window.addEventListener("touchmove", this.mouseMoveEvent)
         window.addEventListener("touchend", this.mouseUpEvent)
         
