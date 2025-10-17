@@ -102,11 +102,11 @@
 						{#each category.teamMembers || [] as member}
 							<div class="studio-category-member" data-id={member._id}>
 								{#if member.photo?.asset?.url}
-									<img class="studio-category-member-image" src={member.photo.asset.url} alt={member.name} />
+									<SanityImage image={member.photo} width={200} height={200} alt={member.name} className="studio-category-member-image" />
+								{:else}
+									<p class="no-members">No team members assigned to this category yet.</p>
 								{/if}
 							</div>
-						{:else}
-							<p class="no-members">No team members assigned to this category yet.</p>
 						{/each}
 					</div>
 					<div class="studio-category-member-cards">
@@ -115,7 +115,7 @@
 							<div class="team-member-wrap">
 								<div class="team-member-image">
 									{#if member.photo}
-										<img src={member.photo.asset.url} alt={member.name} />
+										<SanityImage image={member.photo} width={400} height={400} alt={member.name} className="team-member-image" />
 									{/if}
 								</div>
 								<div class="team-member-name">

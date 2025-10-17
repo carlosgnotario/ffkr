@@ -60,6 +60,12 @@ export class studioGrid {
 		this.projectSliders = [];
 		this.teamMemberCarousels = [];
 		
+		// Store SplitText instances for cleanup
+		this.splitInstances = [];
+		
+		// Store GSAP animations for cleanup
+		this.animations = [];
+		
 		// Basic element setup
 		// this.gridItems = this.element.querySelectorAll(".studio-item")
 		this.slides.forEach((slide, index) => {
@@ -86,8 +92,11 @@ export class studioGrid {
 			const avatarItems = slide.querySelectorAll(".studio-category-member")
 			const achievementsItems = slide.querySelectorAll(".studio-category-achievements-item")
 			const split = SplitText.create(heading, { type: "words, chars", wordsClass: "splitword", charsClass: "char" });
+			
+			// Store split instance for cleanup
+			this.splitInstances.push(split);
 
-			gsap.from(split.chars, {
+			this.animations.push(gsap.from(split.chars, {
 				autoAlpha: 0,
 				y: "0.3em",
 				x: "-0.3em",
@@ -98,30 +107,30 @@ export class studioGrid {
 				},
 				delay: 1,
 				onComplete: () => split.revert()
-			})			
+			}))
 
-			gsap.from(slideItems, {
+			this.animations.push(gsap.from(slideItems, {
 				autoAlpha: 0,
 				y: 200,
 				delay: (i, el, arr) => 1 + Math.pow(Math.min(i, arr.length - i), 1.8) * 0.1
-			})
+			}))
 
-			statItems.length && gsap.from(statItems, {
+			statItems.length && this.animations.push(gsap.from(statItems, {
 				autoAlpha: 0,
 				y: 100,
 				delay: 1,
 				ease: "expo.out",
 				stagger: 0.3
-			})
-			achievementsItems.length && gsap.from(achievementsItems, {
+			}))
+			achievementsItems.length && this.animations.push(gsap.from(achievementsItems, {
 				autoAlpha: 0,
 				y: 100,
 				delay: 1,
 				ease: "expo.out",
 				stagger: 0.3
-			})
+			}))
 
-			avatarItems.length && gsap.from(avatarItems, {
+			avatarItems.length && this.animations.push(gsap.from(avatarItems, {
 				autoAlpha: 0,
 				top: 200,
 				position: "relative",
@@ -129,16 +138,16 @@ export class studioGrid {
 				stagger: {amount: 1, from: "center"},
 				delay: 1,
 				scale: 0
-			})
+			}))
 
 			
 		})
 
-		gsap.from(this.element, {
+		this.animations.push(gsap.from(this.element, {
 			autoAlpha: 0,
 			y: 100,
 			delay: 1
-		})
+		}))
 	}
 
 	resize() {
@@ -164,8 +173,6 @@ export class studioGrid {
 		}
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
-			console.log("dragging");
-			
 			this.pos.x.new = getClientX(e);
 			if (!this.pos.blockClicks && Math.abs(this.pos.x.new - this.pos.x.old) > 3) {
 				this.pos.blockClicks = true;
@@ -197,13 +204,15 @@ export class studioGrid {
 			}, 10);
 		}
 
+		this.slideClickHandlers = [];
 		this.slides.forEach((el, i) => {
-			el.addEventListener("click", () => {
-				
+			const handler = () => {
 				if (i === this.currentSlide) return;
 				if (this.pos.blockClicks) return;
 				this.changeSlide(i)
-			})
+			};
+			this.slideClickHandlers.push({ element: el, handler });
+			el.addEventListener("click", handler);
 		});
 
 		// Touch events
@@ -222,13 +231,9 @@ export class studioGrid {
 	update() {
 		const moveSlider = gsap.quickTo(this.element, "x", {duration: 2, ease: "expo.out"})
 		const moveBar = gsap.quickTo(this.bar, "width", {duration: 1, ease: "expo.out"})
-		console.log(this.element);
-		
 
 		this.ticker = (time) => {
 			const currentPos = -(this.currentSlide * this.slideW) + ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1))
-			console.log(currentPos);
-			
 			moveSlider(currentPos)
 			moveBar((-currentPos / (this.W - this.vw) * this.vw))
 		}
@@ -261,6 +266,14 @@ export class studioGrid {
 	}
 
 	destroy() {
+		// Kill all GSAP animations
+		this.animations.forEach(anim => anim.kill());
+		this.animations = [];
+		
+		// Revert all SplitText instances
+		this.splitInstances.forEach(split => split.revert());
+		this.splitInstances = [];
+		
 		// Cleanup when component is destroyed
 		gsap.ticker.remove(this.ticker)
 
@@ -274,8 +287,14 @@ export class studioGrid {
 		
 		window.removeEventListener("resize", this.resize)
 		
-		this.projectSliders.forEach(slider => slider.destroy())
-		this.teamMemberCarousels.forEach(carousel => carousel.destroy())
+		// Remove slide click handlers
+		this.slideClickHandlers?.forEach(({ element, handler }) => {
+			element.removeEventListener("click", handler);
+		});
+		this.slideClickHandlers = [];
+		
+		this.projectSliders.forEach(slider => slider?.destroy())
+		this.teamMemberCarousels.forEach(carousel => carousel?.destroy())
 		console.clear()
 	}
 }
@@ -421,8 +440,8 @@ class projectsSlider {
 		this.element.removeEventListener("touchstart", this.mouseDownEvent)
 		window.removeEventListener("touchmove", this.mouseMoveEvent)
 		window.removeEventListener("touchend", this.mouseUpEvent)
-		// Remove mouse events
-		this.element.removeEventListener("mousedown", this.mouseDownEvent)
+		// Remove mouse events - FIX: was added to this.wrap, not this.element
+		this.wrap?.removeEventListener("mousedown", this.mouseDownEvent)
 		window.removeEventListener("mousemove", this.mouseMoveEvent)
 		window.removeEventListener("mouseup", this.mouseUpEvent)
 		
@@ -489,6 +508,7 @@ class teamMembersCarousel {
 	bind() {
 		this.currentCard = null;
 		this.cardOpen = null;
+		this.memberClickHandlers = [];
 		
 		this.members.forEach((member, index) => {
 			member.touchEvent = (e) => {
@@ -520,6 +540,7 @@ class teamMembersCarousel {
 			}
 
 			member.addEventListener("click", member.touchEvent)
+			this.memberClickHandlers.push({ element: member, handler: member.touchEvent });
 		})
 
 		this.mouseUpEvent = (e) => {
@@ -565,9 +586,16 @@ class teamMembersCarousel {
 
 	destroy() {
 		gsap.ticker.remove(this.ticker)
+		
+		// Remove member click handlers
+		this.memberClickHandlers?.forEach(({ element, handler }) => {
+			element.removeEventListener("click", handler);
+		});
+		this.memberClickHandlers = [];
 				
+		// FIX: Remove correct event type (was "click", not "mouseup")
+		window.removeEventListener("click", this.mouseUpEvent)
 		window.removeEventListener("touchend", this.mouseUpEvent)
-		window.removeEventListener("mouseup", this.mouseUpEvent)
 		window.removeEventListener("resize", this.sizing)
 	}
 }

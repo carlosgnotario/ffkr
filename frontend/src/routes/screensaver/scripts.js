@@ -8,7 +8,7 @@ export class Screensaver {
         this.active = false
         this.idleScreen = false
         this.currentIndex = 0
-        this.timerDuration = 6000000;
+        this.timerDuration = 20000;
         this.timer = this.timerDuration;
         
         this.setup()
@@ -34,7 +34,6 @@ export class Screensaver {
         this.logo.classList.add('invert')
         gsap.set(this.element, { pointerEvents: "all", })
         if (this.currentSlide) {
-            console.log(this.currentSlide);
             this.currentSlide.remove()
         }
         this.sliderTimer = 1000;
