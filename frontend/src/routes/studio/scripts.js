@@ -152,6 +152,7 @@ export class studioGrid {
 	bind() {
 		this.pos = {
 			dragging: false,
+			blockClicks: false,
 			x: {new: 0, old: 0, stored: 0},
 		}
 		const getClientX = (e) => {
@@ -164,10 +165,13 @@ export class studioGrid {
 		this.mouseMoveEvent = (e) => {
 			if (!this.pos.dragging) return;
 			this.pos.x.new = getClientX(e);
+			if (!this.pos.blockClicks && Math.abs(this.pos.x.new - this.pos.x.old) > 3) {
+				this.pos.blockClicks = true;
+			}
 		}
 		this.mouseUpEvent = (e) => {
 			if (!this.pos.dragging) return;
-			this.pos.x.stored += this.pos.x.new - this.pos.x.old;
+			this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
 			
 			if (-this.pos.x.stored < 0) {
 				this.pos.x.stored = 0;
@@ -185,7 +189,21 @@ export class studioGrid {
 			
 			this.pos.dragging = false;
 			this.pos.x.old = this.pos.x.new = 0;
+			// timeout
+			setTimeout(() => {
+				this.pos.blockClicks = false;
+			}, 10);
 		}
+
+		this.slides.forEach((el, i) => {
+			el.addEventListener("click", () => {
+				
+				if (i === this.currentSlide) return;
+				if (this.pos.blockClicks) return;
+				console.log("clicky");
+				this.changeSlide(i)
+			})
+		});
 
 		// Touch events
         this.element.addEventListener("touchstart", this.mouseDownEvent)
@@ -205,7 +223,7 @@ export class studioGrid {
 		const moveBar = gsap.quickTo(this.bar, "width", {duration: 1, ease: "expo.out"})
 
 		this.ticker = (time) => {
-			const currentPos = -(this.currentSlide * this.slideW) + (this.pos.x.new - this.pos.x.old)
+			const currentPos = -(this.currentSlide * this.slideW) + ((this.pos.x.new - this.pos.x.old) * window.movementModifier)
 			moveSlider(currentPos)
 			moveBar((-currentPos / (this.W - this.vw) * this.vw))
 		}
@@ -318,7 +336,7 @@ class projectsSlider {
 			if (!this.pos.dragging) return;
 			this.pos.dragging = false;
 			
-			this.pos.x.stored += this.pos.x.new - this.pos.x.old;
+			this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
 			this.pos.x.old = this.pos.x.new = 0;
 			this.slides.forEach(slide => {
 				slide.style.pointerEvents = "auto"
@@ -362,7 +380,9 @@ class projectsSlider {
 	update() {
 		this.ticker = (time) => {
 			if (!this.isActive) return;
-			const currentPos = this.pos.x.stored + (this.pos.x.new - this.pos.x.old)
+			console.log(window.movementModifier);
+			
+			const currentPos = this.pos.x.stored + ((this.pos.x.new - this.pos.x.old) * window.movementModifier)
 
 			this.slides.forEach((slide, index) => {				
 				let position = index * this.slideW + currentPos

@@ -63,10 +63,12 @@
 				{/each}
 			</div>
 		</div>
+		{#if project?.completionDate}
 		<div class="project-info-completion-date">
 			<h3>Completion Date:</h3>
 			<span>{project?.completionDate}</span>
 		</div>
+		{/if}
 		{#if project?.team && project.team.length > 0}
 			<div class="project-info-team">
 				<h3>Key Team Members</h3>

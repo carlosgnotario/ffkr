@@ -3,13 +3,15 @@ import gsap from "gsap"
 export class projectSlider {
     constructor(element) {
         this.element = element
+        
+        this.sizing = this.sizing.bind(this)
+        this.destroy = this.destroy.bind(this)
 
         this.define()
         this.sizing()
         this.bind()
         this.animate()
         this.update()
-        this.destroy = this.destroy.bind(this)
     }
 
     define() {
@@ -64,9 +66,9 @@ export class projectSlider {
             console.log("clicking projectSlider up");
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
-            if (this.pos.x.new - this.pos.x.old > 200) {        
+            if ((this.pos.x.new - this.pos.x.old) * window.movementModifier > 200) {        
                 this.changeSlide(this.currentSlide + 1)
-            } else if (this.pos.x.new - this.pos.x.old < -200) {
+            } else if ((this.pos.x.new - this.pos.x.old) * window.movementModifier < -200) {
                 this.changeSlide(this.currentSlide - 1)
             }
             this.pos.x.old = this.pos.x.new = 0;
@@ -89,7 +91,7 @@ export class projectSlider {
         let easedPos = 0;
         this.logo.classList.add('invert')
         this.ticker = (time) => {
-            const currentPos = this.pos.x.stored + (this.pos.x.new - this.pos.x.old) + this.variationX
+            const currentPos = this.pos.x.stored + ((this.pos.x.new - this.pos.x.old) * window.movementModifier) + this.variationX
             easedPos += (currentPos - easedPos) * 0.05;
  
             this.slides.forEach((slide, index) => {

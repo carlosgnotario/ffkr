@@ -4,7 +4,6 @@ export class History{
     constructor(element) {
         this.element = element;
         this.sizing = this.sizing.bind(this)
-        window.movementModifier = 2;
         
         this.elements()
         this.sizing();

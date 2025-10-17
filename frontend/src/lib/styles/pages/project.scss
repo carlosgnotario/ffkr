@@ -162,13 +162,14 @@
             grid-template-rows: min-content;
             grid-auto-rows: minmax(0, min-content);
             overflow: hidden;
-
+            
             h3 {
                 margin-bottom: ptr(35);
             }
         }
         
         &-similar-project {
+            background-color: rgba($black, 0.2);
             min-height: ptr(218);
             padding: ptr(25) 0;
             overflow: hidden;
