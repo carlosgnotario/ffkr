@@ -104,9 +104,7 @@
                 width: 100%;
             }
 
-            &-member {
-                position: relative;
-                
+            &-member {                
                 > img {
                     height: ptr(155);
                     aspect-ratio: 1;
@@ -118,16 +116,14 @@
                     position: absolute!important;
                     z-index: 1;
                     top: auto;
-                    left: auto;
-                    right: 0;
-                    bottom: calc(100% + ptr(80));
+                    right: calc(100% + ptr(160));
+                    top: 0;
                     height: auto;
                     opacity: 0;
-                    transform: translateY(ptr(100));
+                    transform: translateX(ptr(100));
                     box-shadow: ptr(10) ptr(4) ptr(45) 0 rgba($black, 0.2);
                     pointer-events: none;
                     /* GSAP elastic.out(1, 0.8) equivalent */
-                    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);                    
 
                     h3 {
                         text-transform: none;
@@ -138,19 +134,13 @@
                         content: "";
                         position: absolute;
                         top: 100%;
-                        right: ptr(155/2);
-                        translate: 50% 0;
+                        right: 0;
+                        translate: 100% -140%;
                         width: 0;
-                        border-left: ptr(40) solid transparent;
-                        border-top: ptr(40) solid $red;
                         border-right: ptr(40) solid transparent;
-                    }
-                }
-
-                &:active {
-                    .project-info-team-member-floater {
-                        opacity: 1;
-                        transform: translateY(0);
+                        border-left: ptr(40) solid $red;
+                        border-top: ptr(40) solid transparent;
+                        border-bottom: ptr(40) solid transparent;
                     }
                 }
             }

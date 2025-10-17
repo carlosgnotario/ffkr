@@ -18,10 +18,12 @@
 		if (slider) {
 			slider.destroy()
 		}
-		slider = new projectSlider(sliderElement)
+		
+		// Only create slider if element exists (component is mounted)
+		if (sliderElement) {
+			slider = new projectSlider(sliderElement)
+		}
 	}
-
-	onMount(loadProject)
 
 	onDestroy(() => {
 		if (slider) {
@@ -29,7 +31,7 @@
 		}
 	});
 
-	// Watch for route changes - only in browser
+	// Watch for route changes (including initial mount)
 	$: if (typeof window !== 'undefined' && $page.params.slug) {
 		loadProject()
 	}

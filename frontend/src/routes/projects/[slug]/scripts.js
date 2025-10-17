@@ -11,7 +11,9 @@ export class projectSlider {
         this.sizing()
         this.bind()
         this.animate()
-        this.update()
+        if (this.slides.length > 1) {
+            this.update()
+        }
     }
 
     define() {
@@ -19,6 +21,7 @@ export class projectSlider {
         this.slides = this.element.querySelectorAll(".project-slider-image")
         this.parent = this.element.parentElement;
         this.info = this.parent.querySelector(".project-info")
+        this.teamMembers = this.info.querySelectorAll(".project-info-team-member")
         this.currentSlide = 0
         
 
@@ -70,9 +73,9 @@ export class projectSlider {
             console.log("clicking projectSlider up");
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
-            if ((this.pos.x.new - this.pos.x.old) * window.movementModifier > 200) {        
+            if ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1) > 200) {        
                 this.changeSlide(this.currentSlide + 1)
-            } else if ((this.pos.x.new - this.pos.x.old) * window.movementModifier < -200) {
+            } else if ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1) < -200) {
                 this.changeSlide(this.currentSlide - 1)
             }
             this.pos.x.old = this.pos.x.new = 0;
@@ -83,14 +86,66 @@ export class projectSlider {
         this.tapEvent = (e) => {
             if (this.pos.blockClicks) return;
             this.changeSlide(this.currentSlide - 1)
+            if (visibleFloater !== null) {
+                gsap.to(this.teamMembers[visibleFloater].querySelector(".project-info-team-member-floater"), {
+                    opacity: 0,
+                    transform: "translateX(100%)",
+                    duration: 0.5,
+                    ease: "expo.out",
+                })
+                visibleFloater = null;
+            }
         }
+
+        this.windowClickEvent = (e) => {
+            if (visibleFloater !== null) {
+                gsap.to(this.teamMembers[visibleFloater].querySelector(".project-info-team-member-floater"), {
+                    opacity: 0,
+                    x: -100,
+                    duration: 0.5,
+                    ease: "expo.out",
+                })
+                visibleFloater = null;
+            }
+        }
+
+        let visibleFloater = null;
+        console.log("bind");
+        
+
+        this.teamMembers.forEach((member, index) => {
+            console.log(member);
+            
+            member.clickEvent = (e) => {
+                console.log(member);
+                
+                if (visibleFloater !== index) {
+                    gsap.set(member.querySelector(".project-info-team-member-floater"), {
+                        opacity: 0,
+                        x: 100,
+                        overwrite: true,
+                    })
+                    gsap.to(member.querySelector(".project-info-team-member-floater"), {
+                        opacity: 1,
+                        x: 0,
+                        duration: 0.5,
+                        ease: "expo.out",
+                    })
+                    setTimeout(() => {
+                        visibleFloater = index;
+                    }, 100);
+                }
+            }
+            member.addEventListener("click", member.clickEvent)
+        })
 
         // Touch events
         this.element.addEventListener("touchstart", this.mouseDownEvent)
         this.element.addEventListener("click", this.tapEvent)
         window.addEventListener("touchmove", this.mouseMoveEvent)
         window.addEventListener("touchend", this.mouseUpEvent)
-        
+        window.addEventListener("click", this.windowClickEvent)
+
         // Mouse events
         this.element.addEventListener("mousedown", this.mouseDownEvent)
         window.addEventListener("mousemove", this.mouseMoveEvent)
@@ -103,7 +158,7 @@ export class projectSlider {
         let easedPos = 0;
         this.logo.classList.add('invert')
         this.ticker = (time) => {
-            const currentPos = this.pos.x.stored + ((this.pos.x.new - this.pos.x.old) * window.movementModifier) + this.variationX
+            const currentPos = this.pos.x.stored + ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1)) + this.variationX
             easedPos += (currentPos - easedPos) * 0.05;
  
             this.slides.forEach((slide, index) => {
@@ -169,6 +224,7 @@ export class projectSlider {
         })
         const tl = gsap.timeline()
         this.variationX = 0
+        if (this.slides.length <= 1) {return};
         tl.to(this, {
             variationX: -200,
             duration: 1,
@@ -193,6 +249,7 @@ export class projectSlider {
         this.element.removeEventListener("mousedown", this.mouseDownEvent)
         window.removeEventListener("mousemove", this.mouseMoveEvent)
         window.removeEventListener("mouseup", this.mouseUpEvent)
+        this.element.removeEventListener("click", this.tapEvent)
         
         window.removeEventListener("resize", this.sizing)
     }
