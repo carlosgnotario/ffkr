@@ -34,6 +34,7 @@
 		"@sanity/client": "^7.11.2",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"gsap": "^3.13.0",
+		"lottie-web": "^5.13.0",
 		"node-fetch": "^3.3.2",
 		"pixi.js": "^8.13.2"
 	}

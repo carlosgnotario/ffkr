@@ -47,18 +47,6 @@
 
     }
 
-    &-text {
-        grid-area: 1 / 1;
-        z-index: 1;
-        padding: ptr(83) ptr(72);
-
-        p {
-            @include decor-font(ptr(30));
-            color: $white;
-            margin-bottom: 0;
-        }
-    }
-
     &-project {
         grid-column: 2/3;
         grid-row: 1;
@@ -123,6 +111,25 @@
         grid-row: 1;
         place-self: end center;
         background-color: $red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        gap: ptr(20);
+        z-index: 1;
+        padding: ptr(50) ptr(72) ptr(83) ptr(72);
+
+        .lottie-container {
+            height: ptr(80)!important;
+            width: ptr(80)!important;
+        }
+
+        p {
+            @include decor-font(ptr(30));
+            color: $white;
+            height: ptr(30);
+            margin-bottom: 0;
+        }
     }
 }
 

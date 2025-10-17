@@ -3,6 +3,7 @@
 	import { page } from '$app/stores'
 	import { Screensaver } from '../../routes/screensaver/scripts.js'
 	import '$lib/styles/pages/screensaver.scss'
+	import PointAnimation from './PointAnimation.svelte';
 
 	let screensaver: HTMLElement
 	let screensaverInstance: Screensaver
@@ -22,6 +23,7 @@
 
 <div class="screensaver" bind:this={screensaver}>
 	<div class="screensaver-text">
+		<PointAnimation />
 		<p>Tap anywhere to continue</p>
 	</div>
 	<div class="screensaver-menu">
