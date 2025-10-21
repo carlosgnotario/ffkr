@@ -236,13 +236,18 @@
 
         &-member {
             padding: 0 ptr(15);
-            flex-shrink: 0;
+            width: ptr(155);
+            height: ptr(155);
+            flex: 0 0 auto;
+            box-sizing: content-box;
 
             &-image {
                 height: 100%;
-                aspect-ratio: 1;
+                width: 100%;
                 object-fit: cover;
                 border-radius: 50%;
+                width: ptr(155);
+                height: ptr(155);
 
             }
         }

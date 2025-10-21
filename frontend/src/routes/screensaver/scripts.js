@@ -8,8 +8,10 @@ export class Screensaver {
         this.active = false
         this.idleScreen = false
         this.currentIndex = 0
-        this.timerDuration = 20000;
+        this.timerDuration = 690000;
         this.timer = this.timerDuration;
+        console.log("initiating screensaver");
+        
         
         this.setup()
         this.init()
@@ -39,10 +41,10 @@ export class Screensaver {
         this.sliderTimer = 1000;
         this.menu.style.width = '0'
         this.textMessage.style.clipPath = 'inset(0 0 0 0)'
-        
         gsap.set(this.element, {
             display: 'grid',
-            autoAlpha: 0
+            autoAlpha: 0,
+            overwrite: true
         })
         gsap.to(this.element, {
             autoAlpha: 1,
@@ -60,11 +62,13 @@ export class Screensaver {
             duration: 2,
             ease: "expo.out",
             onComplete: () => {
-                this.timer = this.timerDuration;
+                console.log("now");
+                
                 this.active = false;
                 this.idleScreen = false;
             }
         })
+        this.timer = this.timerDuration;
     }
 
     createSlide() {
@@ -176,6 +180,7 @@ export class Screensaver {
 
     update() {
         this.ticker = (time) => {
+            console.log(this.timer, "timer");
             if (this.timer <= 0 && !this.active) {
                 this.show();
                 this.active = true

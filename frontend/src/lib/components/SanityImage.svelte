@@ -15,7 +15,6 @@
     const params = new URLSearchParams({
       w: width.toString(),
       h: height.toString(),
-      fit: 'crop',
       auto: 'format',
       q: '80'
     })

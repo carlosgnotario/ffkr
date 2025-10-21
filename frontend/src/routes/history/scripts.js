@@ -10,6 +10,8 @@ export class History{
         this.bind()
         this.update()
         this.animate()
+        console.log("load history");
+        
     }
 
     elements() {
@@ -26,9 +28,7 @@ export class History{
     sizing() {
         this.W = this.wrap.clientWidth
         this.vw = window.innerWidth
-        this.vh = window.innerHeight
-        console.log("yoo");
-        
+        this.vh = window.innerHeight        
 
         this.timelineItems.forEach(item => {
             item.left = item.querySelector(".img1").offsetLeft
@@ -205,8 +205,6 @@ export class History{
             })
 
             if (-currentPosX > this.W - this.vw * 2) {
-                console.log("yooooo");
-                
                 this.rotation(Math.min(180 - ((-currentPosX - (this.W - this.vw * 2)) / this.vw) * 180, 90))
             }
 
@@ -305,6 +303,6 @@ export class History{
         
         window.removeEventListener("resize", this.sizing)
         
-        console.clear();
+        // console.clear();
     }
 }

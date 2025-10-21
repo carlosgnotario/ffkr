@@ -35,6 +35,7 @@ export class studioGrid {
 	constructor(element) {
 		this.element = element
 		this.resize = this.resize.bind(this)
+		
 		this.elements()
 		this.resize()
 		this.bind()
@@ -46,6 +47,11 @@ export class studioGrid {
 		}
 		this.destroy = this.destroy.bind(this)
 		gsap.registerPlugin(SplitText);
+
+		if (window.numberchange != undefined) {
+			this.changeSlide(window.numberchange)
+			window.numberchange = undefined;
+		}
 	}
 	
 	elements() {
@@ -209,6 +215,7 @@ export class studioGrid {
 			const handler = () => {
 				if (i === this.currentSlide) return;
 				if (this.pos.blockClicks) return;
+				this.pos.x.stored = -(i * this.slideW)
 				this.changeSlide(i)
 			};
 			this.slideClickHandlers.push({ element: el, handler });
@@ -240,14 +247,14 @@ export class studioGrid {
 		gsap.ticker.add(this.ticker)
 	}
 
-	changeSlide(slide) {
+	changeSlide(slide) {		
 		this.projectSliders[this.currentSlide]?.setActive(false)
 
 		this.teamMemberCarousels[this.currentSlide]?.setActive(false)
 		
-		this.slides[this.currentSlide].classList.remove("active");
+		this.slides[this.currentSlide]?.classList.remove("active");
 		
-		this.slides[slide].classList.add("active");
+		this.slides[slide]?.classList.add("active");
 		this.currentSlide = slide;
 		
 		this.projectSliders[this.currentSlide]?.setActive(true)
@@ -262,7 +269,7 @@ export class studioGrid {
 		this.pos.x.stored = -(slideIndex * this.slideW)
 		
 		// Change slide
-		this.changeSlide(slideIndex)
+		this.changeSlide(slideIndex)		
 	}
 
 	destroy() {
@@ -295,7 +302,7 @@ export class studioGrid {
 		
 		this.projectSliders.forEach(slider => slider?.destroy())
 		this.teamMemberCarousels.forEach(carousel => carousel?.destroy())
-		console.clear()
+		// console.clear()
 	}
 }
 
@@ -382,12 +389,16 @@ class projectsSlider {
 
 	sizing() {
 		this.sliderW = this.element.offsetWidth
-		this.slideW = this.slides[0].offsetWidth
+		this.slideH = this.element.offsetHeight;
+		this.slideW = this.slideH * 774 / 582;
 		this.slidesW = this.slides.length * this.slideW
 		this.edge = this.slidesW / 2
 
 		this.slides.forEach((slide, index) => {
 			slide.left = index * this.slideW
+			gsap.set(slide, {
+				width: this.slideW
+			})
 
 			let position = index * this.slideW
 

@@ -6,29 +6,25 @@
 	let categories: any[] = []
 	let grid: any = null;
 	let studioSwiper: any = null;
+	let loading = true;
 
 	onMount(async () => {
 		const data = await loadStudioData()
-		categories = data.categories		
+		categories = data.categories
+		loading = false
 		await tick()
 		if (studioSwiper) {
 			grid = new studioGrid(studioSwiper)
 			// Expose globally for menu navigation
 			if (typeof window !== 'undefined') {
-				;(window as any).studioGridInstance = grid
+				(window as any).studioGridInstance = grid
 				
-				// Check if there's a stored slide index from menu navigation
-				const storedSlideIndex = sessionStorage.getItem('studioSlideIndex')
-				if (storedSlideIndex) {
-					const slideIndex = parseInt(storedSlideIndex)
-					if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < categories.length) {
-						// Navigate to the specified slide
-						setTimeout(() => {
-							grid.goToSlide(slideIndex)
-							// Clear the stored index after use
-							sessionStorage.removeItem('studioSlideIndex')
-						}, 100)
-					}
+				// Handle slide navigation from menu
+				if ((window as any).numberchange !== undefined) {
+					setTimeout(() => {
+						grid.changeSlide((window as any).numberchange)
+						;(window as any).numberchange = undefined
+					}, 100)
 				}
 			}
 		}
@@ -47,8 +43,9 @@
 </svelte:head>
 
 <section class="studio">
+	{#if !loading}
 	<div class="studio-swiper" bind:this={studioSwiper}>
-		{#each categories || [] as category, index}
+		{#each categories as category, index}
 			<div class="studio-category" class:active={index === 0}>
 				<div class="wrap">
 					<h2>{category.title}</h2>
@@ -149,5 +146,6 @@
 			</div>
 		{/each}
 	</div>
+	{/if}
 	<div class="studio-bar"><span></span></div>
 </section>

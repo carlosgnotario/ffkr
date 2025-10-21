@@ -54,7 +54,7 @@ export class Menu {
             const li = document.createElement('li')
             const a = document.createElement('a')
             const categorySlug = category.slug?.current || category.slug || category._id
-            a.href = `/studio#${categorySlug}`
+            a.href = `/studio?category=${categorySlug}`
             a.textContent = category.title
             a.dataset.index = index
             a.dataset.slug = categorySlug
@@ -62,25 +62,22 @@ export class Menu {
             // Add click handler to navigate to slide
             a.addEventListener('click', (e) => {
                 e.preventDefault()
-                
-                // Check if we're on the studio page
+
+                // go to studio
+                // if this page is studio
                 if (window.location.pathname === '/studio') {
-                    // Navigate to the slide directly
-                    // @ts-ignore - studioGridInstance is set dynamically
-                    const studioInstance = window.studioGridInstance
-                    if (studioInstance) {
-                        studioInstance.goToSlide(index)
-                        this.openMenu(false)
-                    }
+                    window.studioGridInstance.changeSlide(index)
                 } else {
-                    // Store the slide index in sessionStorage and navigate to studio
-                    sessionStorage.setItem('studioSlideIndex', index.toString())
+                    window.numberchange = index;
+                    
                     if (this.goto) {
                         this.goto('/studio')
                     } else {
                         window.location.href = '/studio'
                     }
                 }
+                this.openMenu(false)
+                
             })
             
             li.appendChild(a)
@@ -90,7 +87,7 @@ export class Menu {
 
     bind() {
         this.pos = {
-            y: {new: 0, old: 0, stored: 0},
+            y: {new: 0, old: 0, stored: this.vh - this.paddingH * 2 - this.burgerH},
         }
         
         const getClientY = (e) => {
@@ -191,6 +188,13 @@ export class Menu {
             }
         }
 
+        this.element.addEventListener("touchstart", (e) => {
+            e.stopPropagation()
+        })
+        this.element.addEventListener("mousedown", (e) => {
+            e.stopPropagation()
+        })
+
         window.addEventListener("touchstart", this.closeEvent)
         window.addEventListener("mousedown", this.closeEvent)
 
@@ -247,7 +251,7 @@ export class Menu {
                     width: 'auto',
                     duration: 1,
                     ease: "expo.out"
-                })
+                }, 0.2)
             }
             
         } else {
@@ -264,7 +268,7 @@ export class Menu {
                 tl.to(this.menuBurger, {
                     xPercent: 0,
                     ease: "expo.out"
-                })
+                }, 0.2)
             }
         }
 
