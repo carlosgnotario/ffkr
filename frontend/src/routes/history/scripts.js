@@ -17,6 +17,8 @@ export class History{
         this.timelineEnd = this.element.querySelector(".timeline-end")
         this.timelineDecoration = this.element.querySelector(".timeline-decoration")
         this.timelineItems = this.element.querySelectorAll(".timeline-item")
+        this.videoModal = this.element.closest(".history").querySelector(".video-modal")
+        this.imageElements = this.element.querySelectorAll(".img1[data-video]")
         this.reachedEnd = false;
 
         this.xPos = gsap.quickTo(this.wrap, "x", {duration: 2, ease: "expo.out"})
@@ -59,6 +61,25 @@ export class History{
             })
         }
         this.timelineDecoration.addEventListener("click", this.clickEvent)
+        
+        // Video click handlers for images with video
+        this.videoClickHandlers = [];
+        this.imageElements.forEach((imgEl, index) => {
+            const clickHandler = (e) => {
+                if (imgEl.dataset.video) {
+                    e.stopPropagation();
+                    this.openVideoModal(imgEl.dataset.video, true);
+                }
+            };
+            this.videoClickHandlers[index] = clickHandler;
+            imgEl.addEventListener("click", clickHandler);
+        });
+
+        // Video modal close handler
+        this.videoModalClickHandler = () => {
+            this.openVideoModal(null, false);
+        };
+        this.videoModal.addEventListener("click", this.videoModalClickHandler);
         
         this.mouseDownEvent = (e) => {
             this.pos.dragging = true;
@@ -285,8 +306,41 @@ export class History{
         })
     }
 
+    openVideoModal(video, open = true) {
+        if (open) {
+            let embedUrl = video.includes("vimeo.com")
+                ? `https://player.vimeo.com/video/${video.split("/").pop()}?autoplay=1`
+                : `https://www.youtube.com/embed/${video.split("v=")[1]}?autoplay=1`;
+            this.videoModal.innerHTML = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            gsap.to(this.videoModal, { autoAlpha: 1, duration: 0.5, ease: "power2.out" });
+            this.videoModal.style.pointerEvents = "auto";
+        } else {
+            this.videoModal.innerHTML = ""
+            gsap.to(this.videoModal, {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            })
+            this.videoModal.style.pointerEvents = "none"
+        }
+    }
+
     destroy() {
         gsap.ticker.remove(this.ticker)
+        
+        // Remove video click handlers
+        if (this.imageElements && this.videoClickHandlers) {
+            this.imageElements.forEach((imgEl, index) => {
+                if (this.videoClickHandlers[index]) {
+                    imgEl.removeEventListener("click", this.videoClickHandlers[index]);
+                }
+            });
+        }
+        
+        // Remove video modal click handler
+        if (this.videoModal && this.videoModalClickHandler) {
+            this.videoModal.removeEventListener("click", this.videoModalClickHandler);
+        }
         
         // Remove touch events
         this.element.removeEventListener("touchstart", this.mouseDownEvent)

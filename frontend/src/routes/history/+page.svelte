@@ -59,8 +59,15 @@
 							{/if}
 						</div>
 						{#if item.image1}
-							<div class="img1">
+							<div class="img1" data-video={item.videoUrl || ''}>
 								<SanityImage image={item.image1} alt={`Timeline ${item.year}`} quality={100} />
+								{#if item.videoUrl}
+									<div class="video-play-button">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+											<path d="M8 5v14l11-7z"/>
+										</svg>
+									</div>
+								{/if}
 							</div>
 						{/if}
 						{#if item.image2}
@@ -78,6 +85,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="video-modal"></div>
 	{:else}
 		<p>No timeline items found.</p>
 	{/if}
