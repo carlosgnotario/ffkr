@@ -167,10 +167,11 @@
 					{/if}
 					<span class="date">{formatDate(post.publishedAt)}</span>
 					{#if post.body && post.body.length > 0}
-						<p>{post.body.slice(0, 1).map(block => 
-							block._type === 'block' && block.children ? 
-							block.children.map(child => child.text).join('').substring(0, 150) + '...' : ''
-						).join('')}</p>
+						{#each post.body as block}
+							{#if block._type === 'block' && block.children}
+								<p>{block.children.map(child => child.text).join('')}</p>
+							{/if}
+						{/each}
 					{/if}
 				</div>
 			{/each}
