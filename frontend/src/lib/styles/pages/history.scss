@@ -239,7 +239,7 @@
 
     .index-6 {
         @include timeline-story(
-            $img: (width: 835, height: 898, top: 565, left: 4600), 
+            $img: (width: 482, height: 254, top: 911, left: 4811), 
             $year: (left: 4791, top: 540), 
             $text: (width: 509, left: 4791, top: 640), 
             $caption: none
@@ -247,6 +247,7 @@
 
         .img1 {
             z-index: 1;
+            background-color: red;
         }
     }
 
@@ -348,7 +349,7 @@
         @include timeline-story(
             $img: (width:1479, height:1253, top:442, left:8932),
             $year: (left: 8884, top:304), 
-            $text: (width: 319, left:8884, top:584), 
+            $text: (width: 350, left:8884, top:584), 
             $bar: (height:386, left: 8088, top:648), 
             $caption: none,
             $before: (width:406, height:1046, top:760, left:8994),
@@ -356,6 +357,11 @@
 
         .img1 {
             z-index: 1;
+        }
+
+        .text {
+            font-size: ptr(34);
+            letter-spacing: ptr(-0.697);
         }
 
         .year {
@@ -412,7 +418,7 @@
             $img: (width:1937, height:984, top:391, left:13371),
             $img2: (width:600, height:642, top:1124, left:13483),
             $year: (left:14284, top:1375), 
-            $text: (width:527, left:14284, top:1640), 
+            $text: (width:527, left:14284, top:1670), 
             $bar: (height:308, left:13000, top:1034), 
             $caption: none,
             $before: (width: 415, height:1833, top:165, left:13794),

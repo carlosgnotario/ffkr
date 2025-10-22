@@ -5,6 +5,7 @@
   export let width: number = 1024
   export let height: number = 1024
   export let alt: string = ''
+  export let quality: number = 80
   export let className: string = ''
 
   // Generate optimized image URL with Sanity's image API

@@ -60,12 +60,12 @@
 						</div>
 						{#if item.image1}
 							<div class="img1">
-								<SanityImage image={item.image1} alt={`Timeline ${item.year}`} />
+								<SanityImage image={item.image1} alt={`Timeline ${item.year}`} quality={100} />
 							</div>
 						{/if}
 						{#if item.image2}
 							<div class="img2">
-								<SanityImage image={item.image2} alt={`Timeline ${item.year}`} />
+								<SanityImage image={item.image2} alt={`Timeline ${item.year}`} quality={100} />
 							</div>
 						{/if}
 						<div class="bar"></div>
