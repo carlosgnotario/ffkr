@@ -57,8 +57,6 @@ export class projectSlider {
         }
 
         this.mouseDownEvent = (e) => {
-            console.log("clicking projectSlider");
-            
             this.pos.dragging = true;
             this.pos.x.old = this.pos.x.new = getClientX(e);
         }
@@ -70,7 +68,6 @@ export class projectSlider {
             }
         }
         this.mouseUpEvent = (e) => {
-            console.log("clicking projectSlider up");
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
             if ((this.pos.x.new - this.pos.x.old) * (window.movementModifier || 1) > 200) {        
@@ -110,15 +107,9 @@ export class projectSlider {
         }
 
         let visibleFloater = null;
-        console.log("bind");
-        
 
         this.teamMembers.forEach((member, index) => {
-            console.log(member);
-            
             member.clickEvent = (e) => {
-                console.log(member);
-                
                 if (visibleFloater !== index) {
                     gsap.set(member.querySelector(".project-info-team-member-floater"), {
                         opacity: 0,
@@ -183,8 +174,6 @@ export class projectSlider {
     }
 
     changeSlide(slide) {
-        console.log("changing slide");
-        
         this.pos.x.stored = slide * this.slideW
         this.currentSlide = slide;
     }

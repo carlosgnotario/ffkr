@@ -47,6 +47,7 @@
             padding: ptr(80) 0;
             grid-template-columns: 1fr minmax(0, ptr(792));
             display: grid;
+            transform: translateZ(ptr(10));
         }
         
         &:before {

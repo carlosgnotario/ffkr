@@ -11,6 +11,7 @@
 	let toggler: any = null;
 	let togglerElement: any = null;
 	let featuredPosts: any[] = []
+	let tradingCards: any = null
 
 	onMount(async () => {
 		const data = await loadCultureData()
@@ -18,6 +19,7 @@
 		siteSettings = data.siteSettings		
 		cities = data.cities
 		featuredPosts = data.newsPosts
+		tradingCards = data.tradingCards
 		await tick()
 		if (teamGrid) {
 			grid = new cultureGrid(teamGrid, teamMembers, siteSettings)
@@ -176,11 +178,22 @@
 		</div>
 		<div class="culture-content-cards">
 			<div class="culture-content-news-toggle">
-				<h2 class="culture-content-cards-title">Trading Cards</h2>
+				<h2 class="culture-content-cards-title">{tradingCards?.title || 'Trading Cards'}</h2>
 				<span class="toggle"></span>
 			</div>
 			<div class="culture-content-cards-items">
-				
+				{#if tradingCards?.gallery && tradingCards.gallery.length > 0}
+					{#each tradingCards.gallery as card}
+						<div class="culture-content-card-item">
+							<SanityImage 
+								image={card} 
+								width={300} 
+								height={400} 
+								alt={card.alt || 'Trading card'} 
+							/>
+						</div>
+					{/each}
+				{/if}
 			</div>
 		</div>
 	</div>

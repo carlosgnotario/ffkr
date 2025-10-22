@@ -74,7 +74,7 @@
 		{#if project?.team && project.team.length > 0}
 			<div class="project-info-team">
 				<h3>Key Team Members</h3>
-				{#each project.team as member}
+				{#each project.team.filter(m => m !== null) as member}
 					<div class="project-info-team-member">
 						{#if member.photo}
 							<img src={member.photo.asset.url} alt={member.name} />

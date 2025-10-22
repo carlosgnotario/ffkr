@@ -10,8 +10,6 @@ export class History{
         this.bind()
         this.update()
         this.animate()
-        console.log("load history");
-        
     }
 
     elements() {
@@ -303,6 +301,6 @@ export class History{
         
         window.removeEventListener("resize", this.sizing)
         
-        // console.clear();
+        console.clear();
     }
 }

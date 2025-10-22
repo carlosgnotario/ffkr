@@ -25,7 +25,6 @@ export class Menu {
         this.burgerH = this.menuBurger.offsetHeight
         // font size in px multiplied by 7.5
         this.paddingH = parseFloat(getComputedStyle(document.documentElement).fontSize) * 7.5;
-        console.log(this.paddingH);
         
     }
     
@@ -97,7 +96,6 @@ export class Menu {
 
         this.toggle?.addEventListener('click', (e) => {
             e.preventDefault()
-            console.log("open menu");
             
             if (!this.menuOpen) {
                 this.openMenu(true)
@@ -118,7 +116,6 @@ export class Menu {
             
             // Check if we've reached 3 clicks
             if (tripleClickCount === 3) {
-                console.log("TRIPLE CLICK DETECTED!");
                 // Toggle hidden menu
                 this.toggleHiddenMenu()
                 
@@ -145,13 +142,11 @@ export class Menu {
                 this.pos.dragging = true;
             }
             this.pos.y.old = this.pos.y.new = getClientY(e);
-            console.log("mouse down");
             
         }
         this.mouseMoveEvent = (e) => {
             if (!this.pos.dragging) return;
             this.pos.y.new = getClientY(e);
-            console.log(this.pos.y.new);
             
         }
         this.mouseUpEvent = (e) => {
@@ -165,8 +160,6 @@ export class Menu {
             this.pos.y.old = this.pos.y.new = 0;
             this.pos.dragging = false;
 
-            console.log(this.pos.y.stored);
-            
             if (this.pos.y.stored < 0) {
                 this.pos.y.stored = 0;                
             } else if (this.pos.y.stored > this.vh - this.paddingH * 2 - this.burgerH) {
@@ -216,7 +209,6 @@ export class Menu {
             // Set global movement modifier
             if (typeof window !== 'undefined') {
                 window.movementModifier = value
-                console.log('Movement Modifier:', value)
             }
         })
 

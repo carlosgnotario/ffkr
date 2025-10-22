@@ -302,7 +302,7 @@ export class studioGrid {
 		
 		this.projectSliders.forEach(slider => slider?.destroy())
 		this.teamMemberCarousels.forEach(carousel => carousel?.destroy())
-		// console.clear()
+		console.clear()
 	}
 }
 

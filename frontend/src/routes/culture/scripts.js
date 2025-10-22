@@ -1,15 +1,18 @@
 import { tick } from 'svelte'
 import gsap from 'gsap'
+import { Flip } from 'gsap/Flip'
 
 export async function loadCultureData() {
 	let teamMembers = []
 	let siteSettings = []
 	let cities = []
 	let newsPosts = []
-
+	let tradingCards = null
+	
+	gsap.registerPlugin(Flip)
 	const membersFetch = await fetch('/api/team-members')
 	teamMembers = await membersFetch.json()
-
+	
 	const settingsFetch = await fetch('/api/site-settings')
 	siteSettings = await settingsFetch.json()	
 
@@ -18,6 +21,9 @@ export async function loadCultureData() {
 
 	const newsPostsFetch = await fetch('/api/featured-posts')
 	newsPosts = await newsPostsFetch.json()
+
+	const tradingCardsFetch = await fetch('/api/trading-cards')
+	tradingCards = await tradingCardsFetch.json()
 	
 	await tick()	
 	return {
@@ -25,6 +31,7 @@ export async function loadCultureData() {
 		siteSettings,
 		cities,
 		newsPosts,
+		tradingCards,
 	}
 }
 
@@ -45,6 +52,7 @@ export class cultureGrid {
 		this.resize = this.resize.bind(this)
 		this.bind()
 		this.update()
+		this.tradingCards()
 	}
 	
 	elements() {
@@ -58,6 +66,7 @@ export class cultureGrid {
 		this.filterCities = this.filter.querySelectorAll(".team-member-filter-item")
 		this.content = this.element.closest(".culture").querySelector(".culture-content")
 		this.newsItems = this.content.querySelectorAll(".culture-content-news-item")
+		this.tradingCardsWrapper = this.content.querySelector(".culture-content-cards")
 		
 		this.teamItems = this.element.querySelectorAll(".avatar")
 		this.awardItems = this.element.querySelectorAll(".award")
@@ -511,6 +520,49 @@ export class cultureGrid {
 		}
 
 		gsap.ticker.add(this.ticker)
+	}
+
+	tradingCards() {
+		this.tradingCardsItems = this.content.querySelectorAll(".culture-content-card-item")
+
+		let activeCard = null;
+		const grid = this.tradingCardsWrapper;
+		const items = this.tradingCardsItems;
+		let currentFlip;
+
+		
+		items.forEach(item => {
+			item.addEventListener("click", () => {
+				// Capture the current positions and sizes of all items
+				const state = Flip.getState(items);
+				if (currentFlip) currentFlip.kill();
+			
+				// Toggle expansion — make sure only one can be expanded
+				items.forEach(i => i.classList.remove("expanded"));
+				if (!item.classList.contains("expanded")) {
+					item.classList.add("expanded");
+					// Move the expanded one to the top if you want
+				}
+			
+				// Animate from the old layout to the new one
+				currentFlip = Flip.from(state, {
+					duration: 0.6,
+					ease: "power1.inOut",
+					absolute: true,
+					overwrite: true,
+					onComplete: () => {
+						currentFlip = null;
+						item.scrollIntoView({
+							behavior: "smooth",
+							block: "center",
+							container: "nearest",
+							inline: "nearest",
+						  });
+					}
+				});
+			
+			})
+		});
 	}
 
 	destroy() {
