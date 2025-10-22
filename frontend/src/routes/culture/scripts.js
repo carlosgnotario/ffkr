@@ -554,10 +554,10 @@ export class cultureGrid {
 						currentFlip = null;
 						item.scrollIntoView({
 							behavior: "smooth",
-							block: "center",
+							block: "end",
 							container: "nearest",
 							inline: "nearest",
-						  });
+						});
 					}
 				});
 			

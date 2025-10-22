@@ -135,7 +135,7 @@
                         position: absolute;
                         top: 100%;
                         right: 0;
-                        translate: 100% -140%;
+                        transform: translate(calc(100% - 0.5px), -140%);
                         width: 0;
                         border-right: ptr(40) solid transparent;
                         border-left: ptr(40) solid $red;
