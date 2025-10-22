@@ -132,11 +132,11 @@
     &-cards {
         background-color: $red;
         scrollbar-color: rgba($white, 0.5) $red;
-
+        overflow-x: hidden!important;
+        
         &-items {
-            height: 200vh;
-            padding: 0 ptr(100) ptr(100) ptr(100);
             display: grid;
+            padding: 0 ptr(100) ptr(100) ptr(100);
             grid-template-columns: repeat(2, 1fr);
             gap: ptr(25);
         }
