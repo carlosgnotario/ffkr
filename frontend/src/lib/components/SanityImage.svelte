@@ -2,8 +2,8 @@
   import type { Post } from '$lib/sanity'
 
   export let image: Post['featuredImage']
-  export let width: number = 800
-  export let height: number = 400
+  export let width: number = 1024
+  export let height: number = 1024
   export let alt: string = ''
   export let className: string = ''
 
