@@ -99,6 +99,31 @@ export async function GET() {
           alt
         }
       },
+      founders[] {
+        name,
+        image {
+          asset->{
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          },
+          alt
+        },
+        education[] {
+          institution,
+          title
+        },
+        honorsAwards[] {
+          heading,
+          content
+        },
+        keyContributions[] {
+          heading,
+          content
+        }
+      },
       timeline[] {
         year,
         text,

@@ -5,6 +5,7 @@
 	import celebratingImage from '$lib/assets/celebrating.png'
 
 	let timeline: any[] = []
+	let founders: any[] = []
 	let loading = true
 	let timelineElement: any = null
 	let timelineInstance: any = null;
@@ -17,6 +18,7 @@
 			}
 			const data = await response.json()
 			timeline = data.timeline || []
+			founders = data.founders || []
 		} catch (err) {
 			console.error('Error fetching timeline:', err)
 		} finally {
@@ -49,8 +51,37 @@
 		<div class="timeline" bind:this={timelineElement}>
 			<div class="timeline-wrap">
 				<div class="timeline-line"></div>
+				
+				{#each founders as founder}
+					<div class="founder">
+						{#if founder.image}
+							<SanityImage image={founder.image} alt={founder.name} />
+						{/if}
+						{#if founder.name}
+							<h3>{founder.name}</h3>
+						{/if}
+						{#if founder.education && founder.education.length > 0}
+							{#each founder.education as edu}
+								<div>{edu.title} - {edu.institution}</div>
+							{/each}
+						{/if}
+						{#if founder.honorsAwards && founder.honorsAwards.length > 0}
+							{#each founder.honorsAwards as award}
+								<h4>{award.heading}</h4>
+								<p>{award.content}</p>
+							{/each}
+						{/if}
+						{#if founder.keyContributions && founder.keyContributions.length > 0}
+							{#each founder.keyContributions as contribution}
+								<h4>{contribution.heading}</h4>
+								<p>{contribution.content}</p>
+							{/each}
+						{/if}
+					</div>
+				{/each}
+				
 				{#each timeline as item, index}
-					<div class="timeline-item index-{index + 1}">
+					<div class="timeline-item index-{index + 2}">
 						<div class="year">{item.year}</div>
 						<div class="text">
 							<h3>{item.text}</h3>
