@@ -51,35 +51,65 @@
 		<div class="timeline" bind:this={timelineElement}>
 			<div class="timeline-wrap">
 				<div class="timeline-line"></div>
-				
-				{#each founders as founder}
-					<div class="founder">
-						{#if founder.image}
-							<SanityImage image={founder.image} alt={founder.name} />
-						{/if}
-						{#if founder.name}
-							<h3>{founder.name}</h3>
-						{/if}
-						{#if founder.education && founder.education.length > 0}
-							{#each founder.education as edu}
-								<div>{edu.title} - {edu.institution}</div>
-							{/each}
-						{/if}
-						{#if founder.honorsAwards && founder.honorsAwards.length > 0}
-							{#each founder.honorsAwards as award}
-								<h4>{award.heading}</h4>
-								<p>{award.content}</p>
-							{/each}
-						{/if}
-						{#if founder.keyContributions && founder.keyContributions.length > 0}
-							{#each founder.keyContributions as contribution}
-								<h4>{contribution.heading}</h4>
-								<p>{contribution.content}</p>
-							{/each}
-						{/if}
+				<div class="timeline-item index-1">
+					<div class="year">1976</div>
+					<div class="text">
+						<h3>Fowler Ferguson Kingston  Ruben Architects is Founded</h3>
+						<div class="caption">
+							Located in the Oquirrh Building in Salt Lake City, Utah
+						</div>
+						<div class="bar"></div>
 					</div>
-				{/each}
-				
+					<div class="founder-portrait img1">
+						{#each founders as founder}
+						<div class="founder-img">
+							{#if founder.image}
+								<SanityImage image={founder.image} alt={founder.name} />
+							{/if}
+						</div>
+						{/each}
+					</div>
+					<div class="founder-cards">
+						<div class="founder-controls">
+							<div class="prev"></div>
+							<div class="next"></div>
+						</div>
+						{#each founders as founder}
+						<div class="founder-card">
+							{#if founder.name}
+								<h3>{founder.name}</h3>
+							{/if}
+							{#if founder.education && founder.education.length > 0}
+								<div class="founder-education">
+									<h4>Education</h4>
+									{#each founder.education as edu}
+										<h5>{edu.title}</h5>
+										<p>{edu.institution}</p>
+									{/each}
+								</div>
+							{/if}
+							{#if founder.honorsAwards && founder.honorsAwards.length > 0}
+								<div class="founder-honors-awards">
+									<h4>Honors · Awards</h4>
+									{#each founder.honorsAwards as award}
+										<h5>{award.heading}</h5>
+										<p>{award.content}</p>
+									{/each}
+								</div>
+							{/if}
+							{#if founder.keyContributions && founder.keyContributions.length > 0}
+								<div class="founder-key-contributions">
+									<h4>Key Contributions</h4>
+									{#each founder.keyContributions as contribution}
+										<h5>{contribution.heading}</h5>
+										<p>{contribution.content}</p>
+									{/each}
+								</div>
+							{/if}
+						</div>
+						{/each}
+					</div>
+				</div>				
 				{#each timeline as item, index}
 					<div class="timeline-item index-{index + 2}">
 						<div class="year">{item.year}</div>

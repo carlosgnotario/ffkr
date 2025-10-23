@@ -146,52 +146,201 @@
     }
     
     .index-1 {
-        width: ptr(1712);
-        display: grid;
+        @include timeline-story(
+            $img: (width: 1897, height: 1185, top: 1064, left: 38), 
+            $year: (left: 201, top: 1870), 
+            $text: (width: 621, left: 320, top: 592), 
+            $caption: block,
+        );
 
-        .text {
-            width: ptr(621);
-            left: ptr(320);
-            top: ptr(592);
+        // .text {
+        //     width: ptr(621);
+        //     left: ptr(320);
+        //     top: ptr(592);
+        //     z-index: 1;
+
+        //     &:before {
+        //         height: 120%;
+        //         width: ptr(1);
+        //         background-color: $red;
+        //         left: ptr(-38);
+        //     }
+        // }
+
+        .bar {
+            height: ptr(297);
+            left: ptr(-37);
+            top: ptr(0);
+            position: absolute;
+            background-color: $red;
             z-index: 1;
-
-            &:before {
-                height: 120%;
-                width: ptr(1);
-                background-color: $red;
-                left: ptr(-38);
-            }
+            display: block;
 
             &:after {
-                width: ptr(913);
+                content: "";
+                position: absolute;
                 height: ptr(804);
-                left: ptr(-125);
-                top: calc(100% + ptr(155));
-                background-color: $red;
-                z-index: 1;
-                display: block;
+                width: ptr(913);
+                background-color: #CE1F2C;
+                top: calc(100% + ptr(80));
+                left: ptr(-89);
             }
         }
 
+        .caption {
+            width: ptr(450);
+        }
+
         .year {
-            left:ptr(201);
-            top: ptr(1898);
             height: ptr(129);
             display: flex;
             align-items: end;
             font-size: ptr(414.45);
             line-height: ptr(60.9);
             font-weight: 500;
+            height: ptr(129);
             mix-blend-mode: exclusion;
             color: white;
             z-index: 3;
         }
         
-        .img1 {
-            left: ptr(38);
-            height: ptr(1185);
-            width: ptr(1897);
-            top: ptr(1064);
+        .founder-portrait {
+            position: relative;
+
+            .founder-img {
+                display: flex;
+                height: 100%;
+                position: absolute;
+                bottom: 0;
+                
+                img {
+                    max-height: 100%;
+                    height: 100%;
+                    width: auto;
+                }
+
+                &:nth-of-type(1) {
+                    z-index: 1;
+                    height: ptr(1144 * 1.015);
+                }
+
+                &:nth-of-type(2) {
+                    left: ptr(509);
+                    height: ptr(1090 * 1.015);
+                }
+
+                &:nth-of-type(3) {
+                    height: ptr(1171 * 1.015);
+                    left: ptr(929);
+                }
+
+                &:nth-of-type(4) {
+                    height: ptr(1102 * 1.015);
+                    right: 0;
+                }
+            }
+        }
+
+        .founder-cards {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            left: ptr(264);
+            top: ptr(279);
+            z-index: 10;
+            padding: ptr(30);
+        }
+
+        .founder-card {
+            grid-column: 1/2;
+            grid-row: 1;
+            display: flex;
+            flex-wrap: wrap;
+            width: ptr(1665);
+            gap: ptr(50);
+            font-size: ptr(28);
+
+
+            &:nth-of-type(2) {
+                position: relative;
+                z-index: 2;
+            }
+
+            h3 {
+                background-color: $red;
+                font-size: ptr(72);
+                font-weight: 400;
+                width: 100%;
+                padding: ptr(15) ptr(25);
+                height: ptr(117);
+                line-height: 1.25;
+                color: $white;
+                margin-bottom: 0;
+            }
+
+            p {
+                margin-bottom: ptr(15);
+            }
+
+            h4 {
+            }
+
+            h5 {
+                font-weight: 600;
+                font-size: ptr(28);
+            }
+
+            .founder-education {
+                flex: 1;
+                font-family: "Roboto", sans-serif;
+            }
+
+            .founder-honors-awards {
+                flex: 1;
+                font-family: "Roboto", sans-serif;
+            }
+
+            .founder-key-contributions {
+                flex: 1;
+                font-family: "Roboto", sans-serif;
+            }
+
+        }
+        
+        .founder-controls {
+            z-index: 3;
+            background-color: $black;
+            width: ptr(708);
+            height: ptr(117);
+            grid-column: 1/2;
+            grid-row: 1;
+            place-self: start end;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: ptr(25);
+            gap: ptr(15);
+
+            &:before {
+                content: "Founding Principal";
+                color: $white;
+                margin-right: auto;
+                font-size: ptr(44);
+                font-weight: 400;
+            }
+
+            > * {
+                background-image: url('data:image/svg+xml,<svg width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.1667 31.5L31.5 44.8333M18.1667 31.5H44.8333M18.1667 31.5L31.5 18.1667M31.5 61.5C35.4397 61.5 39.3407 60.724 42.9805 59.2164C46.6203 57.7087 49.9274 55.499 52.7132 52.7132C55.499 49.9274 57.7087 46.6203 59.2164 42.9805C60.724 39.3407 61.5 35.4397 61.5 31.5C61.5 27.5603 60.724 23.6593 59.2164 20.0195C57.7087 16.3797 55.499 13.0726 52.7132 10.2868C49.9274 7.50104 46.6203 5.29125 42.9805 3.78361C39.3407 2.27597 35.4397 1.5 31.5 1.5C23.5435 1.5 15.9129 4.6607 10.2868 10.2868C4.66071 15.9129 1.5 23.5435 1.5 31.5C1.5 39.4565 4.66071 47.0871 10.2868 52.7132C15.9129 58.3393 23.5435 61.5 31.5 61.5Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                background-size: ptr(60);
+                background-repeat: no-repeat;
+                background-position: center;
+                width: ptr(80);
+                height: ptr(80);
+                padding: ptr(10);
+            }
+
+            .next {
+                transform: rotate(180deg);
+            }
         }
     }
 

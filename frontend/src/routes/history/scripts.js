@@ -10,6 +10,7 @@ export class History{
         this.bind()
         this.update()
         this.animate()
+        this.founders()
     }
 
     elements() {
@@ -22,6 +23,8 @@ export class History{
         this.reachedEnd = false;
 
         this.xPos = gsap.quickTo(this.wrap, "x", {duration: 2, ease: "expo.out"})
+        console.log(this.xPos);
+        
         this.rotation = gsap.quickTo(this.timelineDecoration, "rotationY", {duration: 2, ease: "expo.out"})
     }
 
@@ -31,7 +34,7 @@ export class History{
         this.vh = window.innerHeight        
 
         this.timelineItems.forEach(item => {
-            item.left = item.querySelector(".img1").offsetLeft
+            item.left = item.querySelector(".img1")?.offsetLeft
             
         })
     }
@@ -82,6 +85,7 @@ export class History{
         this.videoModal.addEventListener("click", this.videoModalClickHandler);
         
         this.mouseDownEvent = (e) => {
+            if (this.foundersOpen) return;
             this.pos.dragging = true;
             this.pos.x.old = this.pos.x.new = getClientX(e);
         }
@@ -89,7 +93,7 @@ export class History{
             if (!this.pos.dragging) return;
             this.pos.x.new = getClientX(e);
         }
-        this.mouseUpEvent = (e) => {
+        this.mouseUpEvent = (e) => {            
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
             this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
@@ -210,8 +214,10 @@ export class History{
     update() {
         this.ticker = () => {
             const currentPosX = (this.pos.x.new - this.pos.x.old) * window.movementModifier + this.pos.x.stored
+            const safePosX = isNaN(currentPosX) ? 0 : currentPosX
+            console.log(safePosX);
             
-            this.xPos(currentPosX)
+            this.xPos(safePosX)
 
             this.timelineItems.forEach(item => {
                 if (-currentPosX > item.left - this.vw * 0.8 && !item.animated) {
@@ -342,6 +348,30 @@ export class History{
             this.videoModal.removeEventListener("click", this.videoModalClickHandler);
         }
         
+        // Remove founder image click handlers
+        if (this.founderImages && this.founderImageClickHandlers) {
+            this.founderImages.forEach((image, index) => {
+                if (this.founderImageClickHandlers[index]) {
+                    image.removeEventListener("click", this.founderImageClickHandlers[index]);
+                }
+            });
+        }
+        
+        // Remove founder controls click handler
+        if (this.founderControls && this.founderControlsClickHandler) {
+            this.founderControls.removeEventListener("click", this.founderControlsClickHandler);
+        }
+        
+        // Remove popstate and click outside handlers if they exist
+        if (this.popstateHandler) {
+            window.removeEventListener("popstate", this.popstateHandler);
+            this.popstateHandler = null;
+        }
+        if (this.clickOutsideHandler) {
+            window.removeEventListener("click", this.clickOutsideHandler);
+            this.clickOutsideHandler = null;
+        }
+        
         // Remove touch events
         this.element.removeEventListener("touchstart", this.mouseDownEvent)
         this.timelineDecoration.removeEventListener("click", this.clickEvent)
@@ -356,5 +386,170 @@ export class History{
         window.removeEventListener("resize", this.sizing)
         
         console.clear();
+    }
+
+    founders() {
+        this.founderImages = this.element.querySelectorAll(".founder-img")
+        this.founderCards = this.element.querySelectorAll(".founder-card")
+        this.founderControls = this.element.querySelector(".founder-controls")
+        this.founderBox = this.timelineItems[0];
+        this.foundersOpen = false;
+        this.currentFounderIndex = 0;
+
+        gsap.set([this.founderCards, this.founderControls], {
+            autoAlpha: 0,
+        })
+
+        // Store founder image click handlers
+        this.founderImageClickHandlers = [];
+        this.founderImages.forEach((image, index) => {
+            const clickHandler = () => {
+                this.showFounderCards(index)
+            }
+            this.founderImageClickHandlers[index] = clickHandler;
+            image.addEventListener("click", clickHandler)
+        })
+
+        // Store founder controls click handler
+        this.founderControlsClickHandler = (e) => {
+            if (e.target.classList.contains("prev")) {
+                this.showFounderCards((this.currentFounderIndex - 1 + this.founderImages.length) % this.founderImages.length)
+            } else if (e.target.classList.contains("next")) {
+                this.showFounderCards((this.currentFounderIndex + 1) % this.founderImages.length)
+            }
+        }
+        this.founderControls.addEventListener("click", this.founderControlsClickHandler)
+    }
+
+    showFounderCards(index) {
+        const url = `#founder-${index + 1}`
+        window.history.pushState({ path: url }, "", url);
+
+        if (!this.foundersOpen) {
+            const timelineitems = Array.from(this.timelineItems).filter((_, i) => i > 0);
+            const text = this.founderBox.querySelector(".text")
+            this.foundersOpen = true;
+            
+            gsap.to(timelineitems, {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            })
+            gsap.to(this.founderImages, {
+                autoAlpha: 0.5,
+                duration: 0.5,
+                ease: "power2.out"
+            })
+            gsap.to(".timeline-line", {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "power2.out"
+            })
+            gsap.to(text, {
+                autoAlpha: 0,
+                overwrite: true,
+                duration: 0.5,
+                ease: "power2.out"
+            })
+            gsap.to(this.founderControls, {
+                autoAlpha: 1,
+                duration: 0.5,
+                ease: "power2.out"
+            })
+
+            // check for url /history
+            if (!this.popstateHandler) {
+                this.popstateHandler = (e) => {
+                    if (window.location.pathname === "/history") {
+                        this.hideFounderCards();
+                    }
+                }
+                window.addEventListener("popstate", this.popstateHandler)
+            }
+
+            // If I click the window excepting founder-portrait or founder-cards, hide the founder cards
+            if (!this.clickOutsideHandler) {
+                this.clickOutsideHandler = (e) => {
+                    if (!e.target.closest(".founder-portrait") && !e.target.closest(".founder-cards")) {
+                        this.hideFounderCards();
+                    }
+                }
+                window.addEventListener("click", this.clickOutsideHandler)
+            }
+            this.pos.x.stored = 0;
+        }
+
+        // Current founder
+        gsap.to(this.founderCards[this.currentFounderIndex], {
+            autoAlpha: 0,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(this.founderImages[this.currentFounderIndex], {
+            autoAlpha: 0.5,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(this.founderCards[index], {
+            autoAlpha: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(this.founderImages[index], {
+            autoAlpha: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+
+        this.currentFounderIndex = index;
+    }
+
+    hideFounderCards() {
+        const text = this.founderBox.querySelector(".text")
+
+        gsap.to(this.founderCards, {
+            autoAlpha: 0,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(this.founderImages, {
+            autoAlpha: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(this.timelineItems, {
+            autoAlpha: 1,
+            duration: 1,
+            ease: "power2.out"
+        })
+        gsap.to(".timeline-line", {
+            autoAlpha: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(text, {
+            autoAlpha: 1,
+            overwrite: true,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        gsap.to(this.founderControls, {
+            autoAlpha: 0,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        
+        // Remove event listeners
+        if (this.popstateHandler) {
+            window.removeEventListener("popstate", this.popstateHandler)
+            this.popstateHandler = null
+        }
+        if (this.clickOutsideHandler) {
+            window.removeEventListener("click", this.clickOutsideHandler)
+            this.clickOutsideHandler = null
+        }
+        
+        this.foundersOpen = false;
+        window.history.pushState(null, "", window.location.pathname);
     }
 }
