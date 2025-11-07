@@ -96,7 +96,7 @@ export class History{
         this.mouseUpEvent = (e) => {            
             if (!this.pos.dragging) return;
             this.pos.dragging = false;
-            this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * window.movementModifier;
+            this.pos.x.stored += (this.pos.x.new - this.pos.x.old) * Math.max(2, window.movementModifier);
             this.pos.x.old = this.pos.x.new = 0;
 
             if (-this.pos.x.stored < 0) {
@@ -213,7 +213,7 @@ export class History{
 
     update() {
         this.ticker = () => {
-            const currentPosX = (this.pos.x.new - this.pos.x.old) * window.movementModifier + this.pos.x.stored
+            const currentPosX = (this.pos.x.new - this.pos.x.old) * Math.max(2, window.movementModifier) + this.pos.x.stored
             const safePosX = isNaN(currentPosX) ? 0 : currentPosX
             console.log(safePosX);
             
@@ -230,7 +230,7 @@ export class History{
             })
 
             if (-currentPosX > this.W - this.vw * 2) {
-                this.rotation(Math.min(180 - ((-currentPosX - (this.W - this.vw * 2)) / this.vw) * 180, 90))
+                this.rotation(Math.min(160 - ((-currentPosX - (this.W - this.vw * 2)) / this.vw) * 160, 60))
             }
 
             if (-currentPosX >= this.W - this.vw && !this.reachedEnd) {
@@ -270,7 +270,9 @@ export class History{
 
             tl.set(particle, {
                 scale: "random(0.5, 1.5)", y: 0, x: 0,
-                backgroundColor: `rgba(${(-40 + Math.random() * 40) + 207}, ${(-40 + Math.random() * 40) + 142}, 52, ${0.5 + Math.random() * 0.5})`,
+                backgroundColor: window.confettiMulticolor ?
+                `hsl(${Math.random() * 360}, ${80 + Math.random() * 20}%, ${45 + Math.random() * 20}%)` :
+                `rgba(${(-40 + Math.random() * 40) + 207}, ${(-40 + Math.random() * 40) + 142}, 52, ${0.5 + Math.random() * 0.5})`,
                 rotateX: "random(0, 360)",
                 rotateZ: "random(0, 360)",
             })

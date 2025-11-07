@@ -120,8 +120,10 @@
     width: 100vw;
     height: 100vh;
     z-index: 1000;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: ptr(100);
     opacity: 0;
     visibility: hidden;
 
@@ -138,13 +140,13 @@
     &-content {
         position: relative;
         background-color: $white;
-        padding: ptr(60);
         border-radius: ptr(20);
-        min-width: ptr(500);
+        min-width: ptr(1000);
         box-shadow: 0 ptr(20) ptr(60) rgba($black, 0.3);
 
         h3 {
-            margin: 0 0 ptr(30) 0;
+            margin: 0;
+            padding: ptr(30) ptr(30) ptr(20) ptr(30);
             color: $black;
             font-size: ptr(32);
         }
@@ -173,14 +175,44 @@
         }
     }
 
+    &-close {
+        position: absolute;
+        top: ptr(30);
+        right: ptr(30);
+        background: none;
+        border: none;
+        font-size: ptr(40);
+        color: $white;
+        cursor: pointer;
+        line-height: ptr(40);
+        padding: 0;
+        width: ptr(40);
+        background-color: $red;
+        border-radius: 50%;
+        padding-top: ptr(3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $black;
+        }
+    }
+
     &-controls {
-        margin-bottom: ptr(30);
-        padding-bottom: ptr(30);
-        border-bottom: 1px solid $gray;
+        padding-bottom: ptr(20);
 
         .control-group {
             display: grid;
             gap: ptr(15);
+            background-color: #f5f5f5;
+            padding: ptr(30);
+            border: ptr(2) solid $white;
+
+            &:last-child {
+                border-radius: 0 0 ptr(20) ptr(20);
+            }
 
             label {
                 color: $black;
@@ -247,30 +279,6 @@
                     transform: scale(1.1);
                 }
             }
-        }
-    }
-
-    &-close {
-        position: absolute;
-        top: ptr(20);
-        right: ptr(20);
-        background: none;
-        border: none;
-        font-size: ptr(40);
-        line-height: 1;
-        cursor: pointer;
-        color: $dark-gray;
-        padding: 0;
-        width: ptr(40);
-        height: ptr(40);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: color 0.3s ease, transform 0.3s ease;
-
-        &:hover {
-            color: $red;
-            transform: rotate(90deg);
         }
     }
 }

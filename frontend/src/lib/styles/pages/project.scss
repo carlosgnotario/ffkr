@@ -19,11 +19,12 @@
         > * {
             grid-area: 1 / 1;
             height: 100%;
+            width: 100%;
             overflow: hidden;
 
             img {
                 height: 100%;
-                width: 120%;
+                width: 100%;
                 max-width: none;
                 object-fit: cover;
             }
@@ -107,7 +108,7 @@
             &-member {                
                 > img {
                     height: ptr(155);
-                    aspect-ratio: 1;
+                    width: ptr(155);
                     object-fit: cover;
                     border-radius: 50%;
                 }
@@ -117,7 +118,7 @@
                     z-index: 1;
                     top: auto;
                     right: calc(100% + ptr(160));
-                    top: 0;
+                    top: ptr(-100);
                     height: auto;
                     opacity: 0;
                     transform: translateX(ptr(100));
@@ -133,12 +134,12 @@
                     &:after {
                         content: "";
                         position: absolute;
-                        top: 100%;
+                        top: 50%;
                         right: 0;
-                        transform: translate(calc(100% - 0.5px), -140%);
+                        transform: translate(calc(100% - 0.5px), -50%);
                         width: 0;
                         border-right: ptr(40) solid transparent;
-                        border-left: ptr(40) solid $red;
+                        border-left: ptr(40) solid $white;
                         border-top: ptr(40) solid transparent;
                         border-bottom: ptr(40) solid transparent;
                     }
@@ -192,6 +193,7 @@
                 width: 100%;
                 object-fit: cover;
                 z-index: -1;
+                filter: brightness(0.8);
             }
         }
         

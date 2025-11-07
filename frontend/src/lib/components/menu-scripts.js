@@ -42,6 +42,7 @@ export class Menu {
         this.hiddenMenuOverlay = document.querySelector('.menu-hidden-overlay')
         this.movementSlider = document.querySelector('.movement-slider')
         this.sliderValue = document.querySelector('.slider-value')
+        this.confettiCheckbox = document.querySelector('.confetti-multicolor-checkbox')
     }
     
     populateStudios() {
@@ -215,6 +216,20 @@ export class Menu {
         // Initialize movement modifier
         if (typeof window !== 'undefined') {
             window.movementModifier = 1.0
+        }
+
+        // Confetti multicolor checkbox
+        this.confettiCheckbox?.addEventListener('change', (e) => {
+            const checked = e.target.checked
+            // Set global confetti multicolor
+            if (typeof window !== 'undefined') {
+                window.confettiMulticolor = checked
+            }
+        })
+
+        // Initialize confetti multicolor
+        if (typeof window !== 'undefined') {
+            window.confettiMulticolor = false
         }
     }
 

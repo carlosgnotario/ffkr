@@ -114,6 +114,13 @@ export class projectSlider {
                     gsap.set(member.querySelector(".project-info-team-member-floater"), {
                         opacity: 0,
                         x: 100,
+                        y: Math.min(
+                            window.innerHeight - member.querySelector(".project-info-team-member-floater").getBoundingClientRect().height - 50, 
+                            Math.max(
+                                50, 
+                                member.getBoundingClientRect().top + member.getBoundingClientRect().height / 2 - member.querySelector(".project-info-team-member-floater").getBoundingClientRect().height / 2
+                            )
+                        ),
                         overwrite: true,
                     })
                     gsap.to(member.querySelector(".project-info-team-member-floater"), {

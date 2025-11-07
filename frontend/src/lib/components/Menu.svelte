@@ -61,6 +61,16 @@
                     <span class="slider-value">1.0</span>
                 </div>
             </div>
+            <div class="control-group">
+                <label for="confetti-multicolor">
+                    <input 
+                        type="checkbox" 
+                        id="confetti-multicolor" 
+                        class="confetti-multicolor-checkbox"
+                    />
+                    Confetti Multicolor
+                </label>
+            </div>
         </div>
     </div>
 </div>

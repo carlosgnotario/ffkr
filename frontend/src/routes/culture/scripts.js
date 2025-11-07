@@ -370,10 +370,10 @@ export class cultureGrid {
 
 	openTestimonialModal(video, open = true) {
 		if (open) {
-			let embedUrl = video.includes("vimeo.com")
-				? `https://player.vimeo.com/video/${video.split("/").pop()}?autoplay=1`
-				: `https://www.youtube.com/embed/${video.split("v=")[1]}?autoplay=1`;
-			this.testimonialModal.innerHTML = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+		let embedUrl = video.includes("vimeo.com")
+			? `https://player.vimeo.com/video/${video.split("/").pop()}?autoplay=1`
+			: `https://www.youtube.com/embed/${video.split("v=")[1]}?autoplay=1`;
+		this.testimonialModal.innerHTML = `<iframe width="560" height="315" src="${embedUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="pointer-events: auto; touch-action: auto;"></iframe>`;
 			gsap.to(this.testimonialModal, { autoAlpha: 1, duration: 0.5, ease: "power2.out" });
 			this.testimonialModal.style.pointerEvents = "auto";
 		} else {
