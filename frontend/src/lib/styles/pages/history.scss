@@ -987,7 +987,6 @@
 
         iframe {
             width: min(80vh * 16 / 9, 100vw - ptr(200));
-            aspect-ratio: 16 / 9;
             height: calc(min(80vh * 16 / 9, 100vw - ptr(200)) * 9 / 16);
         }
     }

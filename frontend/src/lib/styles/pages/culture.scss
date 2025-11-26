@@ -286,7 +286,6 @@
 
         iframe {
             width: min(80vh * 16 / 9, 100vw - ptr(1600));
-            aspect-ratio: 16 / 9;
             height: calc(min(80vh * 16 / 9, 100vw - ptr(1600)) * 9 / 16);
         }
     }
@@ -409,7 +408,7 @@
         height: 100%;
         position: relative;
         width: ptr(470);
-        aspect-ratio: 1 / 1;
+        min-height: ptr(470);
         border-radius: ptr(24) 0 0 ptr(24);
         
         img {

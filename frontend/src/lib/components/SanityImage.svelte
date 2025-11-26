@@ -17,7 +17,7 @@
       w: width.toString(),
       h: height.toString(),
       auto: 'format',
-      q: '80'
+      q: quality.toString()
     })
     
     return `${baseUrl}?${params.toString()}`

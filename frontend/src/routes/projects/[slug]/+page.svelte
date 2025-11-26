@@ -3,6 +3,7 @@
 	import { page } from '$app/stores'
 	import '$lib/styles/pages/project.scss'
 	import { projectSlider } from './scripts.js'
+	import SanityImage from '$lib/components/SanityImage.svelte'
 
 	let project: any = null
 	let slider: any = null
@@ -46,7 +47,7 @@
 	<div class="project-slider" bind:this={sliderElement}>
 		{#each project?.photoGallery || [] as image}
 			<div class="project-slider-image">
-				<img src={image.image.asset.url} alt={image.image.alt || project.name} />
+				<SanityImage image={image.image} width={1600} height={1600} alt={image.image.alt || project.name} />
 			</div>
 		{/each}
 	</div>
@@ -77,13 +78,18 @@
 				{#each project.team.filter(m => m !== null) as member}
 					<div class="project-info-team-member">
 						{#if member.photo}
-							<img src={member.photo.asset.url} alt={member.name} />
+							<SanityImage image={member.photo} width={100} height={100} alt={member.photo.alt || member.name} />
 						{/if}
 						<div class="project-info-team-member-floater">
 							<div class="project-info-team-member-floater-wrap">
 								<div class="project-info-team-member-floater-image">
 									{#if member.photo}
-										<img src={member.photo.asset.url} alt={member.name} />
+										<SanityImage 
+											image={member.photo} 
+											width={400} 
+											height={400} 
+											alt={member.photo.alt || member.name}
+										/>
 									{/if}
 								</div>
 								<div class="project-info-team-member-floater-name">
@@ -121,7 +127,7 @@
 				{#each project.similarProjects as similarProject}
 					<a href={`/projects/${similarProject.slug}`} class="project-info-similar-project">
 						{#if similarProject.photoGallery && similarProject.photoGallery.length > 0}
-							<img src={similarProject.photoGallery[0].image.asset.url} alt={similarProject.name} />
+							<SanityImage image={similarProject.photoGallery[0].image} width={400} height={400} quality={100} alt={similarProject.photoGallery[0].image.alt || similarProject.name} />
 						{/if}
 						<span>{similarProject.name}</span>
 						<span>{similarProject.location}</span>

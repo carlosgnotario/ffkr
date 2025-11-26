@@ -110,15 +110,22 @@ export class projectSlider {
 
         this.teamMembers.forEach((member, index) => {
             member.clickEvent = (e) => {
+                console.log(this.parent.scrollTop);
+                const floaterHeight = member.querySelector(".project-info-team-member-floater").getBoundingClientRect().height;
+                const memberPosition = member.getBoundingClientRect();
+                
                 if (visibleFloater !== index) {
                     gsap.set(member.querySelector(".project-info-team-member-floater"), {
                         opacity: 0,
                         x: 100,
                         y: Math.min(
-                            window.innerHeight - member.querySelector(".project-info-team-member-floater").getBoundingClientRect().height - 50, 
+                            window.innerHeight - floaterHeight - 50 + this.parent.scrollTop, 
                             Math.max(
-                                50, 
-                                member.getBoundingClientRect().top + member.getBoundingClientRect().height / 2 - member.querySelector(".project-info-team-member-floater").getBoundingClientRect().height / 2
+                                50 + this.parent.scrollTop, 
+                                memberPosition.top + 
+                                memberPosition.height / 2 - 
+                                floaterHeight / 2 + 
+                                this.parent.scrollTop
                             )
                         ),
                         overwrite: true,
