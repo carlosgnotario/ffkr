@@ -24,6 +24,8 @@ export class Screensaver {
         this.bind()
         this.update()
         this.populateMenu()
+        // Preload all images to ensure they're cached and reduce bandwidth on repeat cycles
+        this.preloadImages()
     }
     
     setup() {
@@ -207,6 +209,23 @@ export class Screensaver {
 
         }
         gsap.ticker.add(this.ticker)
+    }
+
+    // Preload all project images to ensure they're cached
+    // This prevents re-downloading images when cycling through the slideshow
+    preloadImages() {
+        if (!this.projects || this.projects.length === 0) return
+        
+        this.projects.forEach((project) => {
+            const imageUrl = project.photoGallery?.[0]?.image?.asset?.url
+            if (imageUrl) {
+                const optimizedUrl = this.getOptimizedImageUrl(imageUrl, 1600, 1600, 80)
+                // Create image element to preload (browser will cache it)
+                const img = new Image()
+                img.src = optimizedUrl
+                // Store in a weak way - browser cache handles the rest
+            }
+        })
     }
 
     populateMenu() {
