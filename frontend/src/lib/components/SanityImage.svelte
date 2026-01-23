@@ -9,7 +9,6 @@
   export let className: string = ''
 
   // Generate optimized image URL with Sanity's image API
-  // Sanity uses auto=format which serves AVIF based on browser Accept header
   function getImageUrl(image: Post['featuredImage'], width: number, height: number) {
     if (!image?.asset?.url) return null
     
@@ -17,30 +16,26 @@
     const params = new URLSearchParams({
       w: width.toString(),
       h: height.toString(),
-      q: quality.toString(),
-      auto: 'format' // This will serve AVIF when browser supports it
+      auto: 'format',
+      q: quality.toString()
     })
     
     return `${baseUrl}?${params.toString()}`
   }
 
-  // Get the image URL - Sanity will serve AVIF automatically based on Accept header
-  // We use the same URL for both source and img, browser handles format selection
+  // Get the image URL
   $: imageUrl = getImageUrl(image, width, height)
   $: imageAlt = alt || image?.alt || ''
 </script>
 
 {#if imageUrl}
-  <picture>
-    <source type="image/avif" srcset={imageUrl} />
-    <img 
-      src={imageUrl} 
-      alt={imageAlt}
-      class={className}
-      loading="lazy"
-      decoding="async"
-    />
-  </picture>
+  <img 
+    src={imageUrl} 
+    alt={imageAlt}
+    class={className}
+    loading="lazy"
+    decoding="async"
+  />
 {:else}
   <div class="placeholder {className}">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

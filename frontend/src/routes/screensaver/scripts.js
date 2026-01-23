@@ -67,15 +67,6 @@ export class Screensaver {
         this.timer = this.timerDuration;
     }
 
-    // Helper function to generate optimized image URL with auto=format
-    // Sanity will serve AVIF automatically based on browser Accept header
-    getOptimizedImageUrl(imageUrl) {
-        if (!imageUrl) return ''
-        const url = new URL(imageUrl)
-        url.searchParams.set('auto', 'format')
-        return url.toString()
-    }
-
     createSlide() {
         if (this.currentSlide) {
             this.currentIndex = (this.currentIndex + 1) % this.projects.length
@@ -87,14 +78,9 @@ export class Screensaver {
         this.currentSlide.className = 'screensaver-project'
         this.currentSlide.classList.add('active')
 
-        const imageUrl = project.photoGallery?.[0]?.image?.asset?.url || ''
-        const optimizedUrl = this.getOptimizedImageUrl(imageUrl)
         
         this.currentSlide.innerHTML = `
-            <picture>
-                <source type="image/avif" srcset="${optimizedUrl}" />
-                <img src="${optimizedUrl}" alt="${project.name || ''}" class="screensaver-project-image" />
-            </picture>
+            <img src="${project.photoGallery?.[0]?.image?.asset?.url || ''}" alt="${project.name || ''}" class="screensaver-project-image" />
             <a href="/projects/${project.slug}" class="screensaver-project-info">
                 <div class="category">${project.category?.title || ''}</div>
                 <h3>${project.name || ''}</h3>
@@ -221,24 +207,7 @@ export class Screensaver {
                 const text = menuLinks[index].querySelector('.menu-text')
                 
                 if (img && navItem.image?.asset?.url) {
-                    // Use auto=format - Sanity will serve AVIF based on Accept header
-                    const imageUrl = navItem.image.asset.url
-                    const optimizedUrl = this.getOptimizedImageUrl(imageUrl)
-                    
-                    // Create picture element for AVIF support
-                    const picture = document.createElement('picture')
-                    const source = document.createElement('source')
-                    source.type = 'image/avif'
-                    source.srcset = optimizedUrl
-                    picture.appendChild(source)
-                    
-                    const imgElement = document.createElement('img')
-                    imgElement.src = optimizedUrl
-                    imgElement.alt = navItem.title || ''
-                    picture.appendChild(imgElement)
-                    
-                    // Replace existing img with picture element
-                    img.replaceWith(picture)
+                    img.src = navItem.image.asset.url
                 }
                 if (text) {
                     text.textContent = navItem.title
