@@ -67,6 +67,17 @@ export class Screensaver {
         this.timer = this.timerDuration;
     }
 
+    // Helper function to optimize image URLs with Sanity's image API
+    getOptimizedImageUrl(imageUrl, width = 1600, height = 1600, quality = 80) {
+        if (!imageUrl) return ''
+        const url = new URL(imageUrl)
+        url.searchParams.set('w', width.toString())
+        url.searchParams.set('h', height.toString())
+        url.searchParams.set('auto', 'format')
+        url.searchParams.set('q', quality.toString())
+        return url.toString()
+    }
+
     createSlide() {
         if (this.currentSlide) {
             this.currentIndex = (this.currentIndex + 1) % this.projects.length
@@ -78,9 +89,11 @@ export class Screensaver {
         this.currentSlide.className = 'screensaver-project'
         this.currentSlide.classList.add('active')
 
+        const imageUrl = project.photoGallery?.[0]?.image?.asset?.url || ''
+        const optimizedUrl = this.getOptimizedImageUrl(imageUrl, 1600, 1600, 80)
         
         this.currentSlide.innerHTML = `
-            <img src="${project.photoGallery?.[0]?.image?.asset?.url || ''}" alt="${project.name || ''}" class="screensaver-project-image" />
+            <img src="${optimizedUrl}" alt="${project.name || ''}" class="screensaver-project-image" />
             <a href="/projects/${project.slug}" class="screensaver-project-info">
                 <div class="category">${project.category?.title || ''}</div>
                 <h3>${project.name || ''}</h3>
@@ -207,7 +220,7 @@ export class Screensaver {
                 const text = menuLinks[index].querySelector('.menu-text')
                 
                 if (img && navItem.image?.asset?.url) {
-                    img.src = navItem.image.asset.url
+                    img.src = this.getOptimizedImageUrl(navItem.image.asset.url, 400, 400, 80)
                 }
                 if (text) {
                     text.textContent = navItem.title
