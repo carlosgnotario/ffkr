@@ -4,6 +4,13 @@
 	let siteSettings: any = null
 	let logoUrl = ''
 
+	function getOptimizedImageUrl(imageUrl: string): string {
+		if (!imageUrl) return ''
+		const url = new URL(imageUrl)
+		url.searchParams.set('auto', 'format')
+		return url.toString()
+	}
+
 	onMount(async () => {
 		try {
 			// Fetch from local API endpoint
@@ -12,7 +19,7 @@
 			siteSettings = data || {}
 			
 			if (siteSettings?.logo?.asset?.url) {
-				logoUrl = siteSettings.logo.asset.url
+				logoUrl = getOptimizedImageUrl(siteSettings.logo.asset.url)
 			}
 		} catch (error) {
 			console.error('Error fetching site settings:', error)
@@ -23,7 +30,10 @@
 <nav>
 	<a href="/">
 		{#if logoUrl}
-			<img src={logoUrl} alt="FFKR Logo" />
+			<picture>
+				<source type="image/avif" srcset={logoUrl} />
+				<img src={logoUrl} alt="FFKR Logo" />
+			</picture>
 		{:else}
 			FFKR
 		{/if}

@@ -54,10 +54,20 @@ export class gridTest {
 		this.resources();
 	}
 
+	getOptimizedImageUrl(imageUrl) {
+		if (!imageUrl) return ''
+		const url = new URL(imageUrl)
+		url.searchParams.set('auto', 'format')
+		return url.toString()
+	}
+
 	async resources() {
 		for (const [index, member] of this.members.entries()) {
 			const container = new PIXI.Container();
-			const texture = await PIXI.Assets.load(member.photo.asset.url);
+			// Use auto=format - Sanity will serve AVIF based on browser Accept header
+			const imageUrl = member.photo?.asset?.url || ''
+			const optimizedUrl = this.getOptimizedImageUrl(imageUrl) || imageUrl
+			const texture = await PIXI.Assets.load(optimizedUrl);
 			const image = new PIXI.Sprite(texture);
 			
 			const mask = new PIXI.Graphics();
