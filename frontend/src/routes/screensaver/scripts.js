@@ -23,7 +23,7 @@ export class Screensaver {
         this.elements()
         this.bind()
         this.update()
-        this.populateMenu()
+        // Menu is rendered from site-settings navigation in Screensaver.svelte
         // Preload all images to ensure they're cached and reduce bandwidth on repeat cycles
         this.preloadImages()
     }
@@ -228,23 +228,4 @@ export class Screensaver {
         })
     }
 
-    populateMenu() {
-        if (!this.siteSettings?.navigation) return
-        
-        const menuLinks = this.element.querySelectorAll('.screensaver-menu a')
-        
-        this.siteSettings.navigation.forEach((navItem, index) => {
-            if (menuLinks[index]) {
-                const img = menuLinks[index].querySelector('.menu-image')
-                const text = menuLinks[index].querySelector('.menu-text')
-                
-                if (img && navItem.image?.asset?.url) {
-                    img.src = this.getOptimizedImageUrl(navItem.image.asset.url, 400, 400, 80)
-                }
-                if (text) {
-                    text.textContent = navItem.title
-                }
-            }
-        })
-    }
 }
