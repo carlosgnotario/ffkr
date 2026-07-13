@@ -2,7 +2,7 @@
 	import { onMount, tick, onDestroy } from 'svelte'
 	import SanityImage from '$lib/components/SanityImage.svelte'
 	import { History } from './scripts.js'
-	import celebratingImage from '$lib/assets/celebrating.png'
+	import celebratingImage from '$lib/assets/FFKR_Anniversary 3_Redline.png'
 
 	let timeline: any[] = []
 	let founders: any[] = []

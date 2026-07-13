@@ -272,7 +272,7 @@ export class History{
                 scale: "random(0.5, 1.5)", y: 0, x: 0,
                 backgroundColor: window.confettiMulticolor ?
                 `hsl(${Math.random() * 360}, ${80 + Math.random() * 20}%, ${45 + Math.random() * 20}%)` :
-                `rgba(${(-40 + Math.random() * 40) + 207}, ${(-40 + Math.random() * 40) + 142}, 52, ${0.5 + Math.random() * 0.5})`,
+                `rgba(${(-40 + Math.random() * 40) + 207}, ${(-40 + Math.random() * 40) + 50}, ${(-40 + Math.random() * 40) + 50}, ${0.5 + Math.random() * 0.5})`,
                 rotateX: "random(0, 360)",
                 rotateZ: "random(0, 360)",
             })
